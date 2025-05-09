@@ -18,11 +18,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FOLDER_PATH = os.path.join(BASE_DIR, 'Preprocessing')
 STEMMER_PATH = os.path.join(BASE_DIR, 'Preprocessing', 'Stemmer', 'mpstemmer', 'mpstemmer')
 NLTK_DATA_PATH = os.path.join(BASE_DIR, 'nltk_data')
-sys.path.append(STEMMER_PATH)
-from mpstemmer import MPStemmer
 
 # Tambahkan path untuk MPStemmer
 sys.path.append(STEMMER_PATH)
+from mpstemmer import MPStemmer
 
 # Setup NLTK data
 nltk.data.path.append(NLTK_DATA_PATH)
