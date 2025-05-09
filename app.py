@@ -18,6 +18,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FOLDER_PATH = os.path.join(BASE_DIR, 'Preprocessing')
 STEMMER_PATH = os.path.join(BASE_DIR, 'Preprocessing', 'Stemmer', 'mpstemmer', 'mpstemmer')
 NLTK_DATA_PATH = os.path.join(BASE_DIR, 'nltk_data')
+sys.path.append(STEMMER_PATH)
+from mpstemmer import MPStemmer
 
 # Tambahkan path untuk MPStemmer
 sys.path.append(STEMMER_PATH)
@@ -54,6 +56,9 @@ def get_sentiment_model():
 
 # Muat fungsi API
 sentiment_model = get_sentiment_model()
+
+# Stemmer
+stemmer = MPStemmer()
 
 # Fungsi preprocessing
 def cleaningReview(review):
