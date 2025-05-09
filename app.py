@@ -16,7 +16,7 @@ from io import BytesIO
 # Define base directory and important paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PREPROCESSING_PATH = os.path.join(BASE_DIR, 'Preprocessing')
-STEMMER_PATH = os.path.join(BASE_DIR, 'Preprocessing', 'Stemmer', 'mpstemmer')
+STEMMER_PATH = os.path.join(BASE_DIR, 'Preprocessing', 'Stemmer', 'mpstemmer', 'mpstemmer')
 NLTK_DATA_PATH = os.path.join(BASE_DIR, 'nltk_data')
 
 # Add path for MPStemmer
