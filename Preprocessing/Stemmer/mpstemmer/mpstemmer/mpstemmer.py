@@ -3,7 +3,7 @@ import json
 import re
 import Levenshtein
 
-from . import csstemmer
+import csstemmer
 
 
 class MPStemmer:
