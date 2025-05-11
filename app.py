@@ -10,26 +10,18 @@ import json
 import logging
 import os
 import sys
-import requests
 from io import BytesIO
+from gradio_client import Client
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Define base directory and important paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PREPROCESSING_PATH = os.path.join(BASE_DIR, 'Preprocessing')
-STEMMER_PATH = os.path.join(BASE_DIR, 'Preprocessing', 'Stemmer', 'mpstemmer', 'mpstemmer')
+STEMMER_PATH = os.path.join(PREPROCESSING_PATH, 'Stemmer', 'mpstemmer', 'mpstemmer')
 NLTK_DATA_PATH = os.path.join(BASE_DIR, 'nltk_data')
+sys.path.append(STEMMER_PATH)
 
-# Add path for MPStemmer
-if os.path.exists(STEMMER_PATH):
-    sys.path.append(STEMMER_PATH)
-    try:
-        from mpstemmer import MPStemmer
-    except ImportError:
-        st.error(f"MPStemmer module not found in {STEMMER_PATH}. Ensure the mpstemmer folder exists and contains the required files.")
-        st.stop()
-else:
-    st.error(f"MPStemmer folder not found in {STEMMER_PATH}.")
-    st.stop()
+from mpstemmer import MPStemmer
 
 # Setup NLTK data
 nltk.data.path.append(NLTK_DATA_PATH)
@@ -56,26 +48,60 @@ except LookupError:
 # Setup logging for unmatched_slang.log
 logging.basicConfig(filename='unmatched_slang.log', level=logging.INFO, filemode='w')
 
-# URL for the sentiment API (replace with your actual API URL)
-API_URL = "https://johannawawi-sentiment-api.hf.space/"
-
-# Function to call the sentiment API
+# Function to call the sentiment API using Gradio Client with parallel processing
 @st.cache_resource
 def get_sentiment_model():
+    try:
+        # Initialize the Gradio Client with the Hugging Face Space URL
+        client = Client("johannawawi/sentimen-api")
+    except Exception as e:
+        st.error(f"Failed to initialize Gradio Client: {str(e)}")
+        return lambda texts: [{"sentiment": "neutral", "confidence": 0.0} for _ in texts]
+    
+    def predict_single_text(text):
+        try:
+            result = client.predict(
+                text=text,
+                api_name="/predict"
+            )
+            return {
+                "sentiment": result["sentiment"],
+                "confidence": result["confidence"]
+            }
+        except Exception as e:
+            logging.error(f"Gradio API error for text '{text}': {str(e)}")
+            return {"sentiment": "neutral", "confidence": 0.0}
+    
     def predict_sentiment(texts):
         if not texts:
             return [{"sentiment": "neutral", "confidence": 0.0}]
-        try:
-            response = requests.post(API_URL, json={"data": texts}, timeout=30)
-            response.raise_for_status()
-            results = response.json().get("data", [])
-            if not results:
-                st.warning("API returned empty data.")
-                return [{"sentiment": "neutral", "confidence": 0.0} for _ in texts]
-            return [{"sentiment": r["sentiment"], "confidence": r["confidence"]} for r in results]
-        except requests.exceptions.RequestException as e:
-            st.error(f"Failed to call API: {str(e)}")
-            return [{"sentiment": "neutral", "confidence": 0.0} for _ in texts]
+        
+        # Use ThreadPoolExecutor for parallel API calls
+        results = [None] * len(texts)  # Pre-allocate results list to maintain order
+        with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust max_workers as needed
+            # Submit all tasks
+            future_to_index = {executor.submit(predict_single_text, text): i for i, text in enumerate(texts)}
+            # Initialize progress bar
+            progress_bar = st.progress(0)
+            completed = 0
+            total = len(texts)
+            # Collect results as they complete
+            for future in as_completed(future_to_index):
+                index = future_to_index[future]
+                try:
+                    results[index] = future.result()
+                except Exception as e:
+                    st.warning(f"Failed to analyze sentiment for text: {texts[index]}. Error: {str(e)}")
+                    results[index] = {"sentiment": "neutral", "confidence": 0.0}
+                # Update progress bar
+                completed += 1
+                progress_bar.progress(completed / total)
+            
+            # Clear progress bar after completion
+            progress_bar.empty()
+        
+        return results
+    
     return predict_sentiment
 
 # Load the sentiment model
@@ -112,6 +138,7 @@ def tokenize_text(text):
 def convert_to_slang(text, slang_dict, debug=False):
     if not isinstance(text, list) or not text:
         return []
+    # Join non-None words into a string, converting each word to string
     text_str = ' '.join(str(word) for word in text if word is not None)
     SLANG_PATTERN = re.compile(r'\b(' + '|'.join(map(re.escape, slang_dict.keys())) + r')\b', re.IGNORECASE)
     text_str = SLANG_PATTERN.sub(lambda x: slang_dict[x.group().lower()], text_str)
@@ -245,7 +272,7 @@ if uploaded_file is not None:
 
         # Sentiment Analysis
         st.markdown("<h2 style='font-size: 21px; margin-top: -20px'>Sentiment Analysis Process</h2>", unsafe_allow_html=True)
-        with st.spinner("Analyzing sentiment..."):
+        with st.spinner("Analyzing sentiment... This may take a moment for large datasets."):
             processed_texts = df['processed_text'].dropna().tolist()
             sentiments = sentiment_model(processed_texts)
             df['sentiment'] = [result['sentiment'] for result in sentiments]
