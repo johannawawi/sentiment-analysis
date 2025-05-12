@@ -460,62 +460,64 @@ if uploaded_file is not None:
 
         # If no sentiments are available
         if not any(sentiments_available.values()):
-            st.warning("No text available for positive, negative, or neutral sentiments. Wordclouds cannot be displayed.")
+            st.warning("No text available for positive, negative, or neutral sentiments. Word clouds cannot be displayed.")
         else:
-            # Create two columns with a 4:1 ratio (word clouds vs. download buttons)
-            word_col1, word_col2 = st.columns([4, 1])
+            # Initialize variables to store figures for download buttons
+            fig_pos, fig_neg, fig_neutral = None, None, None
 
-            with word_col1:
-                # Display word clouds for available sentiments
-                if sentiments_available['positive']:
-                    fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Sentiment Word Cloud')
-                    st.pyplot(fig_pos)
-                else:
-                    st.write("No positive text to display.")
+            # Display word clouds vertically in a single column
+            if sentiments_available['positive']:
+                fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Sentiment Word Cloud')
+                st.pyplot(fig_pos)
 
-                if sentiments_available['negative']:
-                    fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Sentiment Word Cloud')
-                    st.pyplot(fig_neg)
-                else:
-                    st.write("No negative text to display.")
+            if sentiments_available['negative']:
+                fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Sentiment Word Cloud')
+                st.pyplot(fig_neg)
 
-                if sentiments_available['neutral']:
-                    fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Sentiment Word Cloud')
-                    st.pyplot(fig_neutral)
-                else:
-                    st.write("No neutral text to display.")
+            if sentiments_available['neutral']:
+                fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Sentiment Word Cloud')
+                st.pyplot(fig_neutral)
 
-            with word_col2:
-                # Display download buttons for available sentiments
-                if sentiments_available['positive']:
-                    buf_pos = get_image_download_link(fig_pos, "wordcloud_positive.png")
-                    st.download_button(
-                        label="📥 Download Positive Word Cloud (HD)",
-                        data=buf_pos,
-                        file_name="wordcloud_positive.png",
-                        mime="image/png",
-                        use_container_width=True
-                    )
+            # Add a three-column table for download buttons
+            with st.container():
+                st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)  # Add spacing
+                col1, col2, col3 = st.columns([1, 1, 1])
 
-                if sentiments_available['negative']:
-                    buf_neg = get_image_download_link(fig_neg, "wordcloud_negative.png")
-                    st.download_button(
-                        label="📥 Download Negative Word Cloud (HD)",
-                        data=buf_neg,
-                        file_name="wordcloud_negative.png",
-                        mime="image/png",
-                        use_container_width=True
-                    )
+                # Positive download button
+                with col1:
+                    if sentiments_available['positive']:
+                        buf_pos = get_image_download_link(fig_pos, "wordcloud_positive.png")
+                        st.download_button(
+                            label="📥 Download Positive Word Cloud (HD)",
+                            data=buf_pos,
+                            file_name="wordcloud_positive.png",
+                            mime="image/png",
+                            use_container_width=True
+                        )
 
-                if sentiments_available['neutral']:
-                    buf_neutral = get_image_download_link(fig_neutral, "wordcloud_neutral.png")
-                    st.download_button(
-                        label="📥 Download Neutral Word Cloud (HD)",
-                        data=buf_neutral,
-                        file_name="wordcloud_neutral.png",
-                        mime="image/png",
-                        use_container_width=True
-                    )
+                # Negative download button
+                with col2:
+                    if sentiments_available['negative']:
+                        buf_neg = get_image_download_link(fig_neg, "wordcloud_negative.png")
+                        st.download_button(
+                            label="📥 Download Negative Word Cloud (HD)",
+                            data=buf_neg,
+                            file_name="wordcloud_negative.png",
+                            mime="image/png",
+                            use_container_width=True
+                        )
+
+                # Neutral download button
+                with col3:
+                    if sentiments_available['neutral']:
+                        buf_neutral = get_image_download_link(fig_neutral, "wordcloud_neutral.png")
+                        st.download_button(
+                            label="📥 Download Neutral Word Cloud (HD)",
+                            data=buf_neutral,
+                            file_name="wordcloud_neutral.png",
+                            mime="image/png",
+                            use_container_width=True
+                        )
 
         # Final Dataset Preview
         st.markdown("<h2 style='font-size: 21px; margin-top: 20px'>Final Dataset Preview</h2>", unsafe_allow_html=True)
