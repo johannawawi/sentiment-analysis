@@ -455,7 +455,7 @@ if uploaded_file is not None:
 
         with word_col2:
             if positive_text:
-                st.markdown("<div style='display: flex; justify-content: center; align-items: center; height: 150px;'>", unsafe_allow_html=True)
+                st.markdown("<div style='display: flex; justify-content: center; align-items: center; height: 100px;'>", unsafe_allow_html=True)
                 buf_pos = get_image_download_link(fig_pos, "wordcloud_positive.png")
                 st.download_button("📥 Download Positive WordCloud (HD)", buf_pos, file_name="wordcloud_positive.png", mime="image/png", use_container_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
@@ -463,7 +463,7 @@ if uploaded_file is not None:
                 st.markdown("<div style='height: 400px;'></div>", unsafe_allow_html=True)
 
             if negative_text:
-                st.markdown("<div style='display: flex; justify-content: center; align-items: center; height: 230px;'>", unsafe_allow_html=True)
+                st.markdown("<div style='display: flex; justify-content: center; align-items: center; height: 200px;'>", unsafe_allow_html=True)
                 buf_neg = get_image_download_link(fig_neg, "wordcloud_negative.png")
                 st.download_button("📥 Download Negative WordCloud (HD)", buf_neg, file_name="wordcloud_negative.png", mime="image/png", use_container_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
@@ -471,7 +471,7 @@ if uploaded_file is not None:
                 st.markdown("<div style='height: 400px;'></div>", unsafe_allow_html=True)
 
             if neutral_text:
-                st.markdown("<div style='display: flex; justify-content: center; align-items: center; height: 230px;'>", unsafe_allow_html=True)
+                st.markdown("<div style='display: flex; justify-content: center; align-items: center; height: 200px;'>", unsafe_allow_html=True)
                 buf_neutral = get_image_download_link(fig_neutral, "wordcloud_neutral.png")
                 st.download_button("📥 Download Neutral WordCloud (HD)", buf_neutral, file_name="wordcloud_neutral.png", mime="image/png", use_container_width=True)
                 st.markdown("</div>", unsafe_allow_html=True)
