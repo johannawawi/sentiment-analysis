@@ -232,6 +232,11 @@ if uploaded_file is not None:
             index=0
         )
         texts = df[text_column].dropna().astype(str).tolist()
+        valid_texts = [t for t in texts if t.strip() and isinstance(t, str)]
+
+        if not valid_texts:
+            st.error(f"The selected column '{text_column}' contains no valid text data. Please choose a column with text content.")
+            st.stop()
 
         # Preprocessing
         st.markdown("<h2 style='font-size: 21px;'>Preprocessing</h2>", unsafe_allow_html=True)
