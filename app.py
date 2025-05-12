@@ -239,7 +239,7 @@ if uploaded_file is not None:
         st.markdown("<h2 style='font-size: 21px;'>Preprocessing</h2>", unsafe_allow_html=True)
         with st.spinner("Processing text data..."):
             progress_bar = st.progress(0)
-            steps = 7
+            steps = 8
             current_step = 0
 
             df['cleaned_text'] = df[text_column].apply(clean_text)
@@ -271,7 +271,21 @@ if uploaded_file is not None:
             progress_bar.progress(current_step / steps)
 
             df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
-            df = df.dropna()
+            
+            # Filter out empty or whitespace-only processed_text
+            original_row_count = len(df)
+            df = df[df['processed_text'].str.strip().astype(bool)].copy()
+            removed_rows = original_row_count - len(df)
+            if removed_rows > 0:
+                st.warning(f"Removed {removed_rows} rows with empty or whitespace-only text after preprocessing.")
+                logging.warning(f"Removed {removed_rows} empty rows after preprocessing. Sample empty texts: {df[df['processed_text'].str.strip() == ''][text_column].head().tolist()}")
+            if df.empty:
+                st.error("After preprocessing, no valid text remains. Please check your dataset or preprocessing steps.")
+                st.stop()
+
+            current_step += 1
+            progress_bar.progress(current_step / steps)
+
             progress_bar.empty()
 
         # Divider
