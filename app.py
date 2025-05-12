@@ -523,7 +523,7 @@ if uploaded_file is not None:
         st.markdown("<h2 style='font-size: 21px; margin-top: 20px'>Final Dataset Preview</h2>", unsafe_allow_html=True)
         st.markdown("<p style='margin-top: -15px; font-size: 16px'>Preview of the original dataset with preprocessed text, sentiment, and confidence scores:</p>", unsafe_allow_html=True)
 
-        preview_columns = [text_column, 'processed_text', 'sentiment', 'confidence']
+        preview_columns = [df, 'processed_text', 'sentiment', 'confidence']
         preview_df = df[preview_columns].copy()
         st.dataframe(preview_df.head(), use_container_width=True)
 
