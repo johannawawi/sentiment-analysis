@@ -271,6 +271,7 @@ if uploaded_file is not None:
             progress_bar.progress(current_step / steps)
 
             df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
+            df['processed_text'] = df['processed_text'].dropna()
             progress_bar.empty()
 
         # Divider
