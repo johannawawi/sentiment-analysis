@@ -112,15 +112,12 @@ def predict_sentiment(texts, batch_size=16):
     label_map = {0: "negative", 1: "neutral", 2: "positive"}
     results = []
     
-    # Process texts in batches
     for i in range(0, len(texts), batch_size):
         batch_texts = texts[i:i + batch_size]
         try:
-            # Tokenize batch
             inputs = tokenizer(batch_texts, padding=True, truncation=True, max_length=512, return_tensors="pt")
             inputs = {key: val.to(device) for key, val in inputs.items()}
             
-            # Predict
             with torch.no_grad():
                 outputs = model(**inputs)
                 logits = outputs.logits
@@ -134,10 +131,10 @@ def predict_sentiment(texts, batch_size=16):
                     
         except Exception as e:
             st.warning(f"Failed to analyze sentiment for batch: {str(e)}")
+            logging.error(f"Sentiment analysis error in batch {i}: {str(e)}")
             for _ in batch_texts:
                 results.append({"sentiment": "neutral", "confidence": 0.0})
         
-        # Update progress
         progress = min((i + len(batch_texts)) / len(texts), 1.0)
         progress_bar.progress(progress)
     
@@ -365,7 +362,7 @@ if uploaded_file is not None:
         }
         colors = [custom_colors.get(label, '#d3d3d3') for label in sentiment_counts.index]
 
-        sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values, palette=colors, ax=ax)
+        sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values, hue=sentiment_counts.index, palette=colors, ax=ax)
 
         for i, v in enumerate(sentiment_counts.values):
             ax.text(i, v + 0.1, str(v), ha='center', fontsize=10)
