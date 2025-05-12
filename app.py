@@ -217,6 +217,8 @@ if uploaded_file is not None:
         else:
             df = pd.read_csv(uploaded_file)
 
+        original_columns = list(df.columns)
+
         # Display data preview
         st.markdown("<h2 style='font-size: 21px;'>Dataset Preview</h2>", unsafe_allow_html=True)
         st.markdown("<p style='margin-top: -15px; font-size: 16px'>Here are the first few rows of your uploaded dataset:</p>", unsafe_allow_html=True)
@@ -523,20 +525,35 @@ if uploaded_file is not None:
         st.markdown("<h2 style='font-size: 21px; margin-top: 20px'>Final Dataset Preview</h2>", unsafe_allow_html=True)
         st.markdown("<p style='margin-top: -15px; font-size: 16px'>Preview of the original dataset with preprocessed text, sentiment, and confidence scores:</p>", unsafe_allow_html=True)
 
-        preview_columns = [df, 'processed_text', 'sentiment', 'confidence']
+        # Define columns to display: original input columns plus derived columns
+        preview_columns = original_columns + ['processed_text', 'sentiment', 'confidence']
+        # Ensure only existing columns are included
+        preview_columns = [col for col in preview_columns if col in df.columns]
         preview_df = df[preview_columns].copy()
-        st.dataframe(preview_df.head(), use_container_width=True)
 
-        csv_buf = BytesIO()
-        preview_df.to_csv(csv_buf, index=False)
-        csv_buf.seek(0)
+        # Check if the DataFrame is empty
+        if preview_df.empty:
+            st.warning("No data available to display in the final dataset preview. Please check your dataset or processing steps.")
+        else:
+            # Display all rows of the DataFrame
+            st.dataframe(preview_df, use_container_width=True)
 
-        st.download_button(
-            label="📥 Download Dataset with Sentiment (CSV)",
-            data=csv_buf,
-            file_name="sentiment_analysis_results.csv",
-            mime="text/csv"
-        )
+            # Prepare CSV for download
+            csv_buf = BytesIO()
+            preview_df.to_csv(csv_buf, index=False)
+            csv_buf.seek(0)
+
+            st.download_button(
+                label="📥 Download Dataset with Sentiment (CSV)",
+                data=csv_buf,
+                file_name="sentiment_analysis_results.csv",
+                mime="text/csv"
+            )
+
+    except Exception as e:
+        st.error(f"An error occurred: {str(e)}")
+        logging.exception("Error in main processing block")
+        st.stop()
 
         # Thank You Message
         st.markdown(
