@@ -9,17 +9,16 @@ import seaborn as sns
 import json
 import logging
 import os
-import sys
 from io import BytesIO
-from gradio_client import Client
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+import numpy as np
 
 # Define base directory and important paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PREPROCESSING_PATH = os.path.join(BASE_DIR, 'Preprocessing')
 STEMMER_PATH = os.path.join(PREPROCESSING_PATH, 'Stemmer', 'mpstemmer', 'mpstemmer')
 NLTK_DATA_PATH = os.path.join(BASE_DIR, 'nltk_data')
-# sys.path.append(STEMMER_PATH)
 
 from mpstemmer import MPStemmer
 
@@ -48,64 +47,23 @@ except LookupError:
 # Setup logging for unmatched_slang.log
 logging.basicConfig(filename='unmatched_slang.log', level=logging.INFO, filemode='w')
 
-# Function to call the sentiment API using Gradio Client with parallel processing
+# Load model and tokenizer from Hugging Face
 @st.cache_resource
-def get_sentiment_model():
+def load_sentiment_model():
     try:
-        # Initialize the Gradio Client with the Hugging Face Space URL
-        client = Client("johannawawi/sentimen-api")
+        model_name = "johannawawi/4_fine-tuning-java-indo-sentiment-analysist-3-class"
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForSequenceClassification.from_pretrained(model_name)
+        model.eval()  # Set to evaluation mode
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        model.to(device)
+        return model, tokenizer, device
     except Exception as e:
-        st.error(f"Failed to initialize Gradio Client: {str(e)}")
-        return lambda texts: [{"sentiment": "neutral", "confidence": 0.0} for _ in texts]
-    
-    def predict_single_text(text):
-        try:
-            result = client.predict(
-                text=text,
-                api_name="/predict"
-            )
-            return {
-                "sentiment": result["sentiment"],
-                "confidence": result["confidence"]
-            }
-        except Exception as e:
-            logging.error(f"Gradio API error for text '{text}': {str(e)}")
-            return {"sentiment": "neutral", "confidence": 0.0}
-    
-    def predict_sentiment(texts):
-        if not texts:
-            return [{"sentiment": "neutral", "confidence": 0.0}]
-        
-        # Use ThreadPoolExecutor for parallel API calls
-        results = [None] * len(texts)  # Pre-allocate results list to maintain order
-        with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust max_workers as needed
-            # Submit all tasks
-            future_to_index = {executor.submit(predict_single_text, text): i for i, text in enumerate(texts)}
-            # Initialize progress bar
-            progress_bar = st.progress(0)
-            completed = 0
-            total = len(texts)
-            # Collect results as they complete
-            for future in as_completed(future_to_index):
-                index = future_to_index[future]
-                try:
-                    results[index] = future.result()
-                except Exception as e:
-                    st.warning(f"Failed to analyze sentiment for text: {texts[index]}. Error: {str(e)}")
-                    results[index] = {"sentiment": "neutral", "confidence": 0.0}
-                # Update progress bar
-                completed += 1
-                progress_bar.progress(completed / total)
-            
-            # Clear progress bar after completion
-            progress_bar.empty()
-        
-        return results
-    
-    return predict_sentiment
+        st.error(f"Failed to load model from Hugging Face: {str(e)}")
+        st.stop()
 
-# Load the sentiment model
-sentiment_model = get_sentiment_model()
+# Load the sentiment model and tokenizer
+model, tokenizer, device = load_sentiment_model()
 
 # Initialize stemmer
 stemmer = MPStemmer()
@@ -138,7 +96,6 @@ def tokenize_text(text):
 def convert_to_slang(text, slang_dict, debug=False):
     if not isinstance(text, list) or not text:
         return []
-    # Join non-None words into a string, converting each word to string
     text_str = ' '.join(str(word) for word in text if word is not None)
     SLANG_PATTERN = re.compile(r'\b(' + '|'.join(map(re.escape, slang_dict.keys())) + r')\b', re.IGNORECASE)
     text_str = SLANG_PATTERN.sub(lambda x: slang_dict[x.group().lower()], text_str)
@@ -146,6 +103,46 @@ def convert_to_slang(text, slang_dict, debug=False):
 
 def stem_text(document):
     return [stemmer.stem(term) for term in document]
+
+# Function to predict sentiment using the loaded model
+def predict_sentiment(texts, batch_size=16):
+    if not texts:
+        return [{"sentiment": "neutral", "confidence": 0.0} for _ in texts]
+    
+    label_map = {0: "negative", 1: "neutral", 2: "positive"}
+    results = []
+    
+    # Process texts in batches
+    for i in range(0, len(texts), batch_size):
+        batch_texts = texts[i:i + batch_size]
+        try:
+            # Tokenize batch
+            inputs = tokenizer(batch_texts, padding=True, truncation=True, max_length=512, return_tensors="pt")
+            inputs = {key: val.to(device) for key, val in inputs.items()}
+            
+            # Predict
+            with torch.no_grad():
+                outputs = model(**inputs)
+                logits = outputs.logits
+                probabilities = torch.softmax(logits, dim=-1)
+                predictions = torch.argmax(probabilities, dim=-1)
+                
+                for pred, prob in zip(predictions, probabilities):
+                    label = label_map[pred.item()]
+                    confidence = prob[pred].item()
+                    results.append({"sentiment": label, "confidence": confidence})
+                    
+        except Exception as e:
+            st.warning(f"Failed to analyze sentiment for batch: {str(e)}")
+            for _ in batch_texts:
+                results.append({"sentiment": "neutral", "confidence": 0.0})
+        
+        # Update progress
+        progress = min((i + len(batch_texts)) / len(texts), 1.0)
+        progress_bar.progress(progress)
+    
+    progress_bar.empty()
+    return results
 
 # Application title
 st.markdown(
@@ -159,8 +156,7 @@ st.markdown(
     <p style='text-align: justify;'>
         Upload your CSV or Excel file containing social media data, 
         and get sentiment insights using Natural Language Processing (NLP). 
-        This application helps you understand public sentiment from textual data 
-        in a simple and efficient way.
+        This app helps you understand public sentiment from text data in a simple and efficient way.
     </p>
     """,
     unsafe_allow_html=True
@@ -176,7 +172,7 @@ st.markdown(
 
 # File uploader
 uploaded_file = st.file_uploader(
-    "**📁 Upload Your Dataset to Begin**" \
+    "**📁 Upload Your Dataset to Start**" \
     "   \n _Only .xlsx or .csv files are supported_", 
     type=["xlsx", "csv"]
 )
@@ -185,12 +181,12 @@ if uploaded_file is not None:
     try:
         # Validate preprocessing folder
         if not os.path.exists(PREPROCESSING_PATH):
-            st.error(f"Preprocessing folder not found in {PREPROCESSING_PATH}!")
+            st.error(f"Preprocessing folder not found at {PREPROCESSING_PATH}!")
             st.stop()
 
         # Validate stemmer folder
         if not os.path.exists(STEMMER_PATH):
-            st.error(f"Stemmer folder not found in {STEMMER_PATH}! Ensure the mpstemmer folder exists.")
+            st.error(f"Stemmer folder not found at {STEMMER_PATH}! Ensure the mpstemmer folder exists.")
             st.stop()
 
         # Load slang dictionary files
@@ -198,10 +194,10 @@ if uploaded_file is not None:
         slang_file2_path = os.path.join(PREPROCESSING_PATH, 'new_kamusalay.txt')
 
         if not os.path.exists(slang_file1_path):
-            st.error(f"slangword.txt not found in {PREPROCESSING_PATH}!")
+            st.error(f"slangword.txt not found at {PREPROCESSING_PATH}!")
             st.stop()
         if not os.path.exists(slang_file2_path):
-            st.error(f"new_kamusalay.txt not found in {PREPROCESSING_PATH}!")
+            st.error(f"new_kamusalay.txt not found at {PREPROCESSING_PATH}!")
             st.stop()
 
         try:
@@ -238,7 +234,7 @@ if uploaded_file is not None:
         texts = df[text_column].dropna().astype(str).tolist()
 
         # Preprocessing
-        st.markdown("<h2 style='font-size: 21px;'>Preprocessing Process</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='font-size: 21px;'>Preprocessing</h2>", unsafe_allow_html=True)
         with st.spinner("Processing text data..."):
             df['cleaned_text'] = df[text_column].apply(clean_text)
             df['emoji_removed'] = df['cleaned_text'].apply(remove_emoji)
@@ -271,10 +267,11 @@ if uploaded_file is not None:
         )
 
         # Sentiment Analysis
-        st.markdown("<h2 style='font-size: 21px; margin-top: -20px'>Sentiment Analysis Process</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='font-size: 21px; margin-top: -20px'>Sentiment Analysis</h2>", unsafe_allow_html=True)
         with st.spinner("Analyzing sentiment... This may take a moment for large datasets."):
             processed_texts = df['processed_text'].dropna().tolist()
-            sentiments = sentiment_model(processed_texts)
+            progress_bar = st.progress(0)
+            sentiments = predict_sentiment(processed_texts)
             df['sentiment'] = [result['sentiment'] for result in sentiments]
             df['confidence'] = [result['confidence'] for result in sentiments]
             df = df.dropna(subset=['sentiment'])
@@ -402,7 +399,7 @@ if uploaded_file is not None:
             buf.seek(0)
             return buf
 
-        st.markdown("<h4 style='margin-top: 20px; margin-bottom:10px; text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px'>Word Clouds of Sentiment</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top: 20px; margin-bottom:10px; text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px'>Word Clouds of Sentiments</h4>", unsafe_allow_html=True)
 
         word_col1, word_col2 = st.columns([6, 1.5])
 

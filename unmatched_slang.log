@@ -1,0 +1,548 @@
+INFO:httpx:HTTP Request: GET https://johannawawi-sentimen-api.hf.space/config "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://johannawawi-sentimen-api.hf.space/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://johannawawi-sentimen-api.hf.space/gradio_api/heartbeat/9e6caa1e-22a7-4c0e-a76c-84c81a1acd1d "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://johannawawi-sentimen-api.hf.space/gradio_api/queue/data?session_hash=9e6caa1e-22a7-4c0e-a76c-84c81a1acd1d "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text 'saya pesimis sama manusia utama dalam urus sampah sudah berapa banyak hewan hewan laut jadi korban gara gara kita buang sampah ke laut tidak tega saya lihat nya kadang tidak mengerti juga benar pimpin pimpin yang ada itu pada pikir tidak sih urus penting kayak begini he': _ssl.c:1011: The handshake operation timed out
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text 'saya itu mememes tiket dot com sudah bayar email belum ada balas bukti bayar sudah saya kirim by email saya pasu data balas nya mesan kadaluarsa terus akhir saya beli lagi langsung ke loket saya minta uang kembali masih tunggu hari ambil saja uang tiket nya tidak apa apa sedih saya unduh aplikasi ini': _ssl.c:1011: The handshake operation timed out
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text 'saya kecewa karena saya sudah transfer dan belum konfirmasi saya telepon bahkan konsumen sibuk terus aduh kecewa ini saya': _ssl.c:1011: The handshake operation timed out
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text 'bicara miskin tetapi hidup dengan mewah bicara senjang tetapi harta triliun bicara cinta negara satu republik indonesia tetapi kemplang pajak bicara lapar tetapi tidak bisa tahan lapar aneh': _ssl.c:1011: The handshake operation timed out
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text 'takdir politik agus harimurti yudhoyono belum bisa ikut kontestasi pilih presiden walaupun agus harimurt yudhoyono legowo kami tetap kecewa': _ssl.c:1011: The handshake operation timed out
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text '': _ssl.c:1011: The handshake operation timed out
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+ERROR:root:Gradio API error for text '': The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text 'kecewa sama iphone kalah politik dengan samsung saat nya hijrah ke samsung iphone iphone mungkin': _ssl.c:1011: The handshake operation timed out
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text 'aplikasi yang sangat bantu dalam tiap perjalan saya puas pokok nya segera coba': _ssl.c:1011: The handshake operation timed out
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://johannawawi-sentimen-api.hf.space/gradio_api/queue/join "HTTP/1.1 200 OK"
+ERROR:root:Gradio API error for text 'sangat puas dengan pelayan nya tiket com selalu bokong tiket pesawat dari sini dan yang bikin nyaman nya kalau ada kslhan nm atau data lain bisa cepat baik dan tidak bikin ribat terima kasih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya selalu pesan tiket pesawat maupun kereta di sini harga lebih murah beda dengan aplikasi lain': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hotel ini adalah salah satu hotel yang wajib kunjung kalau buka puasa bareng tempat nya tarik mewah staf nya ramah makan nya banyaakk jenis nya menu nya komplet dan suasana nya sangat senang tempat yang sangat indah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya inap dua malam sama keluarga cara seluruh hotel nya sangat bagus bersih fasilitas hotel lengkap breakfast nya pun enak enak dan tentu suasana hotel yang sejuk dan nyaman cocok untuk pilih inap sama keluarga': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'proses cek masuk cepat staf nya ramah dan helpfully lingkung hotel sangat asri sejuk dan tenang amenities di kamar lengkap dapat kampung ramadan untuk buka dengan begitu banyak pilih makan yang siap manja lidah baik tempat untuk staf when kamu visi bandung': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kami pakai enam dan pakai kamar kamar besar dan bersih breakfast nya enak banyak varian nya dan aneka segar juice pelayan sangat baik utama pelayan di restoran sangat puas rekomendasi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'lahir di rumah sakit hermina jatinegara sangat rekomendasi fasilitas lengkap seperti fetotermal ina nicu klinik tumbuh kembang senam hamil dan pmo selain itu hermina juga sangat profesional asi dan imd tambah lagi semua kamar itu rooming masuk dengan bayi nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau regis di rumah sakit hermina banyak untung yang dapat pasien untung nya antara lain mudah saat hari h lahir selain itu banyak juga gratis nya seperti gratis senam hamil gratis kursus prenatal gratis senam nifas gratis kursus pijat bayi dan masih banyak lagi asyik deh pokok nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'turut ku rumah sakit harap kita itu rekomendasi selain bisa rooming suster nya juga bantu soal biaya tidak perlu khawatir karena pasti jangkau': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'asyik banget pakai traveloka diskon hotel sampai satu juta kita bisa langsung cek promo merdeka banyak harga spesial hotel untuk bagai hotel di dalam negeri senang deh': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau belanja di blibl com tidak perlu ragu pertama kita bisa leluasa pilih produk tanpa dosa privasi kita ganggu selain itu kita juga dapat fasilitas kirim yang cepat dan gratis bisa sambil sadar emat uang dan tenaga': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya dukung ahok itu tidak ada hubung nya dengan etnis dia atau agama ahok bahkan saya tidak tahu agama dia apa saya dukung ahok karena saya suka fenomena baru dalam perintah yang inovatif bersih dan banyak terobos terobos yang ia kerja dalam bangun perintah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'spasi bambang jangan suka kafir sama muslim kamu bukan malaikat tanpa dosa beda pilih beda paham oke itu hak kamu tetapi tidak harus mejelek mejelekin orang lain juga tidak suka cara kamu yang kayak begini': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'suka banget sama siti nurhaliza suara nya wajah nya attitude nya sempurna kayak nya cuma dia penyanyi yang tidak ada hater nya paling suka dulu pas dia rilis album transkripsi lupa tahun berapa lagu lagu nya semua jadi favorit ku moga bisa duet sama di dalam album': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kata dosen ku budaya korea itu kalau ada orang yang sudah baik sama mereka walaupun cuma banget mereka bakal balas kebaikan itu lebih banyak maka dari itu mereka kalau beri itu suka tidak muluk muluk senang deh sama mereka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'foto aku cuma modal kamera xiaom tetapi tetap suka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'xiaom ram nya mantap baterai awet juga kamera depan nya juga lumayan tidak sesal beli ini': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'xiaom karena saya pakai xiaom sekarang belum oppo f lebih suka xiaom saja baterai nya kuat saya puas banget sih dengan xiaom': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'teman saya telepon genggam nya xiaom yang juta saja masih kembali pas saya tanya kenapa dia beli itu padahal bisa saja di beli iphone dia jawab karena dia suka karena spesifikasi nya lebih iphone yang kamu pandang ricuh itu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'yang paling saya suka dari adalah trully open source sampai sedia forum khusus itu bikin nyaman banget sih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'agak nya xiaom tidak main main ketawa masuk pasar ponsel global mantap saya selalu suka miui mereka di': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak dapat apple aku tidak kecewa kok yang penting samsung galaxy grand sudah di tangan ku sekarang aku senang': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'terima kasih bapak presiden jokow sudah hadir dan inap di tengah tengah kami warga lombok utara hadir bapak tambah semangat kami untuk bangkit lagi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sedia air adalah kunci tahan pangan kita karena itu perin telah bangun bendung yang akan jamin produksi pangan kita di masa depan terima kasih bapak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'terima kasih bang atas apresiasi nya moga bapak cepat temu wakil kami korban putus hubung kerja pihak freeport bila perlu bapak presiden agar masalah kami selesai': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'masyarakat papua pasti akan dukung pilih jokow saat pilih presiden karena masyarakat papua rasa hasil bangun yang capai di era terima kasih bapak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'beliau cinta rakyat di cinta rakyat rakyat terima kasih bapak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'moga bapak selalu sehat moga bapak bisa lanjut dua periode amin saya dukung bapak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'terima kasih kepada anies baswedan dan diego uno atas komitmen nya untuk tidak tinggal jabat gubernur dan wakil gubernur lama tahun saya bangga pilih kalian': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'karya karya seperti itu layak tempat lokasi yang premium indah dan klasik saya suka terima kasih bapak anies': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bagus dong bapak terima kasih sudah gabung alhamdulillah sukses selalu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'terima kasih bapak anies sukses untuk anda baru kali ini lihat trotoar jakarta yang lebar nya lebih lapang badminton keren bapak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'doa kami untuk mu bapak anies moga allah rida engkau sukses sama bapak prabowo ri ri': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'terima kasih untuk buah karya mu di jakarta yang jadi sejuk santun sama bapak sandi juga bapak anies': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya paling suka pakai susu ultra yang lowfat sungguh sih enak banget banget bahkan saya cuma bisa habis indomie rebus kalau kuah nya ganti susu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kenapa aku kok suka banget sama yang nama nya mi apalagi mi indomie goreng kasih kuah telur berh rasa mantap tjoy pangsit di depan rumah saya saja kalah enak sama mi buat aku sendiri': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'benar lebih suka kari ayam sih kak hehe tapi kalau label nya sudah indomie apa saja masuk kok ke perut ku karena aku gemar berat indomie': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'iya enak banget soal nya iya dong indomie adalah kakak perempuan baik iya lalu aku juga tidak suka orang yang padahal jelas jelas dia salah dan harus nya minta maaf tapi adem ayem saja sedang aku nya sudah derita': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'yang hormat saya suka banget sama indomie ketawa minta boleh tidak inovasi bungkus minyak nya biar gampang buka pakai tangan dong supaya tidak bleweran ketika tidak ada gunting terima kasih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'yang saya suka dari chitato indomie konsistensi mereka meng eksplore rasa lokal kesan nya indonesia banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'asus bagus speaker nya kencang kalau buat presentasi lumayan maka dari itu aku lebih pilih asus banding yang lain': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'xiaom redmi catat atau asus zenfone maksimal profesional sama saja juta sudah pakai snapdragon baterai gede baru os jamin kamera bagus': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau ketawa minum kopi datang journey kopi records ini kedai kopi anak musik banget jual kaset tape cd sampai vinil yang punya juga paham banget musik kopi nya enak banget kakak perempuan baik': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'aku lagi makan mangga potong aku suka banget buah mangga besok kalau pasar ketawa beli banyak banyak lagi ah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'jaemin itu lembut banget hati nya mudah sentuh begitu sayang banget sama nctzen juga inti nya dia itu suka sama yang nama nya kasih sayang itu kenapa aku suka banget sama dia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ingin rekomendasi saja buat yang tarik kuliner bandung bacang yang ada di jalan tarip sebelah hotel ibis styles ibis yang warna hijau sungguh enak itu buka dari jam sore sampai jam dini hari kalau belum banget harga ribu cocok buat ajak orang sayang nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'liner pertama yang harus coba itu ketan jompo rasa jangan ditanya lagi gurih manis dan hangat nya ketan yang tabur bubuk koyah bisa banget teman malam kalian di kota jember harga nya juga murah cuma tiga ribu suka banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di jember itu ada tempat makan enak nama nya warung bakar kakak vivi makan nya enak enak bakar nya itu pas banget matang nya dan yang paling penting nya harga nya murah banget untuk makan enak itu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya baru pertama kali ke tempat makan nama nya ayam rempah jember rasa bisa diadu sama makan makan enak kelas atas padu nasi hangat sama ayam rempah terus sanding sama dua macam sambal dan minum nya jeruk panas parah sih itu rasa tagih bikin ingin lagi dan lagi dan lagi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di jember ada juga makan nama nya tahu telur bangka waktu itu belum pernah coba makan yang begitu eh banget nya coba saya langsung jatuh cinta top': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'pujasera okm semanggi itu salah satu tempat makan yang lagi populer di jember asyik banget buat tongkrong wifi nya juga kencang kayak nya sih bakal sering sering ke sana': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tawa yang baru baru sih sudah tidak begitu lihat absurd nya yang rog baru bahkan logo mata doang keren jadi nya lenovo legion yang baru bahkan lebih lebih lagi elegan nya kalau saya pribadi sih suka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'buat saya kece banget lenovo itu saking kece nya layar laptop lenovo yoga bisa tekuk derajat keren banget memang benar sih kadang different adalah lebih baik': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ultra milk ini luv banget iya banget nya keluar flavor baru dua dua nya favorit ku tapi ku lebih sayang sama yang karamel sih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'besar cola itu enak banget aku suka dia tidak jauh beda enak nya dengan minum cola lain tambah dia itu harga nya lebih murah luv banget buat orang yang suka cola kayak aku': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'dulu saya haus sete ke indomaret dan beli besar cola haus saya hilang gila rasa enak banget sejak saat itu jadi terus suka minum besar cola': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'baca keren banget sih pelayan nya selain itu dia pikir karyawan nya banget tiap hari saja karyawan nya dapat camil popcorn salut sama pimpin nya bukan cuma pikir nyaman konsumen tapi juga karyawan': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sungguh besar cola jauh banget lebih enak daripada coca cola tidak terlalu manis dan tidak sisa pahit di mulut seperti coke zero haha norak iya saya baru coba tapi kendi enak banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'aku sayang banget sama susu ultramilk rasa tiap ke indomaret tidak pernah tidak beli susu itu enak tagih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'oppo f turut saya mantap banget sih mulai dari kamera depan nya yang bersih terus layar nya penuh display pakai gorilla glass lalu kamera belakang nya naik tingkat banget dari yang belum tidak sesal saya beli ini handphone': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sarap nya enak dan pilih nya lumayan banyak kamar baik ac nya juga dingin hotel aston saya rekomendasi sih buat kalian kalian yang ketawa inap di hotel': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ini iya turut saya tentang hotel aston itu pertama staf hotel tanggap cepat dan ramah dua untuk sarap lumayan enak dan untuk anak anak suka banget dengan kolam renang anak masuk saya dan istri tiga yang pasti bersih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kolam renang di hotel aston bikin tidak ketawa henti renang nyaman banget air nya bersih tempat bilas nya nyaman': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'wah keren iya siap bank negara indonesia saya juga dukung moga bisa jalan lancar': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'lebih enak lagi kalau nasi padang oreo momogi chocolatos terus semua itu di campur di aduk pakai tangan baru dimakan enak banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sudah lama tidak minum ultra memilk rasa stroberi pas sekarang minum rasa enak banget tidak tahu kenapa tagih rasa ingin beli kardus gede buat minum sendiri': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'go jek makin sini makin keren deh moga makin baik iya dalam pelayan dan aplikasi nya iya go car go jek dan go go lain chirrs': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'go jek kalian harus tetap ada karena kami bukan kadar butuh angkut kami juga butuh pelayan yang prima seperti biasa saya sangat dukung kalian': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya senang di bali bagus pelayan go jek nya sangat bantu dengan ada nya memang harus ada terus supaya pelayan nya semakin puas': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau kendara go jek tidak pelayan prima minta bungkus acar untuk ambil saos tambah hilang nafsu makan saya bravo kendara go jek': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'banyak alas saya bisa rasa puas dengan pelayan go jek go jek tidak pernah lepas dari tanggung jawab itu adalah nilai plus yang belum tentu milik oleh usaha yang lain': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'go jek selalu jadi inspirasi untuk usaha usaha di indonesia pelayan nya bravo selalu kembang tiap waktu dan beri mudah bagi konsumen': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'suka sama hotel ibis dia selalu bikin inovasi buat jaga nyaman konsumen selalu konsisten juga beri pelayan yang baik untuk tamu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kepada yang hormat ibu dari ayi djembarsari selamat tunai tugas bu sebagai direktur utama rshs moga pelayan rshs semakin baik saya bangga kepada ibu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'terima kasih atas saran yang kamu ikan kak kami akan selalu usaha untuk tingkat pelayan kami untuk alam belanja yang lebih senang iya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hai kak terima kasih atas pasu kamu iya saran kamu sangat harga bagi kami kami akan upaya tingkat performa aplikasi dan pelayan kami untuk alam jual beli yang selalu senang untuk kamu dan semua sobat shopee iya kak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'keleveru baik memang dari kualitas kuantitas pelayan pun baik tidak salah pilih aku': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'cocok banget saya pakai shopee sudah asli ongkos kirim gratis kirim juga aman dan lancar': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'alhamdulillah lama beli di lazada tidak pernah masalah barang barang nya lebih lucu lucu pelayan juga lebih baik dari yang lain sudah deh kalau beli apa apa aku ketawa beli di lazada saja': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'karena shopee bukan barang shopee dia itu tempat belanja aku yang paling luar biasa pelayan nya oke punya disko nya banjir': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'harus belanja di shopee karena shopee itu beri bukti pelayan yang baik bukan kadar janji doang seperti mantan itu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'harus belanja di shopee karena pelayan dari shopee itu benar benar puas konsumen dan tak akan kecewa': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'karena hanya shopee yang pelayan nya puas diskon besar besaran barang nya juga pasti nya merek mantap': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'shopee tidak pernah kecewa konsumen selalu beri yang baik dalam pelayan pokok nya shopee selalu beri pelayan dengan baik': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'shopee itu pusat belanja online percaya dengan pelayan yang puas yang paling tarik adalah beri diskon yang besar besaran aku suka aku suka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau ada masalah di toko pedia bisa langsung selesai dengan mudah dan cepat pelayan nya juga jelas pusat panggil yang harus hubung juga selalu aktif puas': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'marketplace pilih saya iya tokopedia lah toko pedia itu selalu usaha beri pelayan baik buat semua guna nya kalau ada keluh juga pasti langsung tanggap salut': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'senang banget saya dengan pelayan komplain di di saat jual tidak gubris tokopedia beri solusi dengan cepat pasti nya dengan investigasi yang tidak larut larut iya walau harus akhir dengan kembali dana dana jadi saya tidak pernah bosan buat belanja di tokopedia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'terima kasih atas tanggap dari keluh yang saya alami kena hilang nya kuota data saya terima kasih xl karena sudah benar benar tanggap dan beri solusi yang sangat puas atas keluh keluh saya saya jadi rasa sangat bantu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kemarin itu pertama kali coba fatmilo yang white memilo demi apa pun itu enak banget sih ampun aku itu tidak bisa kata kata lagi enak banget selera saya banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'satu hal yang saya suka banget dari masjid agung sunda kelapa adalah surga jajan kaki lima di luar masjid nasi gila sate ayam soto mi tempe mendoan es buah thailand tea sampai es kepal memilo ada di sini': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ada yang suka memakan memilo bubuk langsung dari saset nya tidak iya sama memang enak banget bagaimana begitu sih rasa saya bisa sete lima bungkus sendiri': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'terima kasih kembali oh iya garuda dan traveloka cepat respons mantap dan keren': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'mantap banget ikut kontribusi di google lokal guides kemarin dapat kupon diskon traveloka terus ini dapat tokocash tokopedia lagi aku senang': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'wah ada yang baru di aplikasi ini sekarang bisa pesan tiket bus mantap': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'barusan mememes pesawat lalu traveloka seperti biasa kadang pakai kadang booking com kadang agoda asli yang paling asik saja hidup jadi lebih mudah mantap traveloka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'terima kasih pelayan mantap ini kembali dana cair kurang dari jam rekomendasi banget traveloka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'mantap terima kasih atas proses kembali dana yang cepat waktu maksimal hari tapi baru satu hari sudah transfer thumbsup': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya tambah setia ini sama traveloka sekarang pilih maskapai nya makin banyak payment nya mudah selaint itu harga nya murah dari yang lain mantap': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'makin mantap sekarang sudah ada menu pesan hotel lengkap dengan rating nya moga makin sering ada promo iya pasti saya perhati terus': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'e tiket sudah saya terima mantap reservasi cepat harga murah nomor tiketing online indonesia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hari ini iseng coba versi beta nya mantap cari engine nya tidak pusing lagi kalau ketawa cari tiket murah dan waktu terbang mudah aku': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'keren air asia sete malaysia indonesia thailand filipina jepang dan india bakal ada air asia vietnam dan air asia cina': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'air asia ini keren banget kasih tiket gratis umur hidup buat atlet asia menang medali di olimpiade rio': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'top deh hari ini lion air cengkareng balikpapan on waktu banget mantap harus nya seperti ini terus sangat puas': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bu memang mantap moga siapa presiden nya menteri laut ikan tetap bu susi amin': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'mantap bu saya juga akan ikut ke pantai bu biar laut kita bersih kalau kotor nanti bahkan tenggelam dengan bu susi hehe': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'antusias para milik agen sangat luar biasa dan terima kasih untuk para petinggi jne yang kenan hadir dalam acara kami dan terima kasih untuk para agen mitra jne yang juga turut hadir dalam acara ini moga di tahun depan akan semakin mantap': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'biasa paling keren dari tiki jne adalah langsung beri lapor kalau yang terima paket tidak ada di tempat tanpa telepon dulu ke sih terima mantap': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'selamat ulang tahun bdo petugas nya pada ramah ramah umur sudah matang dan mantap sukses selalu karyawan nya pada sehat': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'mantap banget di hari libur tetap antar paket ke tuju benar benar terap semangat merdeka id bdo': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kirim barang guna jne sangat puas tanggal sampai kirim barang sesuai pelayan sangat ramah harga juga sangat masuk akal dan jangkau': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya suwandi sudah pesan tiket bapak cengkareng untuk terbang tanggal jam lalu pesawat nama air namun sampai dengan hari ini tanggal juli saya belum terima informasi apa pun transfer dari bank rakyat indonesia syariat ke bank mandiri mohon bantu nya untuk informasi kembali terima kasih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'daftar harga dispenser baik yang ada di blibl com muat banyak produk salah satu nya adalah memiyako wdp dispenser produk ini rupa dispenser dengan tempat galon di bawah sehingga anda tidak perlu angkat galon saat akan isi air': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'samsung panasonic sharp dan bagai produsen lain telah pasar bagai macam jenis mesin cuci dengan fungsi yang agam': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kami segenap direksi dan karyawan pt smartplus consulting indonesia ucap selamat hari raya idul fitri h': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sudah ini negara demokrasi jangan saling bual masing memasing punya pilih pilih prabowo minggu tidak ketawa pilih jokow juga tidak apa apa bebas': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kami bukan dalam kapasitas tentu jangan calon presiden mbak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'adab di media sosial itu jelas kok suka sila like ikut tidak suka unfollow blok simpel dan kita milik hak yang sama untuk laku nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau tidak suka gaperlu dukung mas dukung saja yang turut mas daus itu bisa bawa indonesia jauh lebih baik yang penting kita harus menomorsatukan asas etika': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kamu bisa punya koleksi bts dengan beli seluler lagi ke selain sedia wallpaper dan tema di dalam nya kamu juga dapat poster dan postcard bts': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'siar bola asian game lewat parabola dong puluh juta pasang mata di luar jawa yang pakai parabola pasti kecewa kalau tidak bisa tonton': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ada tiga tahap pertama harus unlock bootloader terus pasang twrp terus robot deh xiaom kamu tipe berapa iya soal nya suka beda begitu lah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'maaf ini out of topic yang telepon genggam nya xiaom bisa bantu aku tidak ini kalau aku lagi buka twit atau saya begitu suka menang nah yang aku lingkar merah itu aplikasi yang hilang begitu ada yang tahu kenapa dan bagaimana cara sembuh nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di indonesia pilih merek seluler kan limpah kalau tidak suka cara xiaom jalan bisnis nya iya tinggal pilih merek lain bawa santai saja': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'daftar towel towel lagi tidak thinq membludak hingga mungkin kapasitas tempat ke depan nya bakal segera ada towel towel huawei nova i dan mungkin samsung galaxy catat': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di depan sana masih ada kompetisi foto dengan tema pagi feel': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'oke saya akan segera tuju ke cabang baca dekat': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'isi pulsa lalu atm baca tadi jam sampai sekarang belum masuk boleh tolong dicek terima kasih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ketawa tanya apa nomor ini benar nomor kantor baca jakarta yang tangan kartu kredit saya tunggu jawab nya iya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hai mas cepy saya sudah ke bank baca dekat untuk langsung proses ganti kartu iya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hai ken saat ini isi e uang flazz dari baca belum bisa di jenius iya kamu bisa sampai saran kamu lalu bagi dari kami di jenius co create informasi lengkap bisa ku jung terima kasih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'selamat siang kamu bisa guna tarif ramai ramai untuk rombong serta memanfat promo cashback dari rekan bank seperti bank bank rakyat indonesia dan baca': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di pesona festival pasar apung ada juga main tradisional balogo festival kain tradisional sasirangan kompetisi chef hotel dan restoran baik festival liner desa banjar lomba hias perahu jukung lomba fotografi dan masih banyak lagi yang lain': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'asisten pelatih pskc cimahi nurjati rasa tim nya sangat bangga bertemu dengan tim besar persib bandung di babak besar piala indonesia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'selamat siang jika lama bulan tidak dapat saldo rupiah tidak ada transaksi maka sudah otomatis closed namun untuk cek status rekening anda dapat hubung bank negara indonesia telepon': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'selamat pagi untuk lihat tagih dapat hubung bank negara indonesia telepon kemudian tekan untuk bicara dengan bank negara indonesia telepon officer lalu tekan untuk bicara dengan bank negara indonesia telepon officer layan kartu kredit nanti petugas kami akan bantu anda': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'selamat pagi sila hubung bank negara indonesia telepon untuk laku blokir sete itu sila datang ke kantor cabang bank negara indonesia dekat dengan bawa kartu tanda duduk surat terang hilang dari polisi dan buku tabung untuk ganti kartu nya iya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tadi sore saya baru cek email dan sudah transfer kurang tapi belum ada balas lagi apakah transfer nya sudah masuk atas nama ellena saufika no konsumen transfer lalu mbanking bank negara indonesia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'jakarta november di hotel ibis kramat jakarta pusat balai ksda jakarta ada bimtek situs based integrated sistem edar tsl cara online e permit untuk kenal buah aplikasi pelayan manfaat tsl yang nama sih pintar sistem perijinan padu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'dalam kunjung kerja nya ke provinsi jawa barat presiden meninjau pelayan badan penyelenggara jamin sosial dan kartu indonesia sehat kartu indonesia sehat di rumah sakit umum didi rumah sakit umum pusat dari hasan sadik rshs kota bandung kamis siang februari': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hari ini rshs usia tahun': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'pada tanggal februari esok poliklinik rawat jalan rshs tidak laku pelayan karena hari libur nasional poli kembali buka hari senin februari': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kami ingin umum bahwa mal bom kini hadir di shopee mal': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hari ini periode submission xpresound telah tutup iya dan para juri akan pilih finalis yang akan umum tanggal agustus nanti': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'informasi tambah bahwa untuk bayar rupiah juta yang bapak laku tidak jadi limit jadi rupiah juta melainkan bayar sebut akan kurang tagih yang sedang jalan jika kartu kredit dalam keadaan lebih limit maka akan kena biaya rupiah ribu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sebentar lagi asian game mulai ini coba tebak ada berapa cabang olahraga yang tanding di asian game nanti lalu menang hadiah kompor spesial dari rinnai untuk orang lazadians yang untung': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saat kunjung ke hotel menteri agama banyak terima apresiasi atas layan haji tahun ini': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'pagi ini perin kabupaten malang lalu selenggara giat launching sistem layan informasi publik cara online dan rapat koordinasi ppid di salah satu hotel di malang': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kemnaker ri selenggara pamer sempat kerja kerja adil nasional tahun di balairung hotel bumiwiyata depok jawa barat tanggal juli kerja adil ini tidak dipungut biaya gratis': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'gelar jawa tengah wah telah usai pada maret lalu dari pelaksanaan lama dua bulan penuh giat ini telah tingkat huni hotel datang ribu kunjung wisatawan mancanegara ke jawa tengah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'presiden harap menpar ri dan menteri ekonomi untuk ajak pelaku pariwisata baik hotel maupun maskapai terbang untuk juga ajak beri informasi mempromosikan wisata di indonesia khusus nya bali': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'gubernur daerah khusus ibukota jakarta anies baswed bentuk tim evaluasi tata kelola air minum pembentukan tim ini tuang dalam putus gubernur nomor tahun yang ditandatangani agustus tim ini tuai sekretaris daerah saefullah dengan wakil ketua asisten bangun dan lingkung hidup yusmada faizal': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tujuh main real madrid akan sama rekor paolo maldini dan dani alves yang sampai saat ini masih sandang predikat raja di piala super eropa tujuh main yang maksud adalah dani carvajal sergio ramos marcelo luka modric karim benzema isco dan toni kroos di antara tujuh main itu sudah ada enam main yang raih tiga gelar piala super eropa sama real memadrid yakni carvajal ramos memarcelo memodric nzema dan isco': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ada atur presiden nomor tahun tentang strategi nasional cegah korupsi yang telah teken oleh presiden joko widodo pada juli silam harap mampu hasil ubah dasar khusus nya kait tiga aspek tiga aspek itu sangkut izin dan tata niaga uang negara dan tega hukum serta reformasi birokrasi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'beberapa fungsi layan kami butuh daftar akun dengan pilih identifikasi guna id guna dan kata sandi unik serta beri informasi pribadi tentu apabila anda pilih id guna yang anggap tidak sopan atau tidak pantas oleh shopee atas bija nya sendiri shopee hak untuk tangguh atau akhir akun anda': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'buah musibah baru saja timpa kampung adat megalitikum gurusina di bajawa flores bakar hebat yang jadi pada senin sore hampir hangus seluruh kampung total dari rumah adat yang ada habis lalap api sama semua cerita dan sejarah nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di usia tahun saat nya gerakan pramuka di tanah air jawab tantang zaman baru anggota pramuka harus didik bukan hanya bahasa morse tetapi juga pengetahuan digital seperti coding artificial intelligence advance robotic dan internat of pikir': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'dalam papar nya menkeu smi tekan penting nya jaga integritas taxmin sebagai penyalur utama informasi paja agar sampai informasi yang baik dan benar kepada masyarakat lalu media sosial yang milik nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sahabat mido untuk nyaman mohon paspor dan hindar praktik calo direktorat jenderal imigrasi kerja sama dengan menteri uang lalu bank bank yang gabung dalam sistem informasi terima negara bukan pajak online simponi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hai kak saat ini jam opertional restoran pizza hari ulang tahun belum sampai jam iya kadar informasi restoran ph dan phd beda menu dengan konsep nya informasi kena phd kakak dapat hubung atau tanya ke akun official nya id kak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'juru bicara komisi berantas korupsi komisi berantas korupsi febri diansyah ungkap lapor harta kaya calon presiden joko widodo telah verifikasi lengkap komisi berantas korupsi dalam waktu dekat akan umum lapor harta kaya jokow di situs resmi komisi berantas korupsi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'dia tidak pantas jadi pimpin negara ini': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak perlu ragu lagi semua orang memang benci dia aku pun sama': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'selalu tidak suka sama cara dia bicara lepot dan sok paling mengerti sama masalah di negara ini': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'pelayan di supermarket itu payah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'aku kecewa dengan pelayan hotel yang malam aku tempat kamar mandi kotor pelayan tidak ramah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'parah sih bikin emosi naik obrol sama pelayan konsumen bank itu sombong sete': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'dia tidak cocok pakai baju mahal karena dari sana nya memang sudah lihat kayak orang miskin': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'harga makan di restoran tadi mahal banget sudah begitu tidak enak lagi makan nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sesal deh beli baju di toko tadi kualitas nya murah banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ipuh pantas saja tidak pernah datang banyak orang nyata tempat makan di sana dalam nya kotor banget sampah saja biar sera': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak ada enak nya makan di sana bakso tidak enak kakak perempuan manis nya rasa aneh mi ayam nya mie nya kelembekan tidak ketawa lagi deh ke sana': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'benci banget sama pelayan di rumah sakit itu tidak ada adab nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya tidak ketawa bicara lagi sama orang bodoh kayak dia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sampai kapan pun saya tidak sudi bagi sama orang yang tidak tahu terima kasih biarpun dia keluarga saya sendiri': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya tidak puas sama pelayan kerja di tempat kemarin hak hak karyawan batas banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya sudah kecap dia jelek sih jadi ketawa baik apa pun sikap nya saya tetap tidak suka dia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sete perhati iklan di indonesia paling tidak kreatif banding negara lain utama thailand': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak mengerti lagi sama film di indonesia tidak kualitas banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya tidak suka sama pelatih timnas yang sekarang strategi yang buat nya tidak bisa pakai buat alah lawan': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'orang orang di indonesia itu memang begitu pekerja nya negative thinking terus sama pimpin tidak suka saya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kadang bingung sih kenapa mulut warganet pada tidak bisa jaga bisa nya behina terus aneh': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ah persija adalah cupu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sija cuma bisa cari ribut saja kalau lagi main di lapang main nya tidak jago sama banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'memang masih zaman iya bicara pakai kode kode tidak suka banget saya sama orang yang kayak begitu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'harus nya pop tenggelam di indonesia karena cuma bikin anak muda lupa agama': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak ada faedah nya kenal korea pop yang ada mata kita buta terus bikin kita puja puja manusia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'entah kenapa saya tidak suka banget sama politisi yang bisa emis emis suara rakyat dengan manfaat harga diri ulama': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sesal saya beli vivo kamera nya tidak bagus': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sudah kali kali coba produk apple tetap tidak suka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'produk lokal memang cetek': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'band di indonesia tidak kualitas sudah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau banding sama jepang indonesia itu tidak ada apa apa nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'warganet mulut nya sampah semua tidak faedah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'turut saya sih indonesia bakal susah bangkit kalau isi otak duduk nya begitu begitu saja': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'percuma ganti presiden kayak makan buah simalakama tidak ada untung nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'pimpin di indonesia adalah cuma kayak panggung komedi rakyat nya juga sama saja cuma bisa tonton saja tidak ada yang baik': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sandi uno tidak tanggung jawab banget deh sama jakarta': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'benar yang cari sama para pejabat di indonesia hanya kuasa bukan mensejahterakan rakyat payah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sungguh iya saya ganggu banget sama suara nya komentator bola di indonesia bahkan bikin emosi jiwa': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'main sib main nya jelek': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'artis cowok pop banci semua': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'harga baju di ramayana tidak banding sama kualitas baju nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'model baju yang ada di matahari tidak bagus model baju di ramayana': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sudah harga mahal tidak enak pula makan nya tidak ketawa lagi deh ke restoran itu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'anak muda zaman sekarang cuma pikir tenar tidak pikir buat masa depan': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bodoh banget itu bocah tidak punya otak ajak jokow tengkar': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sinyal xl jelek banget di sini': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'indosat bagus iklan nya doang tapi kualitas nya nol': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sungguh iya kesal banget lihat orang yang sok tahu kayak anies': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'barang barang di informa biasa saja tapi harga mahal banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'handphone samsung jelek gampang rusak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hai prabowo daripada malu lebih baik tidak perlu naik jadi presiden tahun ini': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kecut dia itu cuma bisa tantang dari belakang saja': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'aku tidak suka sama cowok yang bisa dance tidak maco': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'benar saya benci banget sih sama orang yang kalau lagi ajak obrol dia tidak ketawa lihat muka kita tidak sopan': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di antara mata kuliah yang ada saya paling tidak suka sama statistika': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'orang yang pakai kacamata itu lihat cupu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'apa bagus nya iya itu acara l men jijik saya sih lihat nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sinema elektronik di indonesia asli ada yang bagus': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'odol pepsodent turut saya terlalu pedas saya tidak suka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya tidak suka anggun jadi duta shampoo': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kasihan sheila on tenggelam sekarang': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'andhika kangen band apa kabar iya seperti makin miskin saja sekarang': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'semua program yang ada iya kuya nya tidak pernah faedah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'harus nya orang indonesia itu banyak cari ilmu bukan bahkan banyak cari masalah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ini tidak ada apa apa nya kalau banding institut teknologi bandung': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sekarang makin banyak orang yang tidak ku islami tapi akhlak tidak jaga selalu rasa jadi orang paling benar': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya tidak suka itu sama orang orang yang pakai alas agama buat menang di dunia politik': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kesal sudah sama habib rizieq malu malu saja bisa nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak suka sama laptop merek acar cepat rusak kakak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'harga telepon genggam vivo iya mahal padahal telepon genggam nya tidak bagus bagus amat': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak pernah suka sama handphone zenfone norak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kamera zenfone selalu jelek kalau pakai di tempat remang remang tidak profesional': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di antara olah raga yang ada saya paling tidak suka sepak bola': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'dulu pernah coba ajar renang tapi tenggelam terus sekarang tidak ketawa lagi deh saya renang trauma seram': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'benar lebih makan di upnormal itu karena sedia banyak main tongkrong jadi lebih seru': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya paling suka sama indomie cabe hijau baik': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau suruh pilih saya lebih suka belanja di shopee pelayan nya nomor': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau ketawa kirim barang ke luar negeri turut saya dil sudah paling enak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya syukur jokow bakal jadi presiden lama puluh tahun': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'senang banget lihat sandi maju calon wakil presiden untuk yakin saya bakal pilih dia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau ketawa karaoke enak kamu datang saja ke studio karaoke harga nya juga jangkau banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'xiamo sudah paling enak sih kualitas nya mantap harga nya juga jangkau': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'banyak nilai positif yang bisa ambil dari jokow': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya suka banget matematika dari dulu karena asah otak jadi cerdas': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'jam tangan pindah selalu kasih model yang kini pilih warna nya juga bagus bagus': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau perhati kembang film di indonesia makin kembang saya suka itu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'film horor indonesia patut acung jempol konsep nya sudah hampir setara sama film horor luar negeri': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kendi iya saya suka banget sama alur cerita film kafir sederhana tapi dapat makna nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'cinta banget sama iko uwais apalagi kalau lagi main film': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kangen deh sama prabowo moga beliau jadi presiden deh iya dua tahun lagi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'recheese nabati yang keju enak banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau ingin hilang haus pakai minum super duper segar lebih baik beli hydrococo': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak tahu kenapa saya senang banget bisa tinggal di jakarta': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'turut saya bali itu pulau cantik yang ada di indonesia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'yang saya suka dari indonesia adalah budaya nya yang kental banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'indonesia itu seperti banget sama seni dan budaya nya syukur saya lahir di indonesia jadi bisa banyak ajar tentang indah nya beda': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak pernah tidak suka sama suara once paling suka waktu dia nyanyi dealova dalam banget tusuk ke hati': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'lagu lagu indie itu selalu enak dengar': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'genre musik paling asyik turut aku sih jazz': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau dita kualitas lirik lagu baik di indonesia saya bakal jawab lirik lagu nya ebiet tidak adek belum ada yang bisa banding': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'buat indonesia apa sih yang tidak saya rela deh kayak pahlawan zaman dulu yang sampai korban nyawa': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'benar nilai di dalam pancasila itu sudah sesuai banget sama cita cita masyarakat indonesia pancasila sangat tinggi penting sama karena itu saya sangat cinta dengan pancasila dan indonesia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'aku dukung banget kerja sama antara jokow sama dengan ruf amin insyaallah indonesia bisa lebih baik ke depan nya kalau sama mereka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya paling suka tisu merek paseo karena lembut banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'laptop lenovo nomor sih buat saya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'camil enak turut saya itu adalah kacang kuaci merek rebo': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tikus logitech lucu lucu desain nya hampir semua saya suka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'lagu nya richard marx selalu syahdu enak dengar ulang ulang': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'karya anak bangsa indonesia di bidang teknologi selalu bangga': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'salut banget sih sama pimpin yang selalu bisa lihat poin plus yang ada di diri orang orang di sekitar nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bangga deh sama jokow maju terus bapak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak perlu dita hebat jokow apa semua juga bisa laku sama bapak presiden kuat satu itu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya lebih pilih makan di restoran yang bersih dan makan nya enak kayak di ampera': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'banyak iya yang bisa bangga dari orang habibie cerdas iya rendah hati pula': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'pelayan bank bank negara indonesia selalu puas ramah ramah banget orang nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'baca keren sih karena sekarang sudah bisa medeteksi identitas orang cuma dengan dengar suara nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'salut sama anak ini bisa bikin robot canggih dengan biaya yang tidak lebih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'paling suka sama orang yang tidak pernah keluh kalau lagi kerja': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya dari dulu selalu suka memomog rasa tagih banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'indomie sih tidak perlu dita lagi naik gunung cuma bawa indomie saja sudah cukup buat saya sudah bisa lengkap bahagia indomie mantap': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidak pernah kecewa sama model sepatu tike selalu elegan': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'samsung galaxy a memang asyik banget sih timpal banget beli itu handphone': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bangga dan salut buat dokter yang rela tidak bayar buat turun jangan korban gempa di lombok': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sandy shandoro tidak pernah gagal bikin saya merinding dewa banget suara nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau suruh pilih antara koi sama chatime lebih baik koi ke asli asli harga murah rasa juara': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'salut sama rk saya yakin jawa barat bakal juara': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di antara penyany rock yang ada saya paling suka bryan adams': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya cuma ketawa pimpin sama jokow': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kopi paling enak turut saya torabika': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'gila sih rasa iga bakar di iga bakar sih jangkung baik parah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bandung itu kota paling nyaman buat tempat': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'distro baju di bandung nyata bagus bagus deh harga nya juga sesuai': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau ketawa jalan jalan lihat pulau paling cantik datang saja ke pulau saumlaki yang ada di malu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'aku bangga jadi anak indonesia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'salut deh sama berani bu susi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'panutan banget bu sri mulyani otak nya cerdas luar biasa': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'suka banget sama desain toko pedia bikin mata segar': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'saya senang banget belanja di shopee banyak promo nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau ketawa beli perlu awat kulit paling body stop rekomendasi banget sih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'fasilitas di hotel santika memang baik': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'alun alun bandung nyaman banget buat tongkrong tongkrong sama keluarga atau teman': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'aku senang banget sama desain interior cgv beda sama bioskop bioskop lain': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ayam sama kentang mc donalds tidak ada yang bisa alah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'mocha float ntaki fried chicken itu minum enak yang pernah saya rasa': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'mal terasik di bandung turut saya pvj sih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'semua rasa ayam di wingstop saya suka': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'indomie goreng rasa rendang rasa enak banget enak banget': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tempat rekomendasi buat beli barang elektronik itu bec di sana banyak pilih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'keren main main bola di indonesia makin punya skill': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau ketawa indonesia maju pimpin itu harus peka sama butuh negara': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di indonesia lagi banyak bencana': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kata nya lagi banyak promo di shopee': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ojek online fitur nya makin banyak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'prabowo sama sandi maju jadi calon presiden dan calon wakil presiden indonesia tahun': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'jokow pilih dengan ruh amin jadi calon wakil presiden nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'hotel bintang yang ada di bogor salah satu nya hotel salak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di bogor itu ada lima mal yang bisa datang salah satu nya botani square': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sekarang transmart buka juga di bogor': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kata nya di pasteur bakal bangun transmart yang kayak di buah batu itu': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bogor memang suka macet tiap akhir pekan lelah': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'car gratis hari di jalan sudirman bogor sudah tidak ada': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau di hari sabtu sama minggu banyak warga bogor yang lari keliling kebun raya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di istana bogor itu pelihara banyak rusa tutul tinggal jajah kata nya sih': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'maju teknologi di indonesia makin ke sini makin kembang': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'mampu paham baca tiap orang itu beda beda ada yang banget baca sudah paham ada juga yang butuh kali kali baca dulu baru paham': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bali punya banyak pulau yang bisa kunjung': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'wortel andung vitamin a yang bisa jaga sehat mata': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'jangan lupa minum air mineral gelas per hari nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sekarang lagi musim durian': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'youngle nya sete tengkar sama gemar korea pop': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'belakang ini sudah jadi dua kali gempa di lombok': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kabar tenggelam nya kami sinar bangun di danau toba sudah tidak pernah dengar lagi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'jumlah korban tenggelam nya kami sinar bangun itu kurang lebih an orang': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sudah hampir orang yang tinggal karena gempa di lombok kemarin': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tukang bubur naik haji sudah stop produksi': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'ada satu relawan di lombok yang tinggal dunia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bikin puisi bisa bikin hati yang tadi banyak masalah jadi lebih tenang': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau lapar iya baik makan': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kerja dari pagi sampai pagi lagi itu cuma bakal siksa diri sendiri jadi tidak perlu lebih kalau soal pekerja': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'perempuan yang malang itu sekarang sudah tutup usia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'cerita sih kancil itu identik dengan kecerdikan orang kancil selesai masalah yang ada di hadap nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau ketawa beli obat obat datang saja ke kimia farma karena di sana lengkap dan harga jangkau': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'buah mangga yang kemarin saya lihat di pohon kayak nya sudah dima sama kelelawar': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'semua perempuan suka kasih bunga atau puisi sama pacar nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'tidur yang cukup tiap hari nya bisa bikin badan segar': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'baik orang yang kasih kuasa di indonesia itu adalah orang yang paling tahu apa yang butuh sama rakyat': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'sandiaga uno salah satu orang kaya di indonesia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di bandung banyak tempat yang bisa datang buat wisata sama keluarga yang tempat nya bagus bagus': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'indonesia punya banyak banget suku yang agam budaya nya dan itu cermin kalau negara kita sangat kayak': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kalau jadi pimpin itu harus bisa adil': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'jadi pimpin di indonesia itu banyak tantang nya': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'salah satu tempat yang banyak datang di bogor itu kebun raya bogor': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'di sekitar istana bogor kita bisa kasih makan rusa langsung kalau rusa rusa nya lagi keluar': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kemarin aku sete coba kopi nya warung kopi nako': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'kata nya tidur yang baik itu minimal enam jam sehari': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'indonesia itu ada di benua asia': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'salah satu gemar anak remaja indonesia sekarang adalah dengar korea pop': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'lihat warna hijau bisa bikin mata jadi lebih santai': cannot schedule new futures after shutdown
+ERROR:root:Gradio API error for text 'bondan winarno yang suka bilang maknyus sekarang sudah tiada': cannot schedule new futures after shutdown
