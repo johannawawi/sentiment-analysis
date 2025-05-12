@@ -238,17 +238,43 @@ if uploaded_file is not None:
             st.error(f"The selected column '{text_column}' contains no valid text data. Please choose a column with text content.")
             st.stop()
 
-        # Preprocessing
+        # Preprocessing 
         st.markdown("<h2 style='font-size: 21px;'>Preprocessing</h2>", unsafe_allow_html=True)
         with st.spinner("Processing text data..."):
+            progress_bar = st.progress(0)
+            steps = 7
+            current_step = 0
+
             df['cleaned_text'] = df[text_column].apply(clean_text)
+            current_step += 1
+            progress_bar.progress(current_step / steps)
+
             df['emoji_removed'] = df['cleaned_text'].apply(remove_emoji)
+            current_step += 1
+            progress_bar.progress(current_step / steps)
+
             df['repeated_chars_removed'] = df['emoji_removed'].apply(replace_repeated_chars)
+            current_step += 1
+            progress_bar.progress(current_step / steps)
+
             df['lowercased'] = df['repeated_chars_removed'].apply(lowercase_text)
+            current_step += 1
+            progress_bar.progress(current_step / steps)
+
             df['tokenized'] = df['lowercased'].apply(tokenize_text)
+            current_step += 1
+            progress_bar.progress(current_step / steps)
+
             df['slang_converted'] = df['tokenized'].apply(lambda x: convert_to_slang(x, combined_slang_dict, debug=True))
+            current_step += 1
+            progress_bar.progress(current_step / steps)
+
             df['stemmed'] = df['slang_converted'].apply(stem_text)
+            current_step += 1
+            progress_bar.progress(current_step / steps)
+
             df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
+            progress_bar.empty()
 
         # Divider
         st.markdown(
