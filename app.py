@@ -540,7 +540,7 @@ if uploaded_file is not None:
 
             # Prepare CSV for download
             csv_buf = BytesIO()
-            preview_df.to_csv(csv_buf, index=False)
+            preview_df.to_csv(csv_buf, index=False, sep=';')
             csv_buf.seek(0)
 
             st.download_button(
