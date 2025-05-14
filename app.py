@@ -526,7 +526,7 @@ if uploaded_file is not None:
         st.markdown("<p style='margin-top: -15px; font-size: 16px'>Preview of the original dataset with preprocessed text, sentiment, and confidence scores:</p>", unsafe_allow_html=True)
 
         # Define columns to display: original input columns plus derived columns
-        preview_columns = original_columns + ['processed_text', 'sentiment', 'confidence']
+        preview_columns = original_columns + ['processed_text', 'sentiment_result', 'confidence']
         # Ensure only existing columns are included
         preview_columns = [col for col in preview_columns if col in df.columns]
         preview_df = df[preview_columns].copy()
