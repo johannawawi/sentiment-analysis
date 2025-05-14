@@ -319,7 +319,7 @@ if uploaded_file is not None:
             sentiments = predict_sentiment(processed_texts)
             df['sentiment_result'] = [result['sentiment'] for result in sentiments]
             df['confidence'] = [result['confidence'] for result in sentiments]
-            df = df.dropna(subset=['sentiment'])
+            df = df.dropna(subset=['sentiment_result'])
 
         # Visualization
         st.markdown("<h2 style='font-size: 25px; margin-top: -5px; text-align: center; border: 1px solid grey; padding: 5px'>Visual Summary of Findings</h2>", unsafe_allow_html=True)
