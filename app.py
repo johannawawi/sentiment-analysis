@@ -549,12 +549,7 @@ if uploaded_file is not None:
                 file_name="sentiment_analysis_results.csv",
                 mime="text/csv"
             )
-
-    except Exception as e:
-        st.error(f"An error occurred: {str(e)}")
-        logging.exception("Error in main processing block")
-        st.stop()
-
+        
         # Thank You Message
         st.markdown(
             """
