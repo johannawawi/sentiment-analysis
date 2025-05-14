@@ -420,7 +420,7 @@ if uploaded_file is not None:
             with pie_col3:
                 st.download_button(
                     label="📥 Download Pie Chart (PNG)",
-                    data регулярpie_buf,
+                    data=pie_buf,
                     file_name="sentiment_pie_chart.png",
                     mime="image/png"
                 )
