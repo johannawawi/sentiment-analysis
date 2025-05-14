@@ -222,7 +222,7 @@ if uploaded_file is not None:
         # Display data preview
         st.markdown("<h2 style='font-size: 21px;'>Dataset Preview</h2>", unsafe_allow_html=True)
         st.markdown("<p style='margin-top: -15px; font-size: 16px'>Here are the first few rows of your uploaded dataset:</p>", unsafe_allow_html=True)
-        st.dataframe(df.head(), use_container_width=True)
+        st.dataframe(df, use_container_width=True)
 
         # Select text column
         text_column = st.selectbox(
@@ -301,7 +301,7 @@ if uploaded_file is not None:
         # Display preprocessing results
         st.markdown("<h2 style='font-size: 21px; margin-top: -20px'>Preprocessing Results</h2>", unsafe_allow_html=True)
         st.markdown("<p style='margin-top: -15px; font-size: 16px; margin-bottom: -15px'>Here is a preview of the preprocessed text:</p>", unsafe_allow_html=True)
-        st.dataframe(df[[text_column, 'cleaned_text', 'lowercased', 'slang_converted', 'processed_text']].head(), use_container_width=True)
+        st.dataframe(df[[text_column, 'cleaned_text', 'lowercased', 'slang_converted', 'processed_text']], use_container_width=True)
 
         # Divider
         st.markdown(
