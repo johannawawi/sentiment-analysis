@@ -317,7 +317,7 @@ if uploaded_file is not None:
             processed_texts = df['processed_text'].dropna().tolist()
             progress_bar = st.progress(0)
             sentiments = predict_sentiment(processed_texts)
-            df['sentiment'] = [result['sentiment'] for result in sentiments]
+            df['sentiment_result'] = [result['sentiment'] for result in sentiments]
             df['confidence'] = [result['confidence'] for result in sentiments]
             df = df.dropna(subset=['sentiment'])
 
@@ -327,7 +327,7 @@ if uploaded_file is not None:
         # Sentiment Distribution Text Box
         st.markdown("<h4 style='text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px; margin-top: 20px'>Sentiment Distribution</h4>", unsafe_allow_html=True)
         st.write("")
-        sentiment_counts = df['sentiment'].value_counts()
+        sentiment_counts = df['sentiment_result'].value_counts()
         col1, col2, col3 = st.columns(3)
         with col1:
             negative_count = sentiment_counts.get('negative', 0)
@@ -449,9 +449,9 @@ if uploaded_file is not None:
         st.markdown("<h4 style='margin-top: 20px; margin-bottom:10px; text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
 
         # Collect text for each sentiment
-        positive_text = ' '.join(df[df['sentiment'] == 'positive']['processed_text'].dropna())
-        negative_text = ' '.join(df[df['sentiment'] == 'negative']['processed_text'].dropna())
-        neutral_text = ' '.join(df[df['sentiment'] == 'neutral']['processed_text'].dropna())
+        positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text'].dropna())
+        negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text'].dropna())
+        neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text'].dropna())
 
         # Check which sentiments have valid text
         sentiments_available = {
