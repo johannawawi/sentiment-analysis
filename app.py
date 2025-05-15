@@ -144,6 +144,27 @@ def predict_sentiment(texts, batch_size=16):
     progress_bar.empty()
     return results
 
+# Custom CSS for improved UI
+st.markdown("""
+    <style>
+    body { font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333; }
+    h1 { font-size: 32px; font-weight: 700; font-family: 'Inter', sans-serif}
+    h3 { font-size: 24px; font-weight: 600; font-family: 'Inter', sans-serif}
+    h4 { font-size: 16px; font-weight: 600; font-family: 'Inter', sans-serif}
+    p { font-size: 18px; line-height: 1.5; font-family: 'Inter', sans-serif}
+    span {font-family: 'Inter', sans-serif; font-weight: 600}
+    .stTabs { 
+        background: linear-gradient(to bottom, #f8f9fa, #e9ecef); 
+        padding: 12px; 
+        border-radius: 5px; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        position: sticky; 
+        top: 0; 
+        z-index: 100;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Application title
 st.markdown(
     "<h1 style='text-align: center;'>🧠 Social Media Sentiment Analysis App</h1>",
@@ -173,8 +194,9 @@ st.markdown(
 # File uploader
 uploaded_file = st.file_uploader(
     "**📁 Upload Your Dataset to Start**" \
-    "   \n _Only .xlsx or .csv files are supported_", 
-    type=["xlsx", "csv"]
+    "   \n Only .xlsx or .csv files are supported", 
+    type=["xlsx", "csv"],
+    help="Upload an Excel (.xlsx) or CSV (.csv) file containing your dataset. Make sure the first row includes column headers and the data is well-structured."
 )
 
 if uploaded_file is not None:
@@ -226,7 +248,9 @@ if uploaded_file is not None:
         text_column = st.selectbox(
             "**Select the text column for analysis (e.g., full_text)**",
             df.columns,
-            index=0
+            index=0,
+            help="Choose the column from your dataset that contains the main text (e.g., product reviews, tweets, or comments)."
+
         )
         texts = df[text_column].dropna().astype(str).tolist()
         valid_texts = [t for t in texts if t.strip() and isinstance(t, str)]
@@ -302,7 +326,7 @@ if uploaded_file is not None:
         # Tab 1: Data Preview and Preprocessing Results
         with tab1:
             # Display data preview
-            st.markdown("<h2 style='font-size: 21px;'>Dataset Preview</h2>", unsafe_allow_html=True)
+            st.markdown("<h3 style='font-size: 21px;'>Dataset Preview</h3>", unsafe_allow_html=True)
             st.markdown("<p style='margin-top: -15px; font-size: 16px'>Here are the first few rows of your uploaded dataset:</p>", unsafe_allow_html=True)
             st.dataframe(df[original_columns], use_container_width=True)
 
@@ -315,16 +339,16 @@ if uploaded_file is not None:
             )
 
             # Display preprocessing results
-            st.markdown("<h2 style='font-size: 21px; margin-top: -20px'>Preprocessing Results</h2>", unsafe_allow_html=True)
+            st.markdown("<h3 style='font-size: 21px; margin-top: -20px'>Preprocessing Results</h3>", unsafe_allow_html=True)
             st.markdown("<p style='margin-top: -15px; font-size: 16px; margin-bottom: -15px'>Here is a preview of the preprocessed text:</p>", unsafe_allow_html=True)
             st.dataframe(df[[text_column, 'cleaned_text', 'lowercased', 'slang_converted', 'processed_text']], use_container_width=True)
 
         # Tab 2: Visualizations
         with tab2:
-            st.markdown("<h2 style='font-size: 25px; text-align: center; border: 1px solid grey; padding: 5px'>Visual Summary of Findings</h2>", unsafe_allow_html=True)
+            st.markdown("<h2 style='font-size: 24px; text-align: center; margin-bottom: 10px; border: 1px solid grey; padding: 5px'>Visual Summary of Findings</h2>", unsafe_allow_html=True)
 
             # Sentiment Distribution Text Box (tetap sama, no Plotly here)
-            st.markdown("<h4 style='text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px; margin-top: 20px'>Sentiment Distribution</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Sentiment Distribution</h4>", unsafe_allow_html=True)
             st.write("")
             sentiment_counts = df['sentiment_result'].value_counts()
             col1, col2, col3 = st.columns(3)
@@ -333,8 +357,8 @@ if uploaded_file is not None:
                 st.markdown(
                     f"""
                     <div style="background-color:#FF8A8A; color:black; border: 1px solid #000000; padding:10px; border-radius:10px; text-align:center;">
-                        <span style="font-weight: 600; font-size: 18px;">Negative ☹️</span><br>
-                        <span style="font-weight: 600; font-size: 35px;">{negative_count}</span>
+                        <span style="font-weight: 550; font-size: 18px;">Negative ☹️</span><br>
+                        <span style="font-weight: 550; font-size: 35px;">{negative_count}</span>
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -345,8 +369,8 @@ if uploaded_file is not None:
                 st.markdown(
                     f"""
                     <div style="background-color:#F0EAAC; color:black; border: 1px solid #000000; padding:10px; border-radius:10px; text-align:center;">
-                        <span style="font-weight: 600; font-size: 18px;">Neutral 😐</span><br>
-                        <span style="font-weight: 600; font-size: 35px;">{neutral_count}</span>
+                        <span style="font-weight: 550; font-size: 18px;">Neutral 😐</span><br>
+                        <span style="font-weight: 550; font-size: 35px;">{neutral_count}</span>
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -356,16 +380,16 @@ if uploaded_file is not None:
                 positive_count = sentiment_counts.get('positive', 0)
                 st.markdown(
                     f"""
-                    <div style="background-color:#CCE0AC; color:black; border: 1px solid #000000; padding:10px; border-radius:10px; text-align:center;">
-                        <span style="font-weight: 600; font-size: 18px;">Positive ☺️</span><br>
-                        <span style="font-weight: 600; font-size: 35px;">{positive_count}</span>
+                    <div style="background-color:#CCE0AC; color:black; border: 1px solid #000000; margin-bottom: 15px; padding:10px; border-radius:10px; text-align:center;">
+                        <span style="font-weight: 550; font-size: 18px;">Positive ☺️</span><br>
+                        <span style="font-weight: 550; font-size: 35px;">{positive_count}</span>
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
 
             # Bar Chart for Sentiment Distribution with Plotly
-            st.markdown("<h4 style='margin-top: 20px; margin-bottom:10px; text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px'>Bar Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Bar Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
 
             order = ['negative', 'neutral', 'positive']
             sentiment_counts = sentiment_counts.reindex(order).fillna(0).reset_index()
@@ -448,7 +472,7 @@ if uploaded_file is not None:
 
             # Prepare download button for Pie Chart
             pie_buf = BytesIO()
-            fig_pie.write_image(pie_buf, format="png", scale=3)
+            fig_pie.write_image(pie_buf, format="png")
             pie_buf.seek(0)
             pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
             with pie_col3:
