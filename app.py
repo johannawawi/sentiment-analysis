@@ -320,7 +320,7 @@ if uploaded_file is not None:
         with tab2:
             st.markdown("<h2 style='font-size: 25px; text-align: center; border: 1px solid grey; padding: 5px'>Visual Summary of Findings</h2>", unsafe_allow_html=True)
 
-            # Sentiment Distribution Text Box
+            # Sentiment Distribution Text Box (tetap sama, no Plotly here)
             st.markdown("<h4 style='text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px; margin-top: 20px'>Sentiment Distribution</h4>", unsafe_allow_html=True)
             st.write("")
             sentiment_counts = df['sentiment_result'].value_counts()
@@ -361,36 +361,53 @@ if uploaded_file is not None:
                     unsafe_allow_html=True
                 )
 
-            # Bar Chart for Sentiment Distribution
+            # Bar Chart for Sentiment Distribution with Plotly
             st.markdown("<h4 style='margin-top: 20px; margin-bottom:10px; text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px'>Bar Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
 
             order = ['negative', 'neutral', 'positive']
-            sentiment_counts = sentiment_counts.reindex(order).fillna(0)
+            sentiment_counts = sentiment_counts.reindex(order).fillna(0).reset_index()
+            sentiment_counts.columns = ['sentiment', 'count']
 
-            fig, ax = plt.subplots(figsize=(8, 5), dpi=300)
             custom_colors = {
                 'negative': '#FF8A8A',
                 'positive': '#CCE0AC',
                 'neutral': '#F0EAAC'
             }
-            colors = [custom_colors.get(label, '#d3d3d3') for label in sentiment_counts.index]
+            colors = [custom_colors.get(label, '#d3d3d3') for label in sentiment_counts['sentiment']]
 
-            sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values, hue=sentiment_counts.index, palette=colors, ax=ax)
+            # Create Plotly Bar Chart
+            fig_bar = px.bar(
+                sentiment_counts,
+                x='sentiment',
+                y='count',
+                color='sentiment',
+                color_discrete_sequence=colors,
+                text='count',
+                title="Sentiment Distribution"
+            )
+            fig_bar.update_traces(textposition='outside', textfont_size=10)
+            fig_bar.update_layout(
+                xaxis_title="Sentiment",
+                yaxis_title="Number of Comments",
+                title_font_size=13,
+                title_x=0.5,
+                showlegend=False,
+                height=500,
+                margin=dict(t=50, b=50),
+                plot_bgcolor='white',
+                font=dict(size=10),
+            )
+            fig_bar.update_yaxes(showgrid=False)
+            fig_bar.update_xaxes(showline=True, linewidth=1, linecolor='black')
 
-            for i, v in enumerate(sentiment_counts.values):
-                ax.text(i, v + 0.1, str(v), ha='center', fontsize=10)
+            # Display Plotly figure in Streamlit
+            st.plotly_chart(fig_bar, use_container_width=True)
 
-            ax.set_xlabel("Sentiment", fontsize=10)
-            ax.set_ylabel("Number of Comments", fontsize=10)
-            ax.set_title("Sentiment Distribution", fontsize=13, pad=0)
-            sns.despine()
-
-            st.pyplot(fig)
+            # Prepare download button for Bar Chart
             bar_buf = BytesIO()
-            fig.savefig(bar_buf, format="png", dpi=300, bbox_inches='tight')
+            fig_bar.write_image(bar_buf, format="png", scale=3)
             bar_buf.seek(0)
             bar_col1, bar_col2, bar_col3 = st.columns([6, 1.5, 4])
-
             with bar_col3:
                 st.download_button(
                     label="📥 Download Bar Chart (PNG)",
@@ -399,24 +416,38 @@ if uploaded_file is not None:
                     mime="image/png"
                 )
 
-            # Pie Chart for Sentiment
+            # Pie Chart for Sentiment with Plotly
             st.markdown("<h4 style='margin-top: 20px; margin-bottom:10px; text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px'>Pie Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
-            fig, ax = plt.subplots(figsize=(8, 6), dpi=300)
 
-            explode = (0.02, 0.02, 0.02)
-            ax.pie(sentiment_counts, labels=sentiment_counts.index, autopct='%1.1f%%',
-                   colors=colors, startangle=45, pctdistance=0.50,
-                   wedgeprops={'edgecolor': 'black', 'linewidth': 1, 'linestyle': 'solid'},
-                   explode=explode)
-            ax.set_title("Sentiment Distribution", fontsize=11, pad=0)
-            st.pyplot(fig)
+            fig_pie = go.Figure(data=[
+                go.Pie(
+                    labels=sentiment_counts['sentiment'],
+                    values=sentiment_counts['count'],
+                    textinfo='percent+label',
+                    marker=dict(colors=colors, line=dict(color='black', width=1)),
+                    pull=[0.02, 0.02, 0.02],  # Mimic explode effect
+                    rotation=45
+                )
+            ])
+            fig_pie.update_layout(
+                title="Sentiment Distribution",
+                title_font_size=11,
+                title_x=0.5,
+                showlegend=True,
+                height=500,
+                margin=dict(t=50, b=50),
+                plot_bgcolor='white',
+                font=dict(size=10)
+            )
 
+            # Display Pie Chart
+            st.plotly_chart(fig_pie, use_container_width=True)
+
+            # Prepare download button for Pie Chart
             pie_buf = BytesIO()
-            fig.savefig(pie_buf, format="png", dpi=300, bbox_inches='tight')
+            fig_pie.write_image(pie_buf, format="png", scale=3)
             pie_buf.seek(0)
-
             pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
-
             with pie_col3:
                 st.download_button(
                     label="📥 Download Pie Chart (PNG)",
@@ -424,6 +455,9 @@ if uploaded_file is not None:
                     file_name="sentiment_pie_chart.png",
                     mime="image/png"
                 )
+
+            # Word Cloud Visualization
+            st.markdown("<h4 style='margin-top: 20px; margin-bottom:10px; text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
 
             # Function to generate word cloud
             def generate_wordcloud(text, colormap, title):
@@ -440,10 +474,7 @@ if uploaded_file is not None:
                 fig.savefig(buf, format="png", dpi=800, bbox_inches='tight')
                 buf.seek(0)
                 return buf
-
-            # Word cloud visualization section
-            st.markdown("<h4 style='margin-top: 20px; margin-bottom:10px; text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
-
+            
             # Collect text for each sentiment
             positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text'].dropna())
             negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text'].dropna())
