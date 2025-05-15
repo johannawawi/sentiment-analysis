@@ -3,6 +3,9 @@ import pandas as pd
 import re
 import nltk
 from nltk.tokenize import word_tokenize
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import seaborn as sns
