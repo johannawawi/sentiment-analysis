@@ -51,7 +51,7 @@ logging.basicConfig(filename='unmatched_slang.log', level=logging.INFO, filemode
 @st.cache_resource
 def load_sentiment_model():
     try:
-        model_name = "johannawawi/v4_balanced_dataset_fine-tuning-java-indo-sentiment-analysist-3-class"
+        model_name = "johannawawi/v3_balanced_dataset_fine-tuning-java-indo-sentiment-analysist-3-class"
         tokenizer = AutoTokenizer.from_pretrained(model_name)
         model = AutoModelForSequenceClassification.from_pretrained(model_name)
         model.eval()  # Set to evaluation mode
