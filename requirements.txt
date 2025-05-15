@@ -11,3 +11,4 @@ python-Levenshtein
 git+https://github.com/ariaghora/mpstemmer.git@master
 torch
 transformers
+joblib
