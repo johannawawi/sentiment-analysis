@@ -6,8 +6,8 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import plotly.express as px
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 import json
 import logging
 import os
@@ -15,45 +15,56 @@ from io import BytesIO
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import numpy as np
-from joblib import Parallel, delayed
-from collections import Counter
-import base64
+from mpstemmer import MPStemmer
 
-# Define paths
+# Define base directory and paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PREPROCESSING_PATH = os.path.join(BASE_DIR, 'Preprocessing')
 STEMMER_PATH = os.path.join(PREPROCESSING_PATH, 'Stemmer', 'mpstemmer', 'mpstemmer')
 NLTK_DATA_PATH = os.path.join(BASE_DIR, 'nltk_data')
 
-# Import stemmer
-try:
-    from mpstemmer import MPStemmer
-except ImportError:
-    st.error("MPStemmer not found! Ensure the 'mpstemmer' folder exists in Preprocessing/Stemmer.")
-    st.stop()
-
-# Setup NLTK
+# Setup NLTK data path
 nltk.data.path.append(NLTK_DATA_PATH)
 if not os.path.exists(NLTK_DATA_PATH):
     os.makedirs(NLTK_DATA_PATH)
-try:
-    if not os.path.exists(os.path.join(NLTK_DATA_PATH, 'tokenizers', 'punkt_tab')):
-        nltk.download('punkt_tab', download_dir=NLTK_DATA_PATH, quiet=True)
-    if not os.path.exists(os.path.join(NLTK_DATA_PATH, 'corpora', 'stopwords')):
-        nltk.download('stopwords', download_dir=NLTK_DATA_PATH, quiet=True)
-except Exception as e:
-    st.error(f"Failed to download NLTK data: {str(e)}. Try again or contact support.")
-    st.stop()
 
+# Download required NLTK data
 try:
-    nltk.data.find('tokenizers/punkt_tab')
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    st.error("NLTK data not found. Ensure downloads succeeded and paths are correct.")
+    for resource in ['punkt_tab', 'stopwords']:
+        if not os.path.exists(os.path.join(NLTK_DATA_PATH, resource)):
+            nltk.download(resource, download_dir=NLTK_DATA_PATH, quiet=True)
+except Exception as e:
+    st.error(f"Failed to download NLTK resource: {str(e)}")
     st.stop()
 
 # Setup logging
-logging.basicConfig(filename='app_errors.log', level=logging.INFO, filemode='w')
+logging.basicConfig(filename='sentiment_analysis.log', level=logging.INFO, filemode='w')
+
+# Custom CSS for improved UI
+st.markdown("""
+    <style>
+    body { font-family: 'Inter', sans-serif; }
+    h2 { font-size: 24px; font-weight: 600; margin-bottom: 10px; }
+    h4 { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+    p { font-size: 16px; line-height: 1.5; }
+    .stDownloadButton > button {
+        background-color: #4A90E2;
+        color: white;
+        border-radius: 8px;
+        padding: 10px 20px;
+        transition: all 0.2s ease;
+    }
+    .stDownloadButton > button:hover {
+        background-color: #357ABD;
+        transform: scale(1.05);
+    }
+    hr { margin: 20px 0; border: 1px solid #ccc; }
+    @media (max-width: 768px) {
+        .stColumn { flex-direction: column; align-items: center; gap: 10px; }
+        .stDownloadButton { width: 100%; }
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # Load model and tokenizer
 @st.cache_resource
@@ -67,18 +78,13 @@ def load_sentiment_model():
         model.to(device)
         return model, tokenizer, device
     except Exception as e:
-        st.error(f"Failed to load model from Hugging Face: {str(e)}. Check connection or model name.")
+        st.error(f"Failed to load model: {str(e)}")
         st.stop()
 
 model, tokenizer, device = load_sentiment_model()
 
 # Initialize stemmer
 stemmer = MPStemmer()
-
-# Load stopwords
-indo_stopwords = set(stopwords.words('indonesian'))
-custom_stopwords = {'yang', 'dan', 'di', 'ke', 'dari', 'untuk', 'aja', 'sih'}
-indo_stopwords.update(custom_stopwords)
 
 # Preprocessing functions
 def clean_text(text):
@@ -87,10 +93,9 @@ def clean_text(text):
     text = re.sub(r'@\w+', ' ', text)
     text = re.sub(r'#[A-Za-z0-9]+', ' ', text)
     text = re.sub(r'http\S+', ' ', text)
-    text = re.sub(r'\b[0-9]+\b', ' ', text)  # Remove standalone numbers
-    text = re.sub(r'[-()\"#/@;:<>{}\'+=~|.!?,_\*&]', ' ', text)
-    text = ' '.join(text.split())
-    return text
+    text = re.sub(r'[0-9]+', ' ', text)
+    text = re.sub(r'[-()\"#/@;:<>{}\'+=~|.!?,_\*&]%', ' ', text)
+    return ' '.join(text.split())
 
 def remove_emoji(text):
     return text.encode('ascii', 'ignore').decode('ascii')
@@ -105,53 +110,31 @@ def lowercase_text(text):
 def tokenize_text(text):
     return word_tokenize(text)
 
-def remove_stopwords(tokens):
-    return [t for t in tokens if t not in indo_stopwords]
-
-unmatched_slang = []
-def convert_to_slang(text, slang_dict, debug=False):
-    global unmatched_slang
+@st.cache_data
+def convert_to_slang(text, slang_dict):
     if not isinstance(text, list) or not text:
         return []
     text_str = ' '.join(str(word) for word in text if word is not None)
     SLANG_PATTERN = re.compile(r'\b(' + '|'.join(map(re.escape, slang_dict.keys())) + r')\b', re.IGNORECASE)
     text_str = SLANG_PATTERN.sub(lambda x: slang_dict[x.group().lower()], text_str)
-    tokens = text_str.split()
-    if debug:
-        for word in tokens:
-            if word.lower() not in slang_dict and word.lower() not in unmatched_slang:
-                unmatched_slang.append(word.lower())
-    return [word.lower() for word in tokens]
+    return [word.lower() for word in text_str.split()]
+
+def remove_stopwords(tokens):
+    stopwords_id = set(stopwords.words('indonesian')).union({'dan', 'di', 'ke', 'dari', 'yang'})
+    return [word for word in tokens if word not in stopwords_id]
 
 def stem_text(document):
-    return [stemmer.stem(term) if len(term) > 3 else term for term in document]
-
-# Parallel preprocessing
-def preprocess_row(row, text_column, slang_dict):
-    try:
-        text = clean_text(row[text_column])
-        text = remove_emoji(text)
-        text = replace_repeated_chars(text)
-        text = lowercase_text(text)
-        tokens = tokenize_text(text)
-        tokens = remove_stopwords(tokens)
-        tokens = convert_to_slang(tokens, slang_dict, debug=True)
-        tokens = stem_text(tokens)
-        return ' '.join(tokens)
-    except Exception as e:
-        logging.error(f"Error preprocessing row {row.name}: {str(e)}")
-        return ""
+    return [stemmer.stem(term) for term in document]
 
 # Sentiment prediction
-failed_texts = []
-def predict_sentiment(texts, batch_size=16):
-    global failed_texts
+def predict_sentiment(texts, batch_size=32 if torch.cuda.is_available() else 8):
     if not texts:
         return [{"sentiment": "neutral", "confidence": 0.0} for _ in texts]
     
     label_map = {0: "negative", 1: "neutral", 2: "positive"}
     results = []
     
+    progress_bar = st.progress(0)
     for i in range(0, len(texts), batch_size):
         batch_texts = texts[i:i + batch_size]
         try:
@@ -167,358 +150,261 @@ def predict_sentiment(texts, batch_size=16):
                     confidence = prob[pred].item()
                     results.append({"sentiment": label, "confidence": confidence})
         except Exception as e:
-            logging.error(f"Error in batch {i}: {str(e)}")
-            failed_texts.extend(batch_texts)
+            st.warning(f"Error in sentiment analysis: {str(e)}")
+            logging.error(f"Sentiment error in batch {i}: {str(e)}")
             results.extend([{"sentiment": "neutral", "confidence": 0.0}] * len(batch_texts))
-        progress = min((i + len(batch_texts)) / len(texts), 1.0)
-        progress_bar.progress(progress)
+        
+        progress_bar.progress(min((i + len(batch_texts)) / len(texts), 1.0))
     
     progress_bar.empty()
     return results
 
-# Top keywords per sentiment
-def top_keywords(df, sentiment, n=5):
-    texts = df[df['sentiment_result'] == sentiment]['processed_text'].str.split()
-    words = [word for text in texts for word in text if word]
-    return Counter(words).most_common(n)
-
-# Custom CSS
+# App title and description
 st.markdown("""
-    <style>
-    .main { background-color: #f5f5f5; }
-    .stButton>button { background-color: #4CAF50; color: white; border-radius: 8px; }
-    .stSelectbox { margin-bottom: 20px; }
-    .stSpinner { margin: 20px 0; }
-    .header { text-align: center; color: #333; font-size: 28px; margin-bottom: 10px; }
-    .subheader { text-align: center; color: #555; font-size: 18px; margin-bottom: 20px; }
-    .divider { border: 1px solid #ccc; margin: 20px 0; }
-    .sentiment-card { padding: 15px; border-radius: 10px; text-align: center; margin: 10px 0; }
-    </style>
-""", unsafe_allow_html=True)
-
-# App title
-st.markdown("""
-    <div class='header'>🧠 Social Media Sentiment Analyzer</div>
-    <div class='subheader'>Upload your data and vibe-check it with dope NLP! 🚀</div>
+    <h1 style='text-align: center;'>🧠 Social Media Sentiment Analysis</h1>
+    <p style='text-align: justify;'>
+        Upload a CSV or Excel file with social media text data to analyze sentiments using advanced NLP techniques. 
+        Explore preprocessing results, visualizations, and download insights with ease.
+    </p>
+    <hr>
 """, unsafe_allow_html=True)
 
 # File uploader
 uploaded_file = st.file_uploader(
-    "📁 Upload Your Dataset (CSV/XLSX)",
-    type=["csv", "xlsx"],
-    help="Upload a file with a text column (e.g., social media comments)."
+    "Upload Your Dataset (CSV or Excel)",
+    type=["xlsx", "csv"],
+    help="Supported formats: .csv, .xlsx. Ensure your file contains a column with text data."
 )
 
-if uploaded_file is not None:
+if uploaded_file:
     try:
         # Validate paths
-        if not os.path.exists(PREPROCESSING_PATH):
-            st.error(f"Preprocessing folder not found at {PREPROCESSING_PATH}!")
-            st.stop()
-        if not os.path.exists(STEMMER_PATH):
-            st.error(f"MPStemmer folder not found at {STEMMER_PATH}!")
-            st.stop()
+        for path, name in [(PREPROCESSING_PATH, "Preprocessing folder"), (STEMMER_PATH, "Stemmer folder")]:
+            if not os.path.exists(path):
+                st.error(f"{name} not found at {path}!")
+                st.stop()
 
         # Load slang dictionaries
         slang_file1_path = os.path.join(PREPROCESSING_PATH, 'slangword.txt')
         slang_file2_path = os.path.join(PREPROCESSING_PATH, 'new_kamusalay.txt')
-        slang_dict1, slang_dict2 = {}, {}
-        for path, dict_name in [(slang_file1_path, 'slangword.txt'), (slang_file2_path, 'new_kamusalay.txt')]:
+        for path in [slang_file1_path, slang_file2_path]:
             if not os.path.exists(path):
-                st.error(f"File {dict_name} not found at {PREPROCESSING_PATH}!")
+                st.error(f"Slang file not found at {path}!")
                 st.stop()
-            try:
-                with open(path, "r", encoding='utf-8') as f:
-                    if path == slang_file1_path:
-                        slang_dict1 = json.load(f)
-                    else:
-                        slang_dict2 = json.load(f)
-            except json.JSONDecodeError:
-                st.error(f"File {dict_name} is not valid JSON!")
-                st.stop()
-            except Exception as e:
-                st.error(f"Failed to load file {dict_name}: {str(e)}")
-                st.stop()
-        combined_slang_dict = {k.lower(): v for k, v in {**slang_dict1, **slang_dict2}.items()}
 
-        # Read dataset
+        try:
+            with open(slang_file1_path, "r", encoding='utf-8') as f1, open(slang_file2_path, "r", encoding='utf-8') as f2:
+                slang_dict1 = json.load(f1)
+                slang_dict2 = json.load(f2)
+            combined_slang_dict = {k.lower(): v for k, v in {**slang_dict1, **slang_dict2}.items()}
+        except Exception as e:
+            st.error(f"Error loading slang dictionaries: {str(e)}")
+            st.stop()
+
+        # Optional custom slang dictionary
+        slang_file = st.file_uploader("Upload Custom Slang Dictionary (JSON, optional)", type=["json"])
+        if slang_file:
+            try:
+                custom_slang = json.load(slang_file)
+                combined_slang_dict.update({k.lower(): v for k, v in custom_slang.items()})
+                st.success("Custom slang dictionary loaded successfully!")
+            except Exception as e:
+                st.warning(f"Error loading custom slang: {str(e)}")
+
+        # Load dataset
         if uploaded_file.name.endswith('.xlsx'):
             df = pd.read_excel(uploaded_file)
         else:
             df = pd.read_csv(uploaded_file)
         original_columns = list(df.columns)
 
-        # Filter text columns
-        text_columns = [col for col in df.columns if df[col].dtype == 'object' and df[col].str.len().mean() > 10]
-        if not text_columns:
-            st.error("No valid text columns found in the dataset. Choose a file with text data (e.g., comments).")
-            st.stop()
-        
-        # Select text column and max rows
-        col1, col2 = st.columns([3, 1])
-        with col1:
-            text_column = st.selectbox(
-                "Select the text column for analysis",
-                text_columns,
-                help="Choose a column with text, like 'full_text'."
-            )
-        with col2:
-            max_rows = st.number_input(
-                "Max rows to analyze",
-                min_value=1,
-                max_value=len(df),
-                value=min(1000, len(df)),
-                help="Limit rows to speed things up."
-            )
-        
-        # Filter dataset
-        df = df.head(max_rows).copy()
+        # Text column selection
+        text_column = st.selectbox(
+            "Select Text Column for Analysis",
+            df.columns,
+            help="Choose the column containing text data (e.g., tweets, comments)."
+        )
         texts = df[text_column].dropna().astype(str).tolist()
         valid_texts = [t for t in texts if t.strip()]
         if not valid_texts:
-            st.error(f"Column '{text_column}' has no valid text. Pick another column!")
+            st.error(f"No valid text data in column '{text_column}'. Please select a column with text content.")
             st.stop()
 
         # Preprocessing
-        with st.spinner("Processing text, hang tight bro..."):
+        with st.spinner("Preprocessing text data..."):
             progress_bar = st.progress(0)
-            df['processed_text'] = Parallel(n_jobs=-1)(
-                delayed(preprocess_row)(row, text_column, combined_slang_dict) for _, row in df.iterrows()
-            )
+            steps = 8
+            preprocessing_steps = [
+                ("Cleaning text", clean_text, 'cleaned_text'),
+                ("Removing emojis", remove_emoji, 'emoji_removed'),
+                ("Normalizing characters", replace_repeated_chars, 'repeated_chars_removed'),
+                ("Lowercasing", lowercase_text, 'lowercased'),
+                ("Tokenizing", tokenize_text, 'tokenized'),
+                ("Converting slang", lambda x: convert_to_slang(x, combined_slang_dict), 'slang_converted'),
+                ("Removing stopwords", remove_stopwords, 'stopwords_removed'),
+                ("Stemming", stem_text, 'stemmed')
+            ]
+            for i, (desc, func, col) in enumerate(preprocessing_steps):
+                df[col] = df[preprocessing_steps[i-1][2] if i > 0 else text_column].apply(func)
+                progress_bar.progress((i + 1) / steps, text=f"{desc}...")
+            
+            df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x) if x else '')
             original_row_count = len(df)
             df = df[df['processed_text'].str.strip().astype(bool)].copy()
-            removed_rows = original_row_count - len(df)
-            if removed_rows > 0:
-                st.warning(f"Removed {removed_rows} rows with empty text after preprocessing.")
+            if len(df) < original_row_count:
+                st.warning(f"Removed {original_row_count - len(df)} rows with empty text after preprocessing.")
             if df.empty:
-                st.error("No valid text left after preprocessing. Check your dataset or preprocessing steps!")
+                st.error("No valid text remains after preprocessing. Please check your data.")
                 st.stop()
-            progress_bar.progress(1.0)
             progress_bar.empty()
 
         # Sentiment analysis
-        with st.spinner("Analyzing sentiments, almost there..."):
-            progress_bar = st.progress(0)
-            processed_texts = df['processed_text'].dropna().tolist()
+        with st.spinner("Analyzing sentiments..."):
+            processed_texts = df['processed_text'].tolist()
             sentiments = predict_sentiment(processed_texts)
             df['sentiment_result'] = [result['sentiment'] for result in sentiments]
             df['confidence'] = [result['confidence'] for result in sentiments]
-            df = df.dropna(subset=['sentiment_result'])
-            if failed_texts:
-                st.warning(f"Failed to analyze {len(failed_texts)} texts. Check app_errors.log for details.")
-            progress_bar.empty()
-
-        # Sentiment filter
-        sentiment_filter = st.multiselect(
-            "Filter by sentiment",
-            ["positive", "negative", "neutral"],
-            default=["positive", "negative", "neutral"],
-            help="Choose which sentiments to display."
-        )
-        filtered_df = df[df['sentiment_result'].isin(sentiment_filter)].copy()
-        if filtered_df.empty:
-            st.warning("No data matches the sentiment filter. Try different sentiments!")
-            filtered_df = df.copy()
+            df['low_confidence'] = df['confidence'] < 0.5
+            if df['low_confidence'].any():
+                st.warning(f"{df['low_confidence'].sum()} predictions have low confidence (<0.5).")
 
         # Tabs
-        tab1, tab2, tab3 = st.tabs(["📊 Data & Preprocessing", "📈 Visualizations", "📥 Download"])
+        tab1, tab2, tab3 = st.tabs(["📊 Data Preview", "📈 Visualizations", "📥 Download Results"])
 
-        # Tab 1: Data Preview and Preprocessing
+        # Tab 1: Data Preview
         with tab1:
-            st.markdown("<h2>Original Data</h2>", unsafe_allow_html=True)
-            st.dataframe(df[original_columns], use_container_width=True)
-            st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
-            st.markdown("<h2>Preprocessed Data</h2>", unsafe_allow_html=True)
-            st.dataframe(filtered_df[[text_column, 'processed_text', 'sentiment_result', 'confidence']], use_container_width=True)
-            if unmatched_slang:
-                st.warning(f"Found {len(unmatched_slang)} unmatched slang words. Check app_errors.log.")
-                logging.info(f"Unmatched slang: {unmatched_slang[:50]}")
+            st.markdown("<h2>Dataset Preview</h2><p>View the first few rows of your uploaded dataset.</p>", unsafe_allow_html=True)
+            st.dataframe(df[original_columns], use_container_width=True, height=300)
+            st.markdown("<hr>", unsafe_allow_html=True)
+            with st.expander("Show Preprocessing Details"):
+                st.markdown("<h2>Preprocessing Results</h2><p>Preview the text after each preprocessing step.</p>", unsafe_allow_html=True)
+                st.dataframe(df[[text_column, 'cleaned_text', 'lowercased', 'slang_converted', 'processed_text']])
 
         # Tab 2: Visualizations
         with tab2:
-            st.markdown("<h2>Visual Summary</h2>", unsafe_allow_html=True)
-            
-            # Sentiment cards
-            sentiment_counts = filtered_df['sentiment_result'].value_counts()
+            st.markdown("<h2 style='text-align: center;'>Visual Insights</h2>", unsafe_allow_html=True)
+            sentiment_counts = df['sentiment_result'].value_counts()
             col1, col2, col3 = st.columns(3)
-            for col, sentiment, color, emoji in [
+            for col, sent, color, emoji in [
                 (col1, 'negative', '#FF8A8A', '☹️'),
                 (col2, 'neutral', '#F0EAAC', '😐'),
                 (col3, 'positive', '#CCE0AC', '☺️')
             ]:
-                count = sentiment_counts.get(sentiment, 0)
-                with col:
-                    st.markdown(
-                        f"""
-                        <div class='sentiment-card' style='background-color:{color}; border:1px solid #000;'>
-                            <span style='font-size:18px; font-weight:600;'>{sentiment.capitalize()} {emoji}</span><br>
-                            <span style='font-size:35px; font-weight:600;'>{count}</span>
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
+                count = sentiment_counts.get(sent, 0)
+                col.markdown(f"""
+                    <div style='background-color:{color}; color:black; border:1px solid #000; padding:10px; border-radius:10px; text-align:center;'>
+                        <span style='font-weight:600; font-size:18px;'>{sent.capitalize()} {emoji}</span><br>
+                        <span style='font-weight:600; font-size:35px;'>{count}</span>
+                    </div>
+                """, unsafe_allow_html=True)
 
             # Bar chart
-            st.markdown("<h3>Sentiment Distribution (Bar)</h3>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align:center; background-color:#9EC6F3; border:1px solid #000; padding:5px; border-radius:10px;'>Sentiment Distribution (Bar)</h4>", unsafe_allow_html=True)
             order = ['negative', 'neutral', 'positive']
-            sentiment_counts = sentiment_counts.reindex(order).fillna(0).reset_index()
-            sentiment_counts.columns = ['sentiment', 'count']
-            colors = ['#FF8A8A', '#F0EAAC', '#CCE0AC']
+            sentiment_counts_df = sentiment_counts.reindex(order).fillna(0).reset_index()
+            sentiment_counts_df.columns = ['sentiment', 'count']
+            colors = {'negative': '#FF8A8A', 'neutral': '#F0EAAC', 'positive': '#CCE0AC'}
             fig_bar = px.bar(
-                sentiment_counts,
+                sentiment_counts_df,
                 x='sentiment',
                 y='count',
                 color='sentiment',
-                color_discrete_sequence=colors,
+                color_discrete_map=colors,
                 text='count'
             )
-            fig_bar.update_traces(
-                textposition='outside',
-                hovertemplate='Sentiment: %{x}<br>Count: %{y}<br>Percentage: %{y/sum(sentiment_counts["count"])*100:.1f}%'
-            )
+            fig_bar.update_traces(textposition='outside')
             fig_bar.update_layout(
-                xaxis_title="Sentiment",
-                yaxis_title="Count",
-                showlegend=False,
-                height=500,
-                plot_bgcolor='white',
-                font=dict(size=12)
+                xaxis_title="Sentiment", yaxis_title="Count", showlegend=False,
+                height=500, plot_bgcolor='white', autosize=True
             )
             st.plotly_chart(fig_bar, use_container_width=True)
             bar_buf = BytesIO()
             fig_bar.write_image(bar_buf, format="png", scale=3)
-            st.download_button(
-                label="📥 Download Bar Chart",
+            _, col, _ = st.columns([6, 1.5, 4])
+            col.download_button(
+                label="Download Bar Chart",
                 data=bar_buf,
                 file_name="sentiment_bar.png",
-                mime="image/png"
+                mime="image/png",
+                help="Download the bar chart as a PNG image."
             )
 
             # Pie chart
-            st.markdown("<h3>Sentiment Distribution (Pie)</h3>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align:center; background-color:#9EC6F3; border:1px solid #000; padding:5px; border-radius:10px;'>Sentiment Distribution (Pie)</h4>", unsafe_allow_html=True)
             fig_pie = go.Figure(data=[
                 go.Pie(
-                    labels=sentiment_counts['sentiment'],
-                    values=sentiment_counts['count'],
+                    labels=sentiment_counts_df['sentiment'],
+                    values=sentiment_counts_df['count'],
                     textinfo='percent+label',
-                    marker=dict(colors=colors, line=dict(color='black', width=1)),
-                    pull=[0.02, 0.02, 0.02]
+                    marker=dict(colors=[colors[s] for s in sentiment_counts_df['sentiment']], line=dict(color='black', width=1)),
+                    pull=[0.02] * 3
                 )
             ])
-            fig_pie.update_layout(
-                showlegend=True,
-                height=500,
-                plot_bgcolor='white',
-                font=dict(size=12)
-            )
+            fig_pie.update_layout(height=500, showlegend=True, plot_bgcolor='white', autosize=True)
             st.plotly_chart(fig_pie, use_container_width=True)
             pie_buf = BytesIO()
             fig_pie.write_image(pie_buf, format="png", scale=3)
-            st.download_button(
-                label="📥 Download Pie Chart",
+            _, col, _ = st.columns([6, 1.5, 4])
+            col.download_button(
+                label="Download Pie Chart",
                 data=pie_buf,
                 file_name="sentiment_pie.png",
                 mime="image/png"
             )
 
-            # Confidence score distribution
-            st.markdown("<h3>Confidence Score Distribution</h3>", unsafe_allow_html=True)
-            fig_conf = px.histogram(
-                filtered_df,
-                x='confidence',
-                nbins=20,
-                color='sentiment_result',
-                color_discrete_sequence=colors,
-                title="Confidence Score Distribution by Sentiment"
-            )
-            fig_conf.update_layout(
-                xaxis_title="Confidence Score",
-                yaxis_title="Count",
-                height=500,
-                plot_bgcolor='white',
-                font=dict(size=12)
-            )
-            st.plotly_chart(fig_conf, use_container_width=True)
-            conf_buf = BytesIO()
-            fig_conf.write_image(conf_buf, format="png", scale=3)
-            st.download_button(
-                label="📥 Download Confidence Histogram",
-                data=conf_buf,
-                file_name="confidence_histogram.png",
-                mime="image/png"
-            )
-
             # Word clouds
-            st.markdown("<h3>Word Cloud by Sentiment</h3>", unsafe_allow_html=True)
-            def generate_wordcloud(text, colormap, title):
-                if not text.strip():
-                    return None
-                wordcloud = WordCloud(width=800, height=400, background_color='white', colormap=colormap).generate(text)
-                fig, ax = plt.subplots(dpi=800)
-                ax.imshow(wordcloud, interpolation='bilinear')
-                ax.axis('off')
-                ax.set_title(title, fontsize=12, pad=10)
-                return fig
+            st.markdown("<h4 style='text-align:center; background-color:#9EC6F3; border:1px solid #000; padding:5px; border-radius:10px;'>Word Clouds</h4>", unsafe_allow_html=True)
+            sentiment_filter = st.multiselect(
+                "Select Sentiments for Word Clouds",
+                ['positive', 'negative', 'neutral'],
+                default=['positive', 'negative', 'neutral']
+            )
+            colormap_dict = {'positive': 'Greens', 'negative': 'Reds', 'neutral': 'Purples'}
+            for sentiment in sentiment_filter:
+                text = ' '.join(df[df['sentiment_result'] == sentiment]['processed_text'].dropna())
+                if text.strip():
+                    wordcloud = WordCloud(width=800, height=400, background_color='white', colormap=colormap_dict[sentiment], stopwords=stopwords.words('indonesian')).generate(text)
+                    fig, ax = plt.subplots()
+                    ax.imshow(wordcloud, interpolation='bilinear')
+                    ax.axis('off')
+                    ax.set_title(f"{sentiment.capitalize()} Word Cloud")
+                    st.pyplot(fig)
+                    buf = BytesIO()
+                    fig.savefig(buf, format="png", bbox_inches='tight')
+                    col1, col2, col3 = st.columns(3)
+                    col2.download_button(
+                        label=f"Download {sentiment.capitalize()} Word Cloud",
+                        data=buf,
+                        file_name=f"wordcloud_{sentiment}.png",
+                        mime="image/png"
+                    )
 
-            sentiments_available = {}
-            for sentiment in ['positive', 'negative', 'neutral']:
-                text = ' '.join(filtered_df[filtered_df['sentiment_result'] == sentiment]['processed_text'].dropna())
-                sentiments_available[sentiment] = bool(text.strip())
-
-            if not any(sentiments_available.values()):
-                st.warning("No text available for word clouds. Check your sentiment filter!")
-            else:
-                for sentiment, colormap in [('positive', 'Greens'), ('negative', 'Reds'), ('neutral', 'Purples')]:
-                    if sentiments_available[sentiment]:
-                        text = ' '.join(filtered_df[filtered_df['sentiment_result'] == sentiment]['processed_text'].dropna())
-                        fig = generate_wordcloud(text, colormap, f"{sentiment.capitalize()} Word Cloud")
-                        st.pyplot(fig)
-                        buf = BytesIO()
-                        fig.savefig(buf, format="png", dpi=800, bbox_inches='tight')
-                        st.download_button(
-                            label=f"📥 Download {sentiment.capitalize()} Word Cloud",
-                            data=buf,
-                            file_name=f"wordcloud_{sentiment}.png",
-                            mime="image/png"
-                        )
-
-            # Top keywords
-            st.markdown("<h3>Top Keywords by Sentiment</h3>", unsafe_allow_html=True)
-            for sentiment in ['positive', 'negative', 'neutral']:
-                keywords = top_keywords(filtered_df, sentiment)
-                if keywords:
-                    st.write(f"**{sentiment.capitalize()}**: {', '.join([f'{k} ({v})' for k, v in keywords])}")
-
-        # Tab 3: Download Results
+        # Tab 3: Download
         with tab3:
-            st.markdown("<h2>Final Dataset</h2>", unsafe_allow_html=True)
-            preview_columns = original_columns + ['processed_text', 'sentiment_result', 'confidence']
-            preview_columns = [col for col in preview_columns if col in filtered_df.columns]
-            st.dataframe(filtered_df[preview_columns], use_container_width=True)
+            st.markdown("<h2>Download Results</h2><p>Preview and download the dataset with sentiment analysis results.</p>", unsafe_allow_html=True)
+            preview_columns = original_columns + ['processed_text', 'sentiment_result', 'confidence', 'low_confidence']
+            preview_columns = [col for col in preview_columns if col in df.columns]
+            st.dataframe(df[preview_columns], use_container_width=True, height=300)
             csv_buf = BytesIO()
-            filtered_df.to_csv(csv_buf, index=False, sep=';')
+            df[preview_columns].to_csv(csv_buf, index=False, sep=';')
             st.download_button(
-                label="📥 Download Dataset with Sentiments",
+                label="Download CSV",
                 data=csv_buf,
                 file_name="sentiment_results.csv",
                 mime="text/csv"
             )
+            excel_buf = BytesIO()
+            df[preview_columns].to_excel(excel_buf, index=False)
+            st.download_button(
+                label="Download Excel",
+                data=excel_buf,
+                file_name="sentiment_results.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
 
-        # Feedback form
-        st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
-        st.markdown("<h2>Drop Your Feedback!</h2>", unsafe_allow_html=True)
-        feedback = st.text_area("What do you think about this app? 😎")
-        if st.button("Send Feedback"):
-            logging.info(f"User feedback: {feedback}")
-            st.success("Yo, thanks for the feedback, bro!")
+        st.markdown("<hr><h3 style='text-align: center;'>Thank You for Using Our App! 😊</h3>", unsafe_allow_html=True)
 
     except Exception as e:
-        st.error(f"Oops, something broke: {str(e)}. Check app_errors.log or ping support.")
-        logging.exception("Main error")
+        st.error(f"An error occurred: {str(e)}")
+        logging.exception("Main processing error")
         st.stop()
-
-# Thank you message
-st.markdown("""
-    <div class='divider'></div>
-    <div class='subheader'>Thanks for using Social Media Sentiment Analyzer! You're awesome! 😎</div>
-""", unsafe_allow_html=True)
