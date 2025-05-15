@@ -330,7 +330,7 @@ if uploaded_file is not None:
                 st.markdown(
                     f"""
                     <div style="background-color:#FF8A8A; color:black; border: 1px solid #000000; padding:10px; border-radius:10px; text-align:center;">
-                        <span style="font-weight: 600; font-size: 18px;">Negative</span><br>
+                        <span style="font-weight: 600; font-size: 18px;">Negative ☹️</span><br>
                         <span style="font-weight: 600; font-size: 35px;">{negative_count}</span>
                     </div>
                     """,
@@ -342,7 +342,7 @@ if uploaded_file is not None:
                 st.markdown(
                     f"""
                     <div style="background-color:#F0EAAC; color:black; border: 1px solid #000000; padding:10px; border-radius:10px; text-align:center;">
-                        <span style="font-weight: 600; font-size: 18px;">Neutral</span><br>
+                        <span style="font-weight: 600; font-size: 18px;">Neutral 😐</span><br>
                         <span style="font-weight: 600; font-size: 35px;">{neutral_count}</span>
                     </div>
                     """,
@@ -354,7 +354,7 @@ if uploaded_file is not None:
                 st.markdown(
                     f"""
                     <div style="background-color:#CCE0AC; color:black; border: 1px solid #000000; padding:10px; border-radius:10px; text-align:center;">
-                        <span style="font-weight: 600; font-size: 18px;">Positive</span><br>
+                        <span style="font-weight: 600; font-size: 18px;">Positive ☺️</span><br>
                         <span style="font-weight: 600; font-size: 35px;">{positive_count}</span>
                     </div>
                     """,
