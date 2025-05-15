@@ -10,4 +10,4 @@ openpyxl==3.1.5
 python-Levenshtein==0.26.0
 git+https://github.com/ariaghora/mpstemmer.git@master
 torch==2.4.1
-transformers==4.44.2
+transformers==4.42.4
