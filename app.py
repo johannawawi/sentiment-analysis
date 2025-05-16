@@ -162,14 +162,12 @@ st.markdown("""
         top: 0; 
         z-index: 100;
     }
-    div[class*="stDownloadButton"] button, 
-        button[data-testid="baseButton-secondary"], 
-        button[data-baseweb="button"] {
-            font-size: 5px !important;
+    .custom-download button {
+            font-size: 14px !important;
             padding: 8px 12px !important;
             font-family: 'Inter', sans-serif !important;
             line-height: 1.2 !important;
-            min-height: auto !important; /* Biar tombol ga kegedean */
+            min-height: auto !important;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -449,11 +447,13 @@ if uploaded_file is not None:
             bar_buf.seek(0)
             bar_col1, bar_col2, bar_col3 = st.columns([6, 1.5, 4])
             with bar_col3:
+                st.markdown('<div class="custom-download">', unsafe_allow_html=True)
                 st.download_button(
                     label="📥 Download Bar Chart (PNG)",
                     data=bar_buf,
                     file_name="sentiment_distribution_bar_chart.png",
-                    mime="image/png"
+                    mime="image/png",
+                    key="download_bar_chart"
                 )
 
             # Pie Chart for Sentiment with Plotly
