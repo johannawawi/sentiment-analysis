@@ -164,7 +164,7 @@ st.markdown("""
     }
     .custom-download button {
             font-size: 9px !important;
-            padding: 8px 12px !important;
+            padding: 6px 10px !important;
             font-family: 'Inter', sans-serif !important;
             line-height: 1.2 !important;
             min-height: auto !important;
