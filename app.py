@@ -299,7 +299,7 @@ def main():
                 st.stop()
     
             # Preprocessing
-            steps = 8
+            steps = 9
             step = 0
             
             progress_placeholder = st.empty()
