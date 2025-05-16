@@ -151,7 +151,7 @@ st.markdown("""
     h1 { font-size: 32px; font-weight: 700; font-family: 'Inter', sans-serif}
     h3 { font-size: 24px; font-weight: 600; font-family: 'Inter', sans-serif}
     h4 { font-size: 16px; font-weight: 600; font-family: 'Inter', sans-serif}
-    p { font-size: 18px; line-height: 1.5; font-family: 'Inter', sans-serif}
+    p { font-size: 10px; line-height: 1.5; font-family: 'Inter', sans-serif}
     span {font-family: 'Inter', sans-serif; font-weight: 600}
     .stTabs { 
         background: linear-gradient(to bottom, #f8f9fa, #e9ecef); 
