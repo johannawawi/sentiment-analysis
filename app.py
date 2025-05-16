@@ -419,13 +419,13 @@ if uploaded_file is not None:
             fig_bar.update_layout(
                 xaxis_title="Sentiment",
                 yaxis_title="Number of Comments",
-                title_font_size=13,
+                title_font_size=14,
                 title_x=0.5,
                 showlegend=False,
                 height=500,
                 margin=dict(t=50, b=50),
                 plot_bgcolor='white',
-                font=dict(size=10),
+                font=dict(size=12),
             )
             fig_bar.update_yaxes(showgrid=False)
             fig_bar.update_xaxes(showline=True, linewidth=1, linecolor='black')
@@ -462,13 +462,13 @@ if uploaded_file is not None:
             ])
             fig_pie.update_layout(
                 title="Sentiment Distribution",
-                title_font_size=13,
+                title_font_size=14,
                 title_x=0.5,
                 showlegend=True,
                 height=500,
                 margin=dict(t=50, b=50),
                 plot_bgcolor='white',
-                font=dict(size=10)
+                font=dict(size=12)
             )
 
             # Display Pie Chart
