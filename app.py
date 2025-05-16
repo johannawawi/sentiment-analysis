@@ -185,11 +185,8 @@ st.components.v1.html("""
                 }
             });
         }
-        // Jalankan pas DOM load
         document.addEventListener('DOMContentLoaded', styleDownloadButtons);
-        // Polling setiap 500ms
         const interval = setInterval(styleDownloadButtons, 500);
-        // Stop polling setelah 10 detik
         setTimeout(() => clearInterval(interval), 10000);
     </script>
 """, height=0)
