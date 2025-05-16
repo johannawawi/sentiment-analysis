@@ -355,7 +355,7 @@ def main():
             st.markdown("""
                     <h2 style='font-size: 24px; text-align: center; margin-bottom: 10px; 
                                background: linear-gradient(to right, #CCE0AC, #F0EAAC); 
-                               color: white; padding: 10px; border-radius: 5px;'>
+                               color: black; padding: 10px; border-radius: 5px;'>
                         🧠 Insights at a Glance 📊
                     </h2>
                 """, unsafe_allow_html=True)
