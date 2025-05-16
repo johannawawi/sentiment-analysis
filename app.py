@@ -302,60 +302,56 @@ def main():
             steps = 9
             step = 0
             
+            # Buat satu placeholder untuk progress bar
+            progress_placeholder = st.empty()
+            progress_bar = progress_placeholder.progress(0)
+            
             with st.container():
                 with st.spinner("Cleaning text..."):
                     df['cleaned_text'] = df[text_column].apply(clean_text)
                     step += 1
-                    progress_placeholder = st.empty()
                     progress_placeholder.progress(step / steps)
             
             with st.container():
                 with st.spinner("Removing emojis..."):
                     df['emoji_removed'] = df['cleaned_text'].apply(remove_emoji)
                     step += 1
-                    progress_placeholder = st.empty()
                     progress_placeholder.progress(step / steps)
             
             with st.container():
                 with st.spinner("Removing repeated characters..."):
                     df['repeated_chars_removed'] = df['emoji_removed'].apply(replace_repeated_chars)
                     step += 1
-                    progress_placeholder = st.empty()
                     progress_placeholder.progress(step / steps)
             
             with st.container():
                 with st.spinner("Converting to lowercase..."):
                     df['lowercased'] = df['repeated_chars_removed'].apply(lowercase_text)
                     step += 1
-                    progress_placeholder = st.empty()
                     progress_placeholder.progress(step / steps)
             
             with st.container():
                 with st.spinner("Tokenizing text..."):
                     df['tokenized'] = df['lowercased'].apply(tokenize_text)
                     step += 1
-                    progress_placeholder = st.empty()
                     progress_placeholder.progress(step / steps)
             
             with st.container():
                 with st.spinner("Converting slang..."):
                     df['slang_converted'] = df['tokenized'].apply(lambda x: convert_to_slang(x, slang_dict))
                     step += 1
-                    progress_placeholder = st.empty()
                     progress_placeholder.progress(step / steps)
             
             with st.container():
                 with st.spinner("Removing stopwords..."):
                     df['slang_converted_no_stopwords'] = df['slang_converted'].apply(lambda x: remove_stopwords(x, custom_stopwords))
                     step += 1
-                    progress_placeholder = st.empty()
                     progress_placeholder.progress(step / steps)
             
             with st.container():
                 with st.spinner("Stemming text..."):
                     df['stemmed'] = df['slang_converted_no_stopwords'].apply(stem_text)
                     step += 1
-                    progress_placeholder = st.empty()
                     progress_placeholder.progress(step / steps)
             
             with st.container():
@@ -372,9 +368,9 @@ def main():
                         st.stop()
                     
                     step += 1
-                    progress_placeholder = st.empty()
                     progress_placeholder.progress(step / steps)
-            
+                    
+                    # Hapus progress bar setelah selesai
                     progress_placeholder.empty()
     
             # Sentiment Analysis
