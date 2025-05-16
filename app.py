@@ -33,6 +33,8 @@ from mpstemmer import MPStemmer
 # Setup Logging
 logging.basicConfig(filename='unmatched_slang.log', level=logging.INFO, filemode='w')
 
+st.set_page_config(layout="centered")
+
 # Initialize NLTK
 def initialize_nltk():
     """Setup NLTK data and ensure punkt_tab is available."""
@@ -52,7 +54,7 @@ def initialize_nltk():
 def load_sentiment_model():
     """Load Hugging Face sentiment model and tokenizer."""
     try:
-        model_name = "johannawawi/v3_balanced_dataset_fine-tuning-java-indo-sentiment-analysist-3-class"
+        model_name = st.secrets["model"]["name"]
         tokenizer = AutoTokenizer.from_pretrained(model_name)
         model = AutoModelForSequenceClassification.from_pretrained(model_name)
         model.eval()
