@@ -497,8 +497,7 @@ if uploaded_file is not None:
             pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
             with pie_col3:
                 st.download_button(
-                    label="📥 Download Pie```python
-Pie Chart (PNG)",
+                    label="📥 Download Pie Chart (PNG)",
                     data=pie_buf,
                     file_name="sentiment_pie_chart.png",
                     mime="image/png"
