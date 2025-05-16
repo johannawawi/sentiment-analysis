@@ -415,7 +415,7 @@ if uploaded_file is not None:
                 text='count',
                 title="Sentiment Distribution"
             )
-            fig_bar.update_traces(textposition='outside', textfont_size=10)
+            fig_bar.update_traces(textposition='outside', textfont_size=14)
             fig_bar.update_layout(
                 xaxis_title="Sentiment",
                 yaxis_title="Number of Comments",
