@@ -222,10 +222,12 @@ def apply_custom_css():
 
 # Thank You Message
 thank_you_message = """
-    <hr style='border: 1px solid #ccc; margin: 20px 0;' />
-    <h3 style='text-align: center;'>
-        Thank You for Using Our Sentiment Analysis App! 😊
-    </h3>
+    <div style='margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);'>
+        <hr style='border: 1px solid #ccc; margin: 10px 0;' />
+        <h3 style='text-align: center; margin: 0;'>
+            Thank You for Using Our Sentiment Analysis App! 😊
+        </h3>
+    </div>
 """
 # Main Application
 def main():
