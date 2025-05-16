@@ -166,11 +166,10 @@ st.markdown("""
     button[data-testid="baseButton-secondary"], 
     button[data-baseweb="button"], 
     button[kind="secondary"] {
-        font-size: 10px !important;
+        font-size: 5px !important;
         padding: 8px 12px !important;
         font-family: 'Inter', sans-serif !important;
         line-height: 1.2 !important;
-        min-height: auto !important;
     }
     </style>
 """, unsafe_allow_html=True)
