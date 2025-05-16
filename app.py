@@ -506,7 +506,7 @@ def main():
 
         # Tab 3: Download Results
         with tab3:
-            st.markdown("<h2>Final Dataset Preview</h2><p>Preview of the dataset with sentiment results:</p>", unsafe_allow_html=True)
+            st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Final Dataset Preview</h3><p>Preview of the dataset with sentiment results:</p>", unsafe_allow_html=True)
             preview_columns = original_columns + ['processed_text', 'sentiment_result', 'confidence']
             preview_columns = [col for col in preview_columns if col in df.columns]
             preview_df = df[preview_columns].copy()
