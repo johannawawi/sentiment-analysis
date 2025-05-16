@@ -252,40 +252,56 @@ def main():
     # File Uploader
     if 'uploaded_file' not in st.session_state:
         st.session_state.uploaded_file = None
+    if 'file_uploader' not in st.session_state:
+        st.session_state.file_uploader = None
         
     uploaded_file = st.file_uploader(
-        "**📁 Upload Your Dataset to Start**   \n\n Only .xlsx or .csv files are supported",
-        type=["xlsx", "csv"],
-        help="Upload an Excel (.xlsx) or CSV (.csv) file containing your dataset.",
-        key="file_uploader"
-    )
+            "**📁 Upload Your Dataset to Start**   \n\n Only .xlsx or .csv files are supported",
+            type=["xlsx", "csv"],
+            help="Upload an Excel (.xlsx) or CSV (.csv) file containing your dataset.",
+            key="file_uploader"
+        )
     
-    # Clear file button
-    if st.session_state.uploaded_file is not None:
-        col1, col2, col3 = st.columns([1, 1, 1])  # Center the button
-        with col2:
-            if st.button("🗑️ Clear File", use_container_width=True):
-                st.session_state.uploaded_file = None
-                st.session_state.file_uploader = None
-                st.rerun()
+        # Update session state based on uploader
+        if uploaded_file is not None:
+            st.session_state.uploaded_file = uploaded_file
+            st.success(f"File '{uploaded_file.name}' successfully uploaded!")
+            st.markdown(
+                "<p style='font-size: 14px; color: #555;'>Click 'Clear File' below to remove the current file and upload a new one.</p>",
+                unsafe_allow_html=True
+            )
+        elif st.session_state.uploaded_file is None:
+            st.info("Please upload a .xlsx or .csv file to start.")
     
-    # Process file if available
-    if st.session_state.uploaded_file is not None:
-        try:
-            if st.session_state.uploaded_file.name.endswith('.xlsx'):
-                df = pd.read_excel(st.session_state.uploaded_file)
-            else:
-                try:
-                    df = pd.read_csv(st.session_state.uploaded_file, sep=';')
-                    if len(df.columns) <= 1:
-                        st.session_state.uploaded_file.seek(0) 
+        # Clear file button
+        if st.session_state.uploaded_file is not None:
+            col1, col2, col3 = st.columns([1, 1, 1])  # Center the button
+            with col2:
+                if st.button("🗑️ Clear File", use_container_width=True):
+                    # Clear all relevant session state
+                    st.session_state.uploaded_file = None
+                    st.session_state.file_uploader = None
+                    if "file_uploader" in st.session_state:
+                        del st.session_state["file_uploader"]  # Clear internal uploader state
+                    st.rerun()
+    
+        # Process file if available
+        if st.session_state.uploaded_file is not None:
+            try:
+                if st.session_state.uploaded_file.name.endswith('.xlsx'):
+                    df = pd.read_excel(st.session_state.uploaded_file)
+                else:
+                    try:
+                        df = pd.read_csv(st.session_state.uploaded_file, sep=';')
+                        if len(df.columns) <= 1:
+                            st.session_state.uploaded_file.seek(0)
+                            df = pd.read_csv(st.session_state.uploaded_file, sep=',')
+                    except:
+                        st.session_state.uploaded_file.seek(0)
                         df = pd.read_csv(st.session_state.uploaded_file, sep=',')
-                except:
-                    st.session_state.uploaded_file.seek(0)
-                    df = pd.read_csv(st.session_state.uploaded_file, sep=',')
-            
-            original_columns = list(df.columns)
     
+                original_columns = list(df.columns)
+        
             # Initialize Resources
             initialize_nltk()
             model, tokenizer, device = load_sentiment_model()
