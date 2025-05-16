@@ -361,7 +361,7 @@ def main():
                 """, unsafe_allow_html=True)
         
             # Sentiment Distribution Text Box
-            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#F0EAAC; border: 1px solid #000000; padding:3px; border-radius:5px;'>Sentiment Distribution</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px;'>Sentiment Distribution</h4>", unsafe_allow_html=True)
             st.write("")
             sentiment_counts = df['sentiment_result'].value_counts()
             col1, col2, col3 = st.columns(3)
