@@ -250,6 +250,9 @@ def main():
     """, unsafe_allow_html=True)
 
     # File Uploader
+    if 'uploaded_file' not in st.session_state:
+        st.session_state.uploaded_file = None
+        
     uploaded_file = st.file_uploader(
         "**📁 Upload Your Dataset to Start**   \n\n Only .xlsx or .csv files are supported",
         type=["xlsx", "csv"],
@@ -257,28 +260,31 @@ def main():
         key="file_uploader"
     )
     
-    if uploaded_file is not None:
-        st.success(f"File '{uploaded_file.name}' successfully uploaded!")
-        
+    # Clear file button
+    if st.session_state.uploaded_file is not None:
+        col1, col2, col3 = st.columns([1, 1, 1])  # Center the button
+        with col2:
+            if st.button("🗑️ Clear File", use_container_width=True):
+                st.session_state.uploaded_file = None
+                st.session_state.file_uploader = None
+                st.rerun()
+    
+    # Process file if available
+    if st.session_state.uploaded_file is not None:
         try:
-            if uploaded_file.name.endswith('.xlsx'):
-                df = pd.read_excel(uploaded_file)
+            if st.session_state.uploaded_file.name.endswith('.xlsx'):
+                df = pd.read_excel(st.session_state.uploaded_file)
             else:
                 try:
-                    df = pd.read_csv(uploaded_file, sep=';')
+                    df = pd.read_csv(st.session_state.uploaded_file, sep=';')
                     if len(df.columns) <= 1:
-                        uploaded_file.seek(0) 
-                        df = pd.read_csv(uploaded_file, sep=',')
+                        st.session_state.uploaded_file.seek(0) 
+                        df = pd.read_csv(st.session_state.uploaded_file, sep=',')
                 except:
-                    uploaded_file.seek(0)
-                    df = pd.read_csv(uploaded_file, sep=',')
+                    st.session_state.uploaded_file.seek(0)
+                    df = pd.read_csv(st.session_state.uploaded_file, sep=',')
             
             original_columns = list(df.columns)
-            # Validate Paths
-            for path in [PREPROCESSING_PATH, STEMMER_PATH]:
-                if not os.path.exists(path):
-                    st.error(f"Required directory not found at {path}")
-                    st.stop()
     
             # Initialize Resources
             initialize_nltk()
