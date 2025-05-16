@@ -354,7 +354,7 @@ def main():
         with tab2:
             st.markdown("""
                     <h2 style='font-size: 24px; text-align: center; margin-bottom: 10px; 
-                               background: linear-gradient(to right, #4facfe, #00f2fe); 
+                               background: linear-gradient(to right, #CCE0AC, #F0EAAC); 
                                color: white; padding: 10px; border-radius: 5px;'>
                         🧠 Insights at a Glance 📊
                     </h2>
