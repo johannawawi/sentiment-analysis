@@ -206,7 +206,7 @@ def apply_custom_css():
         h2 { font-size: 24px; font-weight: 600; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         h3 { font-size: 21px; font-weight: 600; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         h4 { font-size: 16px; font-weight: 600; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
-        p { font-size: 14px; line-height: 0.5; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
+        p { font-size: 14px; line-height: 1.5; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         span { font-weight: 600; }
         .stTabs { 
             background: linear-gradient(to bottom, #f8f9fa, #e9ecef); 
@@ -335,7 +335,7 @@ def main():
 
         # Tab 1: Data Preview
         with tab1:
-            st.markdown("<h3>Dataset Preview</h3><p>Here are the first few rows of your uploaded dataset:</p>", unsafe_allow_html=True)
+            st.markdown("<h3>Dataset Preview</h3><p style='margin-top:-5px;'>Here are the first few rows of your uploaded dataset:</p>", unsafe_allow_html=True)
             st.dataframe(df[original_columns], use_container_width=True)
             st.markdown("<hr style='border: 1px solid #ccc;' />", unsafe_allow_html=True)
             st.markdown("<h3>Preprocessing Results</h3><p>Preview of the preprocessed text:</p>", unsafe_allow_html=True)
