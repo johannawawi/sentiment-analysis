@@ -162,8 +162,15 @@ st.markdown("""
         top: 0; 
         z-index: 100;
     }
+    .custom-download button {
+        font-size: 14px !important;
+        padding: 8px 12px !important;
+        font-family: 'Inter', sans-serif !important;
+        line-height: 1.2 !important;
+        min-height: auto !important;
+    }
     </style>
-    
+    """, unsafe_allow_html=True)
 # Application title
 st.markdown("""
     <div style="
@@ -480,12 +487,14 @@ if uploaded_file is not None:
             pie_buf.seek(0)
             pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
             with pie_col3:
+                st.markdown('<div class="custom-download">', unsafe_allow_html=True)
                 st.download_button(
                     label="📥 Download Pie Chart (PNG)",
                     data=pie_buf,
                     file_name="sentiment_pie_chart.png",
                     mime="image/png"
                 )
+                st.markdown('</div>', unsafe_allow_html=True)
 
             # Word Cloud Visualization
             st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
