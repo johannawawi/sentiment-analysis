@@ -5,10 +5,8 @@ import nltk
 from nltk.tokenize import word_tokenize
 import plotly.express as px
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-import seaborn as sns
 import json
 import logging
 import os
@@ -16,6 +14,8 @@ from io import BytesIO
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import numpy as np
+from Sastrawi.StopWordRemover.StopWordRemover import StopWordRemover
+from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 
 # Define base directory and important paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -68,8 +68,10 @@ def load_sentiment_model():
 # Load the sentiment model and tokenizer
 model, tokenizer, device = load_sentiment_model()
 
-# Initialize stemmer
+# Initialize stemmer and stopword remover
 stemmer = MPStemmer()
+factory = StopWordRemoverFactory()
+stopword_remover = factory.create_stop_word_remover()
 
 # Preprocessing functions
 def clean_text(text):
@@ -103,6 +105,13 @@ def convert_to_slang(text, slang_dict, debug=False):
     SLANG_PATTERN = re.compile(r'\b(' + '|'.join(map(re.escape, slang_dict.keys())) + r')\b', re.IGNORECASE)
     text_str = SLANG_PATTERN.sub(lambda x: slang_dict[x.group().lower()], text_str)
     return [word.lower() for word in text_str.split()]
+
+def remove_stopwords(text):
+    if not isinstance(text) or not text:
+        return []
+    text_str = ' '.join(text)
+    text_without_stopwords = stopword_remover.remove(text_str)
+    return text_without_stopwords.split()
 
 def stem_text(document):
     return [stemmer.stem(term) for term in document]
@@ -164,6 +173,7 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
+
 # Application title
 st.markdown("""
     <div style="
@@ -253,7 +263,6 @@ if uploaded_file is not None:
             df.columns,
             index=0,
             help="Choose the column from your dataset that contains the main text (e.g., product reviews, tweets, or comments)."
-
         )
         texts = df[text_column].dropna().astype(str).tolist()
         valid_texts = [t for t in texts if t.strip() and isinstance(t, str)]
@@ -265,7 +274,7 @@ if uploaded_file is not None:
         # Preprocessing 
         with st.spinner("Processing text data..."):
             progress_bar = st.progress(0)
-            steps = 8
+            steps = 9  # Increased steps for stopword removal
             current_step = 0
 
             df['cleaned_text'] = df[text_column].apply(clean_text)
@@ -292,11 +301,18 @@ if uploaded_file is not None:
             current_step += 1
             progress_bar.progress(current_step / steps)
 
-            df['stemmed'] = df['slang_converted'].apply(stem_text)
+            # Remove stopwords for wordcloud
+            df['slang_converted_no_stopwords'] = df['slang_converted'].apply(remove_stopwords)
+            current_step += 1
+            progress_bar.progress(current_step / steps)
+
+            df['stemmed'] = df['slang_converted_no_stopwords'].apply(stem_text)
             current_step += 1
             progress_bar.progress(current_step / steps)
 
             df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
+            # Keep processed text without stopwords for wordcloud, but use slang_converted for sentiment
+            df['processed_text_for_sentiment'] = df['slang_converted'].apply(lambda x: ' '.join(x))
             
             # Filter out empty or whitespace-only processed_text
             original_row_count = len(df)
@@ -316,7 +332,7 @@ if uploaded_file is not None:
 
         # Sentiment Analysis
         with st.spinner("Analyzing sentiment... This may take a moment for large datasets."):
-            processed_texts = df['processed_text'].dropna().tolist()
+            processed_texts = df['processed_text_for_sentiment'].dropna().tolist()
             progress_bar = st.progress(0)
             sentiments = predict_sentiment(processed_texts)
             df['sentiment_result'] = [result['sentiment'] for result in sentiments]
@@ -350,7 +366,7 @@ if uploaded_file is not None:
         with tab2:
             st.markdown("<h2 style='font-size: 24px; text-align: center; margin-bottom: 10px; border: 1px solid grey; padding: 5px'>Visual Summary of Findings</h2>", unsafe_allow_html=True)
 
-            # Sentiment Distribution Text Box (tetap sama, no Plotly here)
+            # Sentiment Distribution Text Box
             st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Sentiment Distribution</h4>", unsafe_allow_html=True)
             st.write("")
             sentiment_counts = df['sentiment_result'].value_counts()
@@ -481,7 +497,8 @@ if uploaded_file is not None:
             pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
             with pie_col3:
                 st.download_button(
-                    label="📥 Download Pie Chart (PNG)",
+                    label="📥 Download Pie```python
+Pie Chart (PNG)",
                     data=pie_buf,
                     file_name="sentiment_pie_chart.png",
                     mime="image/png"
@@ -506,7 +523,7 @@ if uploaded_file is not None:
                 buf.seek(0)
                 return buf
             
-            # Collect text for each sentiment
+            # Collect text for each sentiment using processed                processed_text (with stopwords removed)
             positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text'].dropna())
             negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text'].dropna())
             neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text'].dropna())
@@ -570,7 +587,7 @@ if uploaded_file is not None:
                     # Neutral download button
                     with col3:
                         if sentiments_available['neutral']:
-                            buf_neutral = get_image_download_link(fig_neutral, "wordcloud_neutral.png")
+                            buf_neutral = get_image_download_link(fig_neutral, "wordcloud_negative.png")
                             st.download_button(
                                 label="📥 Download Neutral Word Cloud (HD)",
                                 data=buf_neutral,
@@ -582,7 +599,7 @@ if uploaded_file is not None:
         # Tab 3: Download Results
         with tab3:
             st.markdown("<h2 style='font-size: 21px;'>Final Dataset Preview</h2>", unsafe_allow_html=True)
-            st.markdown("<p style='margin-top: -15px; font-size: 16px'>Preview of the original dataset with preprocessed text, sentiment, and confidence scores:</p>", unsafe_allow_html=True)
+            st.markdown("<p style='margin-top: -15px; font-size: 16px'>Preview of the original dataset with preprocessed48 text, sentiment, and confidence scores:</p>", unsafe_allow_html=True)
 
             # Define columns to display: original input columns plus derived columns
             preview_columns = original_columns + ['processed_text', 'sentiment_result', 'confidence']
