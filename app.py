@@ -488,7 +488,7 @@ if uploaded_file is not None:
                 )
 
             # Word Cloud Visualization
-            st.markdown("<h4 style='margin-top: 20px; margin-bottom:10px; text-align: center; background-color:#9EC6F3; color:black; border: 1px solid #000000; padding:1px; border-radius:10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
 
             # Function to generate word cloud
             def generate_wordcloud(text, colormap, title):
