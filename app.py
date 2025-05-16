@@ -348,7 +348,6 @@ def main():
             st.markdown("<hr style='border: 1px solid #ccc;' />", unsafe_allow_html=True)
             st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Preprocessing Results</h3><p>Preview of the preprocessed text:</p>", unsafe_allow_html=True)
             st.dataframe(df[[text_column, 'cleaned_text', 'lowercased', 'slang_converted', 'slang_converted_no_stopwords', 'processed_text']], use_container_width=True)
-        st.markdown(thank_you_message, unsafe_allow_html=True)
 
         # Tab 2: Visualizations
         with tab2:
@@ -512,7 +511,7 @@ def main():
                             mime="image/png",
                             use_container_width=True
                         )
-        st.markdown(thank_you_message, unsafe_allow_html=True)
+       
         # Tab 3: Download Results
         with tab3:
             st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Final Dataset Preview</h3><p>Preview of the dataset with sentiment results:</p>", unsafe_allow_html=True)
