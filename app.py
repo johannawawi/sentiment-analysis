@@ -329,7 +329,7 @@ def main():
                 step += 1; progress_bar.progress(step / steps)
     
                 df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
-                df['processed_text_for_sentiment'] = df['lowercased'].apply(lambda x: ' '.join(x))
+                df['processed_text_for_sentiment'] = df['slang_converted'].apply(lambda x: ' '.join(x))
                 
                 original_row_count = len(df)
                 df = df[df['processed_text'].str.strip().astype(bool)].copy()
@@ -344,7 +344,7 @@ def main():
     
             # Sentiment Analysis
             with st.spinner("Analyzing sentiment..."):
-                sentiments = predict_sentiment(df['processed_text_for_sentiment'].dropna().tolist(), model, tokenizer, device)
+                sentiments = predict_sentiment(df['lowercased'].dropna().tolist(), model, tokenizer, device)
                 df['sentiment_result'] = [result['sentiment'] for result in sentiments]
                 df['confidence'] = [result['confidence'] for result in sentiments]
                 df = df.dropna(subset=['sentiment_result'])
