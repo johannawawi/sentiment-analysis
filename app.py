@@ -162,7 +162,7 @@ st.markdown("""
         top: 0; 
         z-index: 100;
     }
-    .small-download button {
+    div.stDownloadButton > button {
         font-size: 10px !important;
         padding: 8px 12px !important;
         font-family: 'Inter', sans-serif !important;
@@ -445,7 +445,6 @@ if uploaded_file is not None:
             bar_buf.seek(0)
             bar_col1, bar_col2, bar_col3 = st.columns([6, 1.5, 4])
             with bar_col3:
-                st.markdown('<div class="small-download">', unsafe_allow_html=True)
                 st.download_button(
                     label="📥 Download Bar Chart (PNG)",
                     data=bar_buf,
@@ -486,7 +485,6 @@ if uploaded_file is not None:
             pie_buf.seek(0)
             pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
             with pie_col3:
-                st.markdown('<div class="small-download">', unsafe_allow_html=True)
                 st.download_button(
                     label="📥 Download Pie Chart (PNG)",
                     data=pie_buf,
@@ -566,7 +564,6 @@ if uploaded_file is not None:
                     with col2:
                         if sentiments_available['negative']:
                             buf_neg = get_image_download_link(fig_neg, "wordcloud_negative.png")
-                            st.markdown('<div class="small-download">', unsafe_allow_html=True)
                             st.download_button(
                                 label="📥 Download Negative Word Cloud (HD)",
                                 data=buf_neg,
@@ -579,7 +576,6 @@ if uploaded_file is not None:
                     with col3:
                         if sentiments_available['neutral']:
                             buf_neutral = get_image_download_link(fig_neutral, "wordcloud_neutral.png")
-                            st.markdown('<div class="small-download">', unsafe_allow_html=True)
                             st.download_button(
                                 label="📥 Download Neutral Word Cloud (HD)",
                                 data=buf_neutral,
@@ -610,7 +606,6 @@ if uploaded_file is not None:
                 csv_buf = BytesIO()
                 preview_df.to_csv(csv_buf, index=False, sep=';')
                 csv_buf.seek(0)
-                st.markdown('<div class="small-download">', unsafe_allow_html=True)
                 st.download_button(
                     label="📥 Download Dataset with Sentiment (CSV)",
                     data=csv_buf,
