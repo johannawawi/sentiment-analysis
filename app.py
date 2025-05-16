@@ -220,6 +220,13 @@ def apply_custom_css():
         </style>
     """, unsafe_allow_html=True)
 
+# Thank You Message
+thank_you_message = """
+    <hr style='border: 1px solid #ccc; margin: 20px 0;' />
+    <h3 style='text-align: center;'>
+        Thank You for Using Our Sentiment Analysis App! 😊
+    </h3>
+"""
 # Main Application
 def main():
     """Main Streamlit application."""
@@ -340,6 +347,8 @@ def main():
             st.markdown("<hr style='border: 1px solid #ccc;' />", unsafe_allow_html=True)
             st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Preprocessing Results</h3><p>Preview of the preprocessed text:</p>", unsafe_allow_html=True)
             st.dataframe(df[[text_column, 'cleaned_text', 'lowercased', 'slang_converted', 'slang_converted_no_stopwords', 'processed_text']], use_container_width=True)
+            
+            st.markdown(thank_you_message, unsafe_allow_html=True)
 
         # Tab 2: Visualizations
         with tab2:
@@ -503,6 +512,8 @@ def main():
                             mime="image/png",
                             use_container_width=True
                         )
+                        
+            st.markdown(thank_you_message, unsafe_allow_html=True)
 
         # Tab 3: Download Results
         with tab3:
@@ -524,15 +535,8 @@ def main():
                     file_name="sentiment_analysis_results.csv",
                     mime="text/csv"
                 )
-
-        # Thank You Message
-        st.markdown(
-            """
-            <hr style='border: 1px solid #ccc; margin: 20px 0;' />
-            <h3 style='text-align: center;'>
-                Thank You for Using Our Sentiment Analysis App! 😊
-            </h3>
-            """, unsafe_allow_html=True)
+                
+            st.markdown(thank_you_message, unsafe_allow_html=True)
 
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
