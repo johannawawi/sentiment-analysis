@@ -259,8 +259,21 @@ def main():
     
     if uploaded_file is not None:
         st.success(f"File '{uploaded_file.name}' successfully uploaded!")
-
+        
         try:
+            if uploaded_file.name.endswith('.xlsx'):
+                df = pd.read_excel(uploaded_file)
+            else:
+                try:
+                    df = pd.read_csv(uploaded_file, sep=';')
+                    if len(df.columns) <= 1:
+                        uploaded_file.seek(0) 
+                        df = pd.read_csv(uploaded_file, sep=',')
+                except:
+                    uploaded_file.seek(0)
+                    df = pd.read_csv(uploaded_file, sep=',')
+            
+            original_columns = list(df.columns)
             # Validate Paths
             for path in [PREPROCESSING_PATH, STEMMER_PATH]:
                 if not os.path.exists(path):
@@ -272,10 +285,6 @@ def main():
             model, tokenizer, device = load_sentiment_model()
             slang_dict = load_slang_dictionary()
             custom_stopwords = load_custom_stopwords()
-    
-            # Load Dataset
-            df = pd.read_excel(uploaded_file) if uploaded_file.name.endswith('.xlsx') else pd.read_csv(uploaded_file)
-            original_columns = list(df.columns)
     
             # Select Text Column
             text_column = st.selectbox(
