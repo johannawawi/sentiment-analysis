@@ -162,10 +162,10 @@ st.markdown("""
         top: 0; 
         z-index: 100;
     }
-    button[kind="primary"] {
+    button {
         font-size: 13px !important;
-        padding: 8px 12px;
-        font-family: 'Inter', sans-serif;
+        padding: 8px 12px !important;
+        font-family: 'Inter', sans-serif !important;
     }
     </style>
 """, unsafe_allow_html=True)
