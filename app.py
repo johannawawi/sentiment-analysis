@@ -180,6 +180,23 @@ def predict_sentiment(texts, model, tokenizer, device, batch_size=16):
     progress_bar.empty()
     return results
 
+# Function to count word frequencies
+def get_top_words(text, n=10):
+    words = text.split()
+    word_counts = Counter(words)
+    return word_counts.most_common(n)
+
+# Function to create bar chart for top 10 words
+def generate_bar_chart(top_words, color, title):
+    fig, ax = plt.subplots(figsize=(5, 4))
+    words, counts = zip(*top_words)
+    ax.barh(words, counts, color=color)
+    ax.set_title(title, fontsize=12)
+    ax.invert_yaxis()
+    ax.set_xlabel('Frequency')
+    plt.tight_layout()
+    return fig
+
 # Visualization Functions
 def generate_wordcloud(text, colormap, title):
     """Generate a word cloud from text."""
@@ -188,6 +205,7 @@ def generate_wordcloud(text, colormap, title):
     ax.imshow(wordcloud, interpolation='bilinear')
     ax.axis('off')
     ax.set_title(title, fontsize=10, pad=10)
+    plt.tight_layout()
     return fig
 
 def get_image_buffer(fig):
@@ -453,9 +471,9 @@ def main():
                     file_name="sentiment_pie_chart.png",
                     mime="image/png"
                 )
-        
-            # Word Clouds
-            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px; ;margin-bottom: 10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
+
+            # Word Clouds and Bar Charts
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
             positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text'].dropna())
             negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text'].dropna())
             neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text'].dropna())
@@ -464,25 +482,26 @@ def main():
                 'negative': bool(negative_text.strip()),
                 'neutral': bool(neutral_text.strip())
             }
-        
+            
             if not any(sentiments_available.values()):
-                st.warning("No text available for positive, negative, or neutral sentiments. Word clouds cannot be displayed.")
+                st.warning("No text available for positive, negative, or neutral sentiments. Word clouds and bar charts cannot be displayed.")
             else:
                 fig_pos, fig_neg, fig_neutral = None, None, None
-                if sentiments_available['positive']:
-                    fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Sentiment Word Cloud')
-                    st.pyplot(fig_pos)
-                if sentiments_available['negative']:
-                    fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Sentiment Word Cloud')
-                    st.pyplot(fig_neg)
-                if sentiments_available['neutral']:
-                    fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Sentiment Word Cloud')
-                    st.pyplot(fig_neutral)
+                fig_bar_pos, fig_bar_neg, fig_bar_neutral = None, None, None
                 
-                st.markdown("<div style='margin-top: 5px;'></div>", unsafe_allow_html=True)
-                col1, col2, col3 = st.columns([1, 1, 1])
-                with col1:
-                    if sentiments_available['positive']:
+                # Positive Sentiment
+                if sentiments_available['positive']:
+                    col1, col2 = st.columns([2, 1])
+                    with col1:
+                        fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Sentiment Word Cloud')
+                        st.pyplot(fig_pos)
+                    with col2:
+                        top_words_pos = get_top_words(positive_text)
+                        fig_bar_pos = generate_bar_chart(top_words_pos, '#2ca02c', 'Top 10 Words (Positive)')
+                        st.pyplot(fig_bar_pos)
+                    # Download buttons for positive
+                    col1, col2 = st.columns([1, 1])
+                    with col1:
                         buf_pos = get_image_buffer(fig_pos)
                         st.download_button(
                             label="📥 Download Positive Word Cloud (HD)",
@@ -491,8 +510,29 @@ def main():
                             mime="image/png",
                             use_container_width=True
                         )
-                with col2:
-                    if sentiments_available['negative']:
+                    with col2:
+                        buf_bar_pos = get_image_buffer(fig_bar_pos)
+                        st.download_button(
+                            label="📥 Download Positive Bar Chart (HD)",
+                            data=buf_bar_pos,
+                            file_name="barchart_positive.png",
+                            mime="image/png",
+                            use_container_width=True
+                        )
+                
+                # Negative Sentiment
+                if sentiments_available['negative']:
+                    col1, col2 = st.columns([2, 1])
+                    with col1:
+                        fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Sentiment Word Cloud')
+                        st.pyplot(fig_neg)
+                    with col2:
+                        top_words_neg = get_top_words(negative_text)
+                        fig_bar_neg = generate_bar_chart(top_words_neg, '#d62728', 'Top 10 Words (Negative)')
+                        st.pyplot(fig_bar_neg)
+                    # Download buttons for negative
+                    col1, col2 = st.columns([1, 1])
+                    with col1:
                         buf_neg = get_image_buffer(fig_neg)
                         st.download_button(
                             label="📥 Download Negative Word Cloud (HD)",
@@ -501,13 +541,43 @@ def main():
                             mime="image/png",
                             use_container_width=True
                         )
-                with col3:
-                    if sentiments_available['neutral']:
+                    with col2:
+                        buf_bar_neg = get_image_buffer(fig_bar_neg)
+                        st.download_button(
+                            label="📥 Download Negative Bar Chart (HD)",
+                            data=buf_bar_neg,
+                            file_name="barchart_negative.png",
+                            mime="image/png",
+                            use_container_width=True
+                        )
+                
+                # Neutral Sentiment
+                if sentiments_available['neutral']:
+                    col1, col2 = st.columns([2, 1])
+                    with col1:
+                        fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Sentiment Word Cloud')
+                        st.pyplot(fig_neutral)
+                    with col2:
+                        top_words_neutral = get_top_words(neutral_text)
+                        fig_bar_neutral = generate_bar_chart(top_words_neutral, '#9467bd', 'Top 10 Words (Neutral)')
+                        st.pyplot(fig_bar_neutral)
+                    # Download buttons for neutral
+                    col1, col2 = st.columns([1, 1])
+                    with col1:
                         buf_neutral = get_image_buffer(fig_neutral)
                         st.download_button(
                             label="📥 Download Neutral Word Cloud (HD)",
                             data=buf_neutral,
                             file_name="wordcloud_neutral.png",
+                            mime="image/png",
+                            use_container_width=True
+                        )
+                    with col2:
+                        buf_bar_neutral = get_image_buffer(fig_bar_neutral)
+                        st.download_button(
+                            label="📥 Download Neutral Bar Chart (HD)",
+                            data=buf_bar_neutral,
+                            file_name="barchart_neutral.png",
                             mime="image/png",
                             use_container_width=True
                         )
