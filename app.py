@@ -335,7 +335,7 @@ def main():
 
         # Tab 1: Data Preview
         with tab1:
-            st.markdown("<h3 style='margin-bottom: -5px;'>Dataset Preview</h3><p>Here are the first few rows of your uploaded dataset:</p>", unsafe_allow_html=True)
+            st.markdown("<h3 style='margin-bottom: -10px;'>Dataset Preview</h3><p>Here are the first few rows of your uploaded dataset:</p>", unsafe_allow_html=True)
             st.dataframe(df[original_columns], use_container_width=True)
             st.markdown("<hr style='border: 1px solid #ccc;' />", unsafe_allow_html=True)
             st.markdown("<h3>Preprocessing Results</h3><p>Preview of the preprocessed text:</p>", unsafe_allow_html=True)
