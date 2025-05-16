@@ -163,7 +163,7 @@ st.markdown("""
         z-index: 100;
     }
     .custom-download button {
-        font-size: 14px !important;
+        font-size: 5px !important;
         padding: 8px 12px !important;
         font-family: 'Inter', sans-serif !important;
         line-height: 1.2 !important;
