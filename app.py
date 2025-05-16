@@ -164,33 +164,32 @@ st.markdown("""
     }
     </style>
 st.components.v1.html("""
-    <script>
-        function styleDownloadButtons() {
-            const buttons = document.querySelectorAll('button');
-            const downloadLabels = [
-                '📥 Download Bar Chart (PNG)',
-                '📥 Download Pie Chart (PNG)',
-                '📥 Download Positive Word Cloud (HD)',
-                '📥 Download Negative Word Cloud (HD)',
-                '📥 Download Neutral Word Cloud (HD)',
-                '📥 Download Dataset with Sentiment (CSV)'
-            ];
-            buttons.forEach(button => {
-                if (downloadLabels.includes(button.textContent.trim()) && button.hasAttribute('download')) {
-                    button.style.fontSize = '10px';
-                    button.style.padding = '8px 12px';
-                    button.style.fontFamily = 'Inter, Helvetica, Arial, sans-serif';
-                    button.style.lineHeight = '1.2';
-                    button.style.minHeight = 'auto';
+            <script>
+                function styleDownloadButtons() {
+                    const buttons = document.querySelectorAll('button');
+                    const downloadLabels = [
+                        '📥 Download Bar Chart (PNG)',
+                        '📥 Download Pie Chart (PNG)',
+                        '📥 Download Positive Word Cloud (HD)',
+                        '📥 Download Negative Word Cloud (HD)',
+                        '📥 Download Neutral Word Cloud (HD)',
+                        '📥 Download Dataset with Sentiment (CSV)'
+                    ];
+                    buttons.forEach(button => {
+                        if (downloadLabels.includes(button.textContent.trim()) && button.hasAttribute('download')) {
+                            button.style.fontSize = '10px';
+                            button.style.padding = '8px 12px';
+                            button.style.fontFamily = 'Inter, Helvetica, Arial, sans-serif';
+                            button.style.lineHeight = '1.2';
+                            button.style.minHeight = 'auto';
+                        }
+                    });
                 }
-            });
-        }
-        document.addEventListener('DOMContentLoaded', styleDownloadButtons);
-        const interval = setInterval(styleDownloadButtons, 500);
-        setTimeout(() => clearInterval(interval), 10000);
-    </script>
-""", height=0)
-""", unsafe_allow_html=True)
+                document.addEventListener('DOMContentLoaded', styleDownloadButtons);
+                const interval = setInterval(styleDownloadButtons, 500);
+                setTimeout(() => clearInterval(interval), 10000);
+            </script>
+            """, height=0) """, unsafe_allow_html=True)
 
 # Application title
 st.markdown("""
