@@ -15,9 +15,6 @@ from io import BytesIO
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import numpy as np
-from Sastrawi.StopWordRemover.StopWordRemover import StopWordRemover
-from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
-from mpstemmer import MPStemmer
 
 # Configuration and Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -30,6 +27,8 @@ STOPWORD_ID_PATH = os.path.join(STOPWORD_PATH, 'stopword_id.txt')
 STOPWORD_JV_PATH = os.path.join(STOPWORD_PATH, 'stopword_jv.txt')
 SLANG_FILE1_PATH = os.path.join(SLANGWORD_PATH, 'slangword.txt')
 SLANG_FILE2_PATH = os.path.join(SLANGWORD_PATH, 'new_kamusalay.txt')
+
+from mpstemmer import MPStemmer
 
 # Setup Logging
 logging.basicConfig(filename='unmatched_slang.log', level=logging.INFO, filemode='w')
