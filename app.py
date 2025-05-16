@@ -526,14 +526,14 @@ def main():
                     mime="text/csv"
                 )
 
-        # Thank You Message
-        st.markdown(
-            """
-            <hr style='border: 1px solid #ccc; margin: 20px 0;' />
-            <h3 style='text-align: center; font-size: 24px;'>
-                Thank You for Using Our Sentiment Analysis App! 😊
-            </h3>
-            """, unsafe_allow_html=True)
+    # Thank You Message
+    st.markdown(
+        """
+        <hr style='border: 1px solid #ccc; margin: 20px 0;' />
+        <h3 style='text-align: center; font-size: 24px; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif'>
+            Thank You for Using Our Sentiment Analysis App! 😊
+        </h3>
+        """, unsafe_allow_html=True)
 
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
