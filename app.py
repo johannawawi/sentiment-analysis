@@ -2,8 +2,6 @@
 import streamlit as st
 import pandas as pd
 import re
-import torch
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import nltk
 from nltk.tokenize import word_tokenize
 import plotly.express as px
@@ -14,8 +12,9 @@ import json
 import logging
 import os
 from io import BytesIO
+import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import numpy as np
-from collections import Counter
 
 # Configuration and Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -180,23 +179,6 @@ def predict_sentiment(texts, model, tokenizer, device, batch_size=16):
     
     progress_bar.empty()
     return results
-
-# Function to count word frequencies
-def get_top_words(text, n=10):
-    words = text.split()
-    word_counts = Counter(words)
-    return word_counts.most_common(n)
-
-# Function to create bar chart for top 10 words
-def generate_bar_chart(top_words, color, title):
-    fig, ax = plt.subplots(figsize=(5, 4))
-    words, counts = zip(*top_words)
-    ax.barh(words, counts, color=color)
-    ax.set_title(title, fontsize=12)
-    ax.invert_yaxis()
-    ax.set_xlabel('Frequency')
-    plt.tight_layout()
-    return fig
 
 # Visualization Functions
 def generate_wordcloud(text, colormap, title):
@@ -472,8 +454,8 @@ def main():
                     file_name="sentiment_pie_chart.png",
                     mime="image/png"
                 )
-
-            # Word Clouds and Bar Charts
+        
+            # Word Clouds
             st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px; ;margin-bottom: 10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
             positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text'].dropna())
             negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text'].dropna())
@@ -483,43 +465,21 @@ def main():
                 'negative': bool(negative_text.strip()),
                 'neutral': bool(neutral_text.strip())
             }
-            
+        
             if not any(sentiments_available.values()):
-                st.warning("No text available for positive, negative, or neutral sentiments. Word clouds and bar charts cannot be displayed.")
+                st.warning("No text available for positive, negative, or neutral sentiments. Word clouds cannot be displayed.")
             else:
                 fig_pos, fig_neg, fig_neutral = None, None, None
                 if sentiments_available['positive']:
-                    # Layout untuk word cloud dan bar chart
-                    col1, col2 = st.columns([2, 1])
-                    with col1:
-                        fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Sentiment Word Cloud')
-                        st.pyplot(fig_pos)
-                    with col2:
-                        top_words_pos = get_top_words(positive_text)
-                        fig_bar_pos = generate_bar_chart(top_words_pos, '#2ca02c', 'Top 10 Words (Positive)')
-                        st.pyplot(fig_bar_pos)
-                        
+                    fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Sentiment Word Cloud')
+                    st.pyplot(fig_pos)
                 if sentiments_available['negative']:
-                    col1, col2 = st.columns([2, 1])
-                    with col1:
-                        fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Sentiment Word Cloud')
-                        st.pyplot(fig_neg)
-                    with col2:
-                        top_words_neg = get_top_words(negative_text)
-                        fig_bar_neg = generate_bar_chart(top_words_neg, '#d62728', 'Top 10 Words (Negative)')
-                        st.pyplot(fig_bar_neg)
-                        
+                    fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Sentiment Word Cloud')
+                    st.pyplot(fig_neg)
                 if sentiments_available['neutral']:
-                    col1, col2 = st.columns([2, 1])
-                    with col1:
-                        fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Sentiment Word Cloud')
-                        st.pyplot(fig_neutral)
-                    with col2:
-                        top_words_neutral = get_top_words(neutral_text)
-                        fig_bar_neutral = generate_bar_chart(top_words_neutral, '#9467bd', 'Top 10 Words (Neutral)')
-                        st.pyplot(fig_bar_neutral)
+                    fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Sentiment Word Cloud')
+                    st.pyplot(fig_neutral)
                 
-                # Download buttons
                 st.markdown("<div style='margin-top: 5px;'></div>", unsafe_allow_html=True)
                 col1, col2, col3 = st.columns([1, 1, 1])
                 with col1:
