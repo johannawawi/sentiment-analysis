@@ -202,12 +202,11 @@ def apply_custom_css():
     """Apply custom CSS for improved UI."""
     st.markdown("""
         <style>
-        body { font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333; }
         h1 { font-size: 32px; font-weight: 700; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         h2 { font-size: 24px; font-weight: 600; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         h3 { font-size: 21px; font-weight: 600; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         h4 { font-size: 16px; font-weight: 600; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
-        p { font-size: 14px; line-height: 1.5; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
+        p { font-size: 14px; line-height: 1; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         span { font-weight: 600; }
         .stTabs { 
             background: linear-gradient(to bottom, #f8f9fa, #e9ecef); 
