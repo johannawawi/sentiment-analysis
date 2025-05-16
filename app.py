@@ -529,7 +529,7 @@ def main():
         st.markdown(
             """
             <hr style='border: 1px solid #ccc; margin: 20px 0;' />
-            <h3 style='text-align: center>
+            <h3 style='text-align: center;'>
                 Thank You for Using Our Sentiment Analysis App! 😊
             </h3>
             """, unsafe_allow_html=True)
