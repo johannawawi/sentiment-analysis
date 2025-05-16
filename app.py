@@ -254,11 +254,11 @@ def main():
         "**📁 Upload Your Dataset to Start**   \n\n Only .xlsx or .csv files are supported",
         type=["xlsx", "csv"],
         help="Upload an Excel (.xlsx) or CSV (.csv) file containing your dataset.",
-        key="file_uploader"  # Add a unique key for the uploader
+        key="file_uploader"
     )
     
     if uploaded_file is None and st.session_state.get('uploaded_file_key'):
-        # File was cleared, reset state
+        st.success(f"File '{uploaded_file.name}' successfully uploaded!")
         st.session_state.uploaded_file_key = None
         if 'df' in st.session_state:
             del st.session_state.df
