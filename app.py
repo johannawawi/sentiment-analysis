@@ -342,38 +342,54 @@ def main():
 
         # Tab 2: Visualizations
         with tab2:
-            st.markdown("<h2 style='text-align: center; border: 1px solid grey; padding: 5px'>Visual Summary of Findings</h2>", unsafe_allow_html=True)
-
-            # Sentiment Counts
+            st.markdown("<h2 style='font-size: 24px; text-align: center; margin-bottom: 10px; border: 1px solid grey; padding: 5px'>Visual Summary of Findings</h2>", unsafe_allow_html=True)
+        
+            # Sentiment Distribution Text Box
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Sentiment Distribution</h4>", unsafe_allow_html=True)
+            st.write("")
             sentiment_counts = df['sentiment_result'].value_counts()
-            st.markdown("<h4 style='text-align: center; background-color:#9EC6F3; border: 1px solid #000; padding:3px; border-radius:5px;'>Sentiment Distribution</h4>", unsafe_allow_html=True)
             col1, col2, col3 = st.columns(3)
-            for col, sent, color, emoji in [
-                (col1, 'negative', '#FF8A8A', '☹️'),
-                (col2, 'neutral', '#F0EAAC', '😐'),
-                (col3, 'positive', '#CCE0AC', '☺️')
-            ]:
-                count = sentiment_counts.get(sent, 0)
-                col.markdown(
+            with col1:
+                negative_count = sentiment_counts.get('negative', 0)
+                st.markdown(
                     f"""
-                    <div style="background-color:{color}; color:black; border: 1px solid #000; padding:10px; border-radius:10px; text-align:center;">
-                        <span style="font-size: 18px;">{sent.capitalize()} {emoji}</span><br>
-                        <span style="font-size: 35px;">{count}</span>
+                    <div style="background-color:#FF8A8A; color:black; border: 1px solid #000000; padding:10px; border-radius:10px; text-align:center;">
+                        <span style="font-weight: 550; font-size: 18px;">Negative ☹️</span><br>
+                        <span style="font-weight: 550; font-size: 35px;">{negative_count}</span>
                     </div>
                     """, unsafe_allow_html=True)
-
+            with col2:
+                neutral_count = sentiment_counts.get('neutral', 0)
+                st.markdown(
+                    f"""
+                    <div style="background-color:#F0EAAC; color:black; border: 1px solid #000000; padding:10px; border-radius:10px; text-align:center;">
+                        <span style="font-weight: 550; font-size: 18px;">Neutral 😐</span><br>
+                        <span style="font-weight: 550; font-size: 35px;">{neutral_count}</span>
+                    </div>
+                    """, unsafe_allow_html=True)
+            with col3:
+                positive_count = sentiment_counts.get('positive', 0)
+                st.markdown(
+                    f"""
+                    <div style="background-color:#CCE0AC; color:black; border: 1px solid #000000; margin-bottom: 15px; padding:10px; border-radius:10px; text-align:center;">
+                        <span style="font-weight: 550; font-size: 18px;">Positive ☺️</span><br>
+                        <span style="font-weight: 550; font-size: 35px;">{positive_count}</span>
+                    </div>
+                    """, unsafe_allow_html=True)
+        
             # Bar Chart
-            st.markdown("<h4 style='text-align: center; background-color:#9EC6F3; border: 1px solid #000; padding:3px; border-radius:5px;'>Bar Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Bar Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
             order = ['negative', 'neutral', 'positive']
             sentiment_counts = sentiment_counts.reindex(order).fillna(0).reset_index()
             sentiment_counts.columns = ['sentiment', 'count']
-            colors = {'negative': '#FF8A8A', 'neutral': '#F0EAAC', 'positive': '#CCE0AC'}
+            custom_colors = {'negative': '#FF8A8A', 'positive': '#CCE0AC', 'neutral': '#F0EAAC'}
+            colors = [custom_colors.get(label, '#d3d3d3') for label in sentiment_counts['sentiment']]
             fig_bar = px.bar(
                 sentiment_counts,
                 x='sentiment',
                 y='count',
                 color='sentiment',
-                color_discrete_sequence=[colors.get(label, '#d3d3d3') for label in sentiment_counts['sentiment']],
+                color_discrete_sequence=colors,
                 text='count',
                 title="Sentiment Distribution"
             )
@@ -386,26 +402,27 @@ def main():
             fig_bar.update_yaxes(showgrid=False)
             fig_bar.update_xaxes(showline=True, linewidth=1, linecolor='black')
             st.plotly_chart(fig_bar, use_container_width=True)
-
             bar_buf = BytesIO()
             fig_bar.write_image(bar_buf, format="png", scale=3)
             bar_buf.seek(0)
-            _, col, _ = st.columns([6, 1.5, 4])
-            col.download_button(
-                label="📥 Download Bar Chart (PNG)",
-                data=bar_buf,
-                file_name="sentiment_distribution_bar_chart.png",
-                mime="image/png"
-            )
-
+            bar_col1, bar_col2, bar_col3 = st.columns([6, 1.5, 4])
+            with bar_col3:
+                st.download_button(
+                    label="📥 Download Bar Chart (PNG)",
+                    data=bar_buf,
+                    file_name="sentiment_distribution_bar_chart.png",
+                    mime="image/png",
+                    key="download_bar_chart"
+                )
+        
             # Pie Chart
-            st.markdown("<h4 style='text-align: center; background-color:#9EC6F3; border: 1px solid #000; padding:3px; border-radius:5px;'>Pie Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Pie Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
             fig_pie = go.Figure(data=[
                 go.Pie(
                     labels=sentiment_counts['sentiment'],
                     values=sentiment_counts['count'],
                     textinfo='percent+label',
-                    marker=dict(colors=[colors.get(label, '#d3d3d3') for label in sentiment_counts['sentiment']], line=dict(color='black', width=1)),
+                    marker=dict(colors=colors, line=dict(color='black', width=1)),
                     pull=[0.02, 0.02, 0.02],
                     rotation=45
                 )
@@ -416,44 +433,72 @@ def main():
                 margin=dict(t=50, b=50), plot_bgcolor='white', font=dict(size=14)
             )
             st.plotly_chart(fig_pie, use_container_width=True)
-
             pie_buf = BytesIO()
             fig_pie.write_image(pie_buf, format="png", scale=3)
             pie_buf.seek(0)
-            _, col, _ = st.columns([6, 1.5, 4])
-            col.download_button(
-                label="📥 Download Pie Chart (PNG)",
-                data=pie_buf,
-                file_name="sentiment_pie_chart.png",
-                mime="image/png"
-            )
-
+            pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
+            with pie_col3:
+                st.download_button(
+                    label="📥 Download Pie Chart (PNG)",
+                    data=pie_buf,
+                    file_name="sentiment_pie_chart.png",
+                    mime="image/png"
+                )
+        
             # Word Clouds
-            st.markdown("<h4 style='text-align: center; background-color:#9EC6F3; border: 1px solid #000; padding:3px; border-radius:5px;'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
-            texts = {
-                'positive': ' '.join(df[df['sentiment_result'] == 'positive']['processed_text'].dropna()),
-                'negative': ' '.join(df[df['sentiment_result'] == 'negative']['processed_text'].dropna()),
-                'neutral': ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text'].dropna())
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
+            positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text'].dropna())
+            negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text'].dropna())
+            neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text'].dropna())
+            sentiments_available = {
+                'positive': bool(positive_text.strip()),
+                'negative': bool(negative_text.strip()),
+                'neutral': bool(neutral_text.strip())
             }
-            available = {k: bool(v.strip()) for k, v in texts.items()}
-            
-            if not any(available.values()):
-                st.warning("No text available for word clouds.")
+        
+            if not any(sentiments_available.values()):
+                st.warning("No text available for positive, negative, or neutral sentiments. Word clouds cannot be displayed.")
             else:
-                for sent, colormap, title in [
-                    ('positive', 'Greens', 'Positive Sentiment Word Cloud'),
-                    ('negative', 'Reds', 'Negative Sentiment Word Cloud'),
-                    ('neutral', 'Purples', 'Neutral Sentiment Word Cloud')
-                ]:
-                    if available[sent]:
-                        fig = generate_wordcloud(texts[sent], colormap, title)
-                        st.pyplot(fig)
-                        buf = get_image_buffer(fig)
-                        col1, col2, col3 = st.columns([1, 1, 1])
-                        col2.download_button(
-                            label=f"📥 Download {sent.capitalize()} Word Cloud (HD)",
-                            data=buf,
-                            file_name=f"wordcloud_{sent}.png",
+                fig_pos, fig_neg, fig_neutral = None, None, None
+                if sentiments_available['positive']:
+                    fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Sentiment Word Cloud')
+                    st.pyplot(fig_pos)
+                if sentiments_available['negative']:
+                    fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Sentiment Word Cloud')
+                    st.pyplot(fig_neg)
+                if sentiments_available['neutral']:
+                    fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Sentiment Word Cloud')
+                    st.pyplot(fig_neutral)
+                
+                st.markdown("<div style='margin-top: 5px;'></div>", unsafe_allow_html=True)
+                col1, col2, col3 = st.columns([1, 1, 1])
+                with col1:
+                    if sentiments_available['positive']:
+                        buf_pos = get_image_buffer(fig_pos)
+                        st.download_button(
+                            label="📥 Download Positive Word Cloud (HD)",
+                            data=buf_pos,
+                            file_name="wordcloud_positive.png",
+                            mime="image/png",
+                            use_container_width=True
+                        )
+                with col2:
+                    if sentiments_available['negative']:
+                        buf_neg = get_image_buffer(fig_neg)
+                        st.download_button(
+                            label="📥 Download Negative Word Cloud (HD)",
+                            data=buf_neg,
+                            file_name="wordcloud_negative.png",
+                            mime="image/png",
+                            use_container_width=True
+                        )
+                with col3:
+                    if sentiments_available['neutral']:
+                        buf_neutral = get_image_buffer(fig_neutral)
+                        st.download_button(
+                            label="📥 Download Neutral Word Cloud (HD)",
+                            data=buf_neutral,
+                            file_name="wordcloud_neutral.png",
                             mime="image/png",
                             use_container_width=True
                         )
