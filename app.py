@@ -107,7 +107,7 @@ def convert_to_slang(text, slang_dict, debug=False):
     return [word.lower() for word in text_str.split()]
 
 def remove_stopwords(text):
-    if not isinstance(text) or not text:
+    if not isinstance(text, list) or not text:
         return []
     text_str = ' '.join(text)
     text_without_stopwords = stopword_remover.remove(text_str)
