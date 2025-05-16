@@ -394,7 +394,7 @@ def main():
                     """, unsafe_allow_html=True)
             
             # Bar Chart
-            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px;'>Bar Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px;'>Bar Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
             order = ['negative', 'neutral', 'positive']
             sentiment_counts = sentiment_counts.reindex(order).fillna(0).reset_index()
             sentiment_counts.columns = ['sentiment', 'count']
@@ -432,7 +432,7 @@ def main():
                 )
         
             # Pie Chart
-            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px;'>Pie Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px;'>Pie Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
             fig_pie = go.Figure(data=[
                 go.Pie(
                     labels=sentiment_counts['sentiment'],
@@ -462,7 +462,7 @@ def main():
                 )
         
             # Word Clouds
-            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px; ;margin-bottom: 10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; ;margin-bottom: 10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
             positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text'].dropna())
             negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text'].dropna())
             neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text'].dropna())
