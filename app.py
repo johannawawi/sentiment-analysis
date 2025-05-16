@@ -162,13 +162,16 @@ st.markdown("""
         top: 0; 
         z-index: 100;
     }
-    .custom-download button {
-            font-size: 9px !important;
-            padding: 6px 10px !important;
-            font-family: 'Inter', sans-serif !important;
-            line-height: 1.2 !important;
-            min-height: auto !important;
-        }
+    div[class*="stDownloadButton"] button, 
+    button[data-testid="baseButton-secondary"], 
+    button[data-baseweb="button"], 
+    button[kind="secondary"] {
+        font-size: 10px !important;
+        padding: 8px 12px !important;
+        font-family: 'Inter', sans-serif !important;
+        line-height: 1.2 !important;
+        min-height: auto !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -447,7 +450,6 @@ if uploaded_file is not None:
             bar_buf.seek(0)
             bar_col1, bar_col2, bar_col3 = st.columns([6, 1.5, 4])
             with bar_col3:
-                st.markdown('<div class="custom-download">', unsafe_allow_html=True)
                 st.download_button(
                     label="📥 Download Bar Chart (PNG)",
                     data=bar_buf,
