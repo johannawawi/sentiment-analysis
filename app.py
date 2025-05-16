@@ -263,11 +263,12 @@ def main():
     # Update session state based on uploader
     if uploaded_file is not None:
         st.session_state.uploaded_file = uploaded_file
-        st.success(f"File '{uploaded_file.name}' successfully uploaded!")
         st.markdown(
             "<p style='font-size: 14px; color: #555;'>Click the 'X' next to the file name to clear it, or use 'Browse files' to upload a new file.</p>",
             unsafe_allow_html=True
         )
+        st.success(f"File '{uploaded_file.name}' successfully uploaded!", icon="✅")
+
     else:
         st.session_state.uploaded_file = None
         st.info("Please upload a .xlsx or .csv file to start.")
