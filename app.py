@@ -162,12 +162,15 @@ st.markdown("""
         top: 0; 
         z-index: 100;
     }
-    div[class*="stDownloadButton"] button, button[data-testid="stDownloadButton"] {
-        font-size: 10px !important;
-        padding: 8px 12px !important;
-        font-family: 'Inter', sans-serif !important;
-        line-height: 1.2 !important; /* Biar teks ga kegedean */
-    }
+    div[class*="stDownloadButton"] button, 
+        button[data-testid="baseButton-secondary"], 
+        button[data-baseweb="button"] {
+            font-size: 14px !important;
+            padding: 8px 12px !important;
+            font-family: 'Inter', sans-serif !important;
+            line-height: 1.2 !important;
+            min-height: auto !important; /* Biar tombol ga kegedean */
+        }
     </style>
 """, unsafe_allow_html=True)
 
