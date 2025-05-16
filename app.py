@@ -314,7 +314,7 @@ def main():
             original_row_count = len(df)
             df = df[df['processed_text'].str.strip().astype(bool)].copy()
             if len(df) < original_row_count:
-                st.warning(f"Removed {original_row_count - len(df)} rows with empty text after preprocessing.")
+                st.warning(f"Original rows: {original_row_count}, Removed: {original_row_count - len(df)}, Remaining: {len(df)}")
             if df.empty:
                 st.error("No valid text remains after preprocessing.")
                 st.stop()
