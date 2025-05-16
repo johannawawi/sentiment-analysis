@@ -540,7 +540,7 @@ if uploaded_file is not None:
 
                 # Add a three-column table for download buttons
                 with st.container():
-                    st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)  # Add spacing
+                    st.markdown("<div style='margin-top: 5px;'></div>", unsafe_allow_html=True)  # Add spacing
                     col1, col2, col3 = st.columns([1, 1, 1])
 
                     # Positive download button
