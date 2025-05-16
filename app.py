@@ -352,7 +352,13 @@ def main():
 
         # Tab 2: Visualizations
         with tab2:
-            st.markdown("<h2 style='font-size: 24px; text-align: center; margin-bottom: 10px; border: 1px solid grey; padding: 5px'>Visual Summary of Findings</h2>", unsafe_allow_html=True)
+            st.markdown("""
+                    <h2 style='font-size: 24px; text-align: center; margin-bottom: 10px; 
+                               background: linear-gradient(to right, #4facfe, #00f2fe); 
+                               color: white; padding: 10px; border-radius: 5px;'>
+                        🧠 Insights at a Glance 📊
+                    </h2>
+                """, unsafe_allow_html=True)
         
             # Sentiment Distribution Text Box
             st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#9EC6F3; border: 1px solid #000000; padding:3px; border-radius:5px;'>Sentiment Distribution</h4>", unsafe_allow_html=True)
