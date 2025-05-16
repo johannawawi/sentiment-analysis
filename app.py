@@ -602,8 +602,6 @@ def main():
             st.error(f"An error occurred: {str(e)}")
             logging.exception("Error in main application")
             st.stop()
-    else:
-        st.info("Please upload a .xlsx or .csv file to start.")
-        return
+            
 if __name__ == "__main__":
     main()
