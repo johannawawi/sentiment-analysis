@@ -299,11 +299,10 @@ def main():
                 st.stop()
     
             # Preprocessing
-            with st.spinner("Processing text data..."):
+            with st.spinner("Cleaning text..."):
                 steps = 9
                 progress_bar = st.progress(0)
                 step = 0
-            with st.spinner("Cleaning text..."):
                 df['cleaned_text'] = df[text_column].apply(clean_text)
                 step += 1; progress_bar.progress(step / steps)
             with st.spinner("Removing emojis..."):
