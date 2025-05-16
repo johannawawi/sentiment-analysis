@@ -344,7 +344,7 @@ def main():
     
             # Sentiment Analysis
             with st.spinner("Analyzing sentiment..."):
-                sentiments = predict_sentiment(df['slang_converted'].dropna().tolist(), model, tokenizer, device)
+                sentiments = predict_sentiment(df['processed_text_for_sentiment'].dropna().tolist(), model, tokenizer, device)
                 df['sentiment_result'] = [result['sentiment'] for result in sentiments]
                 df['confidence'] = [result['confidence'] for result in sentiments]
                 df = df.dropna(subset=['sentiment_result'])
