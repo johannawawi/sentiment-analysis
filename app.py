@@ -162,6 +162,11 @@ st.markdown("""
         top: 0; 
         z-index: 100;
     }
+    button[kind="primary"] {
+        font-size: 13px !important;
+        padding: 8px 12px;
+        font-family: 'Inter', sans-serif;
+    }
     </style>
 """, unsafe_allow_html=True)
 
