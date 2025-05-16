@@ -221,13 +221,13 @@ def apply_custom_css():
     """, unsafe_allow_html=True)
 
 # Thank you message
-thank_you_message =
-    """
-    <hr style='border: 1px solid #ccc; margin: 20px 0;' />
-    <h3 style='text-align: center;'>
-        Thank You for Using Our Sentiment Analysis App! 😊
-    </h3>
-    """
+thank_you_message = """
+<hr style='border: 1px solid #ccc; margin: 20px 0;' />
+<h3 style='text-align: center;'>
+    Thank You for Using Our Sentiment Analysis App! 😊
+</h3>
+"""
+
 # Main Application
 def main():
     """Main Streamlit application."""
