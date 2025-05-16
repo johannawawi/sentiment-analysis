@@ -419,13 +419,13 @@ if uploaded_file is not None:
             fig_bar.update_layout(
                 xaxis_title="Sentiment",
                 yaxis_title="Number of Comments",
-                title_font_size=14,
+                title_font_size=16,
                 title_x=0.5,
                 showlegend=False,
                 height=500,
                 margin=dict(t=50, b=50),
                 plot_bgcolor='white',
-                font=dict(size=12),
+                font=dict(size=14),
             )
             fig_bar.update_yaxes(showgrid=False)
             fig_bar.update_xaxes(showline=True, linewidth=1, linecolor='black')
@@ -468,7 +468,7 @@ if uploaded_file is not None:
                 height=500,
                 margin=dict(t=50, b=50),
                 plot_bgcolor='white',
-                font=dict(size=12)
+                font=dict(size=14)
             )
 
             # Display Pie Chart
@@ -476,7 +476,7 @@ if uploaded_file is not None:
 
             # Prepare download button for Pie Chart
             pie_buf = BytesIO()
-            fig_pie.write_image(pie_buf, format="png")
+            fig_pie.write_image(pie_buf, format="png", scale=3)
             pie_buf.seek(0)
             pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
             with pie_col3:
@@ -496,7 +496,7 @@ if uploaded_file is not None:
                 fig, ax = plt.subplots(dpi=800)
                 ax.imshow(wordcloud, interpolation='bilinear')
                 ax.axis('off')
-                ax.set_title(title, fontsize=12, pad=10)
+                ax.set_title(title, fontsize=10, pad=10)
                 return fig
 
             # Function to create image buffer for download
