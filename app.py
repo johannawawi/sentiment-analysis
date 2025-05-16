@@ -251,14 +251,14 @@ def main():
 
     # File Uploader
     uploaded_file = st.file_uploader(
-            "**📁 Upload Your Dataset to Start**   \n\n Only .xlsx or .csv files are supported",
-            type=["xlsx", "csv"],
-            help="Upload an Excel (.xlsx) or CSV (.csv) file containing your dataset.",
-            key="file_uploader"
-        )
+        "**📁 Upload Your Dataset to Start**   \n\n Only .xlsx or .csv files are supported",
+        type=["xlsx", "csv"],
+        help="Upload an Excel (.xlsx) or CSV (.csv) file containing your dataset.",
+        key="file_uploader"
+    )
     
     if uploaded_file is not None:
-            st.success(f"File '{uploaded_file.name}' successfully uploaded!")
+        st.success(f"File '{uploaded_file.name}' successfully uploaded!")
 
         try:
             # Validate Paths
