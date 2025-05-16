@@ -2,6 +2,8 @@
 import streamlit as st
 import pandas as pd
 import re
+import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import nltk
 from nltk.tokenize import word_tokenize
 import plotly.express as px
@@ -12,9 +14,8 @@ import json
 import logging
 import os
 from io import BytesIO
-import torch
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import numpy as np
+from collections import Counter
 
 # Configuration and Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
