@@ -358,7 +358,7 @@ def main():
                 st.dataframe(df[original_columns], use_container_width=True)
                 st.markdown("<hr style='border: 1px solid #ccc;' />", unsafe_allow_html=True)
                 st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Preprocessing Results</h3><p>Preview of the preprocessed text:</p>", unsafe_allow_html=True)
-                st.dataframe(df[[text_column, 'cleaned_text', 'lowercased', 'slang_converted', 'slang_converted_no_stopwords', 'processed_text']], use_container_width=True)
+                st.dataframe(df[[text_column, 'cleaned_text', 'lowercased', 'tokenized', 'slang_converted', 'slang_converted_no_stopwords', 'processed_text']], use_container_width=True)
     
             # Tab 2: Visualizations
             with tab2:
