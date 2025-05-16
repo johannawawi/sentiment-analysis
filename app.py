@@ -184,7 +184,7 @@ def predict_sentiment(texts, model, tokenizer, device, batch_size=16):
 def generate_wordcloud(text, colormap, title):
     """Generate a word cloud from text."""
     wordcloud = WordCloud(width=800, height=400, background_color='white', colormap=colormap).generate(text)
-    fig, ax = plt.subplots(dpi=800)
+    fig, ax = plt.subplots(dpi=300)
     ax.imshow(wordcloud, interpolation='bilinear')
     ax.axis('off')
     ax.set_title(title, fontsize=10, pad=10)
@@ -429,7 +429,7 @@ def main():
                 fig_bar.update_xaxes(showline=True, linewidth=1, linecolor='black')
                 st.plotly_chart(fig_bar, use_container_width=True)
                 bar_buf = BytesIO()
-                fig_bar.write_image(bar_buf, format="png", scale=3)
+                fig_bar.write_image(bar_buf, format="png", scale=2)
                 bar_buf.seek(0)
                 bar_col1, bar_col2, bar_col3 = st.columns([6, 1.5, 4])
                 with bar_col3:
@@ -460,7 +460,7 @@ def main():
                 )
                 st.plotly_chart(fig_pie, use_container_width=True)
                 pie_buf = BytesIO()
-                fig_pie.write_image(pie_buf, format="png", scale=3)
+                fig_pie.write_image(pie_buf, format="png", scale=2)
                 pie_buf.seek(0)
                 pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
                 with pie_col3:
