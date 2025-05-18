@@ -218,7 +218,7 @@ def apply_custom_css():
         .stTabs { 
             background: linear-gradient(to bottom, #f8f9fa, #e9ecef); 
             padding: 12px; 
-            border-radius: 5px; 
+            border-radius: 10px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             position: sticky; 
             top: 0; 
