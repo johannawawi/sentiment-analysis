@@ -203,6 +203,12 @@ def apply_custom_css():
     """Apply custom CSS for improved UI."""
     st.markdown("""
         <style>
+        .stApp {
+        background-color: #F4F4F4;
+        background-image: url("http://www.transparenttextures.com/patterns/beige-paper.png");
+        background-size: auto;
+        background-repeat: repeat;
+        }
         h1 { font-size: 32px; font-weight: 700; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         h2 { font-size: 24px; font-weight: 600; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         h3 { font-size: 21px; font-weight: 600; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
