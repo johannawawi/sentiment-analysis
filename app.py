@@ -246,7 +246,7 @@ def main():
             <h1 style="font-size: 32px; font-weight: 700; color: #333; margin-bottom: 10px;">
                 🧠 Social Media Sentiment Analysis App
             </h1>
-            <p style="font-size: 18px; line-height: 1.5; color: #333; margin: 0 auto; max-width: 600px; text-align: justify">
+            <p style="font-size: 18px; line-height: 1.5; color: #333; margin: 0 auto; max-width: 700px; text-align: justify">
                 Upload your CSV or Excel file containing social media data, 
                 and get sentiment insights using Natural Language Processing (NLP). 
                 This app helps you understand public sentiment from text data in a simple and efficient way.
