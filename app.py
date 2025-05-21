@@ -380,7 +380,7 @@ def main():
                 df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
                 df['processed_text_for_sentiment'] = df['slang_converted'].apply(lambda x: ' '.join(x))
                 
-                original_row_count = len(df[text_column)
+                original_row_count = len(df[text_column))
                 df = df[df['processed_text'].str.strip().astype(bool)].copy()
                 if len(df[text_column]) < original_row_count:
                     st.warning(f"Original rows: {original_row_count}, Removed: {original_row_count - len(df)}, Remaining: {len(df)}")
