@@ -308,7 +308,7 @@ def main():
                 index=0,
                 help="Choose the column containing the main text (e.g., reviews, tweets)."
             )
-            texts = df[text_column].dropna().astype(str).tolist()
+            texts = df[text_column].dropna().drop_duplicates().astype(str).tolist()
             if not [t for t in texts if t.strip()]:
                 st.error(f"No valid text data in column '{text_column}'. Please select a different column.")
                 st.stop()
