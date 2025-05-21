@@ -308,7 +308,9 @@ def main():
                 index=0,
                 help="Choose the column containing the main text (e.g., reviews, tweets)."
             )
-            texts = df[text_column].dropna().drop_duplicates().astype(str).tolist()
+            
+            df = df.dropna(subset=[text_column]).drop_duplicates(subset=[text_column])
+            texts = df[text_column].astype(str).tolist()
             if not [t for t in texts if t.strip()]:
                 st.error(f"No valid text data in column '{text_column}'. Please select a different column.")
                 st.stop()
@@ -380,10 +382,10 @@ def main():
                 df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
                 df['processed_text_for_sentiment'] = df['slang_converted'].apply(lambda x: ' '.join(x))
                 
-                original_row_count = len(df[text_column])
+                original_row_count = len(df)
                 df = df[df['processed_text'].str.strip().astype(bool)].copy()
-                if len(df[text_column]) < original_row_count:
-                    st.warning(f"Original rows: {original_row_count}, Removed: {original_row_count - len(df[text_column])}, Remaining: {len(df[text_column])}")
+                if len(df) < original_row_count:
+                    st.warning(f"Original rows: {original_row_count}, Removed: {original_row_count - len(df)}, Remaining: {len(df)}")
                 if df.empty:
                     st.error("No valid text remains after preprocessing.")
                     st.stop()
