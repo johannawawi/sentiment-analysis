@@ -308,7 +308,8 @@ def main():
                 index=0,
                 help="Choose the column containing the main text (e.g., reviews, tweets)."
             )
-            
+
+            original_row_count = len(df)
             df = df.dropna(subset=[text_column])
             df[text_column] = df[text_column].astype(str).str.strip()
             df = df[df[text_column].astype(bool)].drop_duplicates(subset=[text_column], keep='first')
@@ -384,10 +385,9 @@ def main():
                 df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
                 df['processed_text_for_sentiment'] = df['slang_converted'].apply(lambda x: ' '.join(x))
                 
-                original_row_count = len(df)
                 df = df[df['processed_text'].str.strip().astype(bool)].copy()
                 if len(df) < original_row_count:
-                    st.warning(f"Original rows: {original_row_count}, Removed: {original_row_count - len(df)}, Remaining: {len(df)}")
+                    st.warning(f"Original rows: {original_row_count}, Removed: {original_row_count - len(df)}, Remaining data after preprocessing: {len(df)}")
                 if df.empty:
                     st.error("No valid text remains after preprocessing.")
                     st.stop()
