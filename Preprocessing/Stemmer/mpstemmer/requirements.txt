@@ -1,4 +1,0 @@
-setuptools
-requests
-beautifulsoup4
-python-Levenshtein
