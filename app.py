@@ -422,7 +422,7 @@ def main():
             with tab1:
                 st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Dataset Preview</h3><p>Here are the first few rows of your uploaded dataset:</p>", unsafe_allow_html=True)
                 st.dataframe(df[original_columns], use_container_width=True)
-                st.markdown("<hr style='border: 1px solid #ccc; margin-top=-15px' />", unsafe_allow_html=True)
+                st.markdown("<hr style='border: 1px solid #ccc; margin-top: -10px; margin-bottom: 10px;' />", unsafe_allow_html=True)
 
             # Tab 2: Visualizations
             with tab2:
@@ -518,8 +518,8 @@ def main():
                     st.plotly_chart(fig_pie, use_container_width=True)
                 
                 # Download Buttons for Charts
-                col_btn1, col_btn2, col_btn3 = st.columns([2, 1, 1])
-                with col_btn2:
+                col_btn1, col_btn2 = st.columns([1, 1])
+                with col_btn1:
                     bar_buf = BytesIO()
                     fig_bar.write_image(bar_buf, format="png", scale=2)
                     bar_buf.seek(0)
@@ -530,7 +530,7 @@ def main():
                         mime="image/png",
                         key="download_bar_chart"
                     )
-                with col_btn3:
+                with col_btn2:
                     pie_buf = BytesIO()
                     fig_pie.write_image(pie_buf, format="png", scale=2)
                     pie_buf.seek(0)
@@ -557,13 +557,13 @@ def main():
                 else:
                     fig_pos, fig_neg, fig_neutral = None, None, None
                     if sentiments_available['positive']:
-                        fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Formalized Word Cloud')
+                        fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Sentiment Word Cloud')
                         st.pyplot(fig_pos)
                     if sentiments_available['negative']:
-                        fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Formalized Word Cloud')
+                        fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Sentiment Word Cloud')
                         st.pyplot(fig_neg)
                     if sentiments_available['neutral']:
-                        fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Formalized Word Cloud')
+                        fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Sentiment Word Cloud')
                         st.pyplot(fig_neutral)
                     
                     st.markdown("<div style='margin-top: 5px;'></div>", unsafe_allow_html=True)
