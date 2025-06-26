@@ -18,15 +18,20 @@ import numpy as np
 
 # Configuration and Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PREPROCESSING_PATH = os.path.join(BASE_DIR, 'Preprocessing')
-STEMMER_PATH = os.path.join(PREPROCESSING_PATH, 'Stemmer', 'mpstemmer', 'mpstemmer')
-STOPWORD_PATH = os.path.join(PREPROCESSING_PATH, 'Stopword')
-SLANGWORD_PATH = os.path.join(PREPROCESSING_PATH, 'Slangword')
-NLTK_DATA_PATH = os.path.join(BASE_DIR, 'nltk_data')
+PREPROCESSING_PATH = os.path.join(BASE_DIR, 'preprocessing')
+STEMMER_PATH = os.path.join(PREPROCESSING_PATH, 'stemmer', 'mpstemmer', 'mpstemmer')
+STOPWORD_PATH = os.path.join(PREPROCESSING_PATH, 'stopword')
+SLANGWORD_PATH = os.path.join(PREPROCESSING_PATH, 'slangword')
+
+# Define paths for 3 stopword and 3 slangword files
 STOPWORD_ID_PATH = os.path.join(STOPWORD_PATH, 'stopword_id.txt')
 STOPWORD_JV_PATH = os.path.join(STOPWORD_PATH, 'stopword_jv.txt')
+STOPWORD_CUSTOM_PATH = os.path.join(STOPWORD_PATH, 'stopword_sby.txt')
 SLANG_FILE1_PATH = os.path.join(SLANGWORD_PATH, 'slangword.txt')
 SLANG_FILE2_PATH = os.path.join(SLANGWORD_PATH, 'new_kamusalay.txt')
+SLANG_FILE3_PATH = os.path.join(SLANGWORD_PATH, 'slangword_sby.txt')
+
+NLTK_DATA_PATH = os.path.join(BASE_DIR, 'nltk_data')
 
 from mpstemmer import MPStemmer
 
@@ -54,7 +59,7 @@ def initialize_nltk():
 def load_sentiment_model():
     """Load Hugging Face sentiment model and tokenizer."""
     try:
-        model_name = st.secrets["model"]["name"]
+        model_name = "johannawawi/model-for-sosmed-analysis-v3"
         tokenizer = AutoTokenizer.from_pretrained(model_name)
         model = AutoModelForSequenceClassification.from_pretrained(model_name)
         model.eval()
@@ -67,36 +72,40 @@ def load_sentiment_model():
 
 @st.cache_resource
 def load_slang_dictionary():
-    """Load and combine slang dictionaries."""
+    """Load and combine three slang dictionaries."""
     try:
-        for path in [SLANG_FILE1_PATH, SLANG_FILE2_PATH]:
+        slang_paths = [SLANG_FILE1_PATH, SLANG_FILE2_PATH, SLANG_FILE3_PATH]
+        for path in slang_paths:
             if not os.path.exists(path):
                 st.error(f"Slang file not found at {path}")
                 st.stop()
-        with open(SLANG_FILE1_PATH, 'r', encoding='utf-8') as f1, open(SLANG_FILE2_PATH, 'r', encoding='utf-8') as f2:
-            slang_dict1 = json.load(f1)
-            slang_dict2 = json.load(f2)
-        return {k.lower(): v for k, v in {**slang_dict1, **slang_dict2}.items()}
-    except json.JSONDecodeError:
-        st.error("Invalid JSON format in slang dictionary files.")
-        st.stop()
+        slang_dict = {}
+        for path in slang_paths:
+            with open(path, 'r', encoding='utf-8') as f:
+                try:
+                    slang_dict.update({k.lower(): v for k, v in json.load(f).items()})
+                except json.JSONDecodeError:
+                    st.error(f"Invalid JSON format in slang file: {path}")
+                    st.stop()
+        return slang_dict
     except Exception as e:
         st.error(f"Failed to load slang dictionaries: {str(e)}")
         st.stop()
 
 @st.cache_resource
 def load_custom_stopwords():
-    """Load and combine Indonesian and Javanese stopwords."""
+    """Load and combine three stopword files."""
     try:
-        for path in [STOPWORD_ID_PATH, STOPWORD_JV_PATH]:
+        stopword_paths = [STOPWORD_ID_PATH, STOPWORD_JV_PATH, STOPWORD_CUSTOM_PATH]
+        for path in stopword_paths:
             if not os.path.exists(path):
                 st.error(f"Stopword file not found at {path}")
                 st.stop()
-        with open(STOPWORD_ID_PATH, 'r', encoding='utf-8') as f:
-            stopwords_id = set(line.strip().lower() for line in f if line.strip())
-        with open(STOPWORD_JV_PATH, 'r', encoding='utf-8') as f:
-            stopwords_jv = set(line.strip().lower() for line in f if line.strip())
-        return stopwords_id.union(stopwords_jv)
+        stopwords = set()
+        for path in stopword_paths:
+            with open(path, 'r', encoding='utf-8') as f:
+                stopwords.update(line.strip().lower() for line in f if line.strip())
+        return stopwords
     except Exception as e:
         st.error(f"Failed to load stopwords: {str(e)}")
         st.stop()
@@ -204,10 +213,10 @@ def apply_custom_css():
     st.markdown("""
         <style>
         .stApp {
-        background-color: #F4F4F4;
-        background-image: url("http://www.transparenttextures.com/patterns/beige-paper.png");
-        background-size: auto;
-        background-repeat: repeat;
+            background-color: #F4F4F4;
+            background-image: url("http://www.transparenttextures.com/patterns/beige-paper.png");
+            background-size: auto;
+            background-repeat: repeat;
         }
         h1 { font-size: 32px; font-weight: 700; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
         h2 { font-size: 24px; font-weight: 600; font-family: 'Inter', 'Helvetica', 'Arial', sans-serif; color: #333;}
@@ -407,22 +416,20 @@ def main():
                 df = df.dropna(subset=['sentiment_result'])
     
             # Tabs for Results
-            tab1, tab2, tab3 = st.tabs(["📊 Data Preview & Preprocessing", "📈 Visualizations", "📥 Download Results"])
+            tab1, tab2, tab3 = st.tabs(["📊 Data Preview", "📈 Visualizations", "📥 Download Results"])
     
             # Tab 1: Data Preview
             with tab1:
                 st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Dataset Preview</h3><p>Here are the first few rows of your uploaded dataset:</p>", unsafe_allow_html=True)
                 st.dataframe(df[original_columns], use_container_width=True)
-                st.markdown("<hr style='border: 1px solid #ccc;' />", unsafe_allow_html=True)
-                st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Preprocessing Results</h3><p>Preview of the preprocessed text:</p>", unsafe_allow_html=True)
-                st.dataframe(df[[text_column, 'cleaned_text', 'lowercased', 'tokenized', 'slang_converted', 'slang_converted_no_stopwords', 'processed_text']], use_container_width=True)
-    
+                st.markdown("<hr style='border: 1px solid #ccc; margin-top=-15px' />", unsafe_allow_html=True)
+
             # Tab 2: Visualizations
             with tab2:
                 st.markdown("""
-                        <h2 style='font-size: 24px; text-align: center; margin-bottom: 10px; 
-                                   background: linear-gradient(to right, #CCE0AC, #F0EAAC); 
-                                   color: black; padding: 10px; border-radius: 5px;'>
+                        <h2 style='font-size: 24px; text-align: center; margin-bottom: 10px;
+                            background: linear-gradient(to right, #CCE0AC, #F0EAAC); 
+                            color: black; padding: 10px; border-radius: 5px;'>
                             🧠 Insights at a Glance 📊
                         </h2>
                     """, unsafe_allow_html=True)
@@ -460,36 +467,62 @@ def main():
                         </div>
                         """, unsafe_allow_html=True)
                 
+                # Bar and Pie Chart Side by Side
+                st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px;'>Sentiment Distribution Charts</h4>", unsafe_allow_html=True)
+                col_bar, col_pie = st.columns(2)
+                
                 # Bar Chart
-                st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px;'>Bar Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
-                order = ['negative', 'neutral', 'positive']
-                sentiment_counts = sentiment_counts.reindex(order).fillna(0).reset_index()
-                sentiment_counts.columns = ['sentiment', 'count']
-                custom_colors = {'negative': '#FF8A8A', 'positive': '#CCE0AC', 'neutral': '#F0EAAC'}
-                colors = [custom_colors.get(label, '#d3d3d3') for label in sentiment_counts['sentiment']]
-                fig_bar = px.bar(
-                    sentiment_counts,
-                    x='sentiment',
-                    y='count',
-                    color='sentiment',
-                    color_discrete_sequence=colors,
-                    text='count',
-                    title="Sentiment Distribution"
-                )
-                fig_bar.update_traces(textposition='outside', textfont_size=14)
-                fig_bar.update_layout(
-                    xaxis_title="Sentiment", yaxis_title="Number of Comments",
-                    title_font_size=16, title_x=0.5, showlegend=False, height=500,
-                    margin=dict(t=50, b=50), plot_bgcolor='white', font=dict(size=14)
-                )
-                fig_bar.update_yaxes(showgrid=False)
-                fig_bar.update_xaxes(showline=True, linewidth=1, linecolor='black')
-                st.plotly_chart(fig_bar, use_container_width=True)
-                bar_buf = BytesIO()
-                fig_bar.write_image(bar_buf, format="png", scale=2)
-                bar_buf.seek(0)
-                bar_col1, bar_col2, bar_col3 = st.columns([6, 1.5, 4])
-                with bar_col3:
+                with col_bar:
+                    order = ['negative', 'neutral', 'positive']
+                    sentiment_counts = sentiment_counts.reindex(order).fillna(0).reset_index()
+                    sentiment_counts.columns = ['sentiment', 'count']
+                    custom_colors = {'negative': '#FF8A8A', 'positive': '#CCE0AC', 'neutral': '#F0EAAC'}
+                    colors = [custom_colors.get(label, '#d3d3d3') for label in sentiment_counts['sentiment']]
+                    fig_bar = px.bar(
+                        sentiment_counts,
+                        x='sentiment',
+                        y='count',
+                        color='sentiment',
+                        color_discrete_sequence=colors,
+                        text='count',
+                        title="Bar Chart"
+                    )
+                    fig_bar.update_traces(textposition='outside', textfont_size=14)
+                    fig_bar.update_layout(
+                        xaxis_title="Sentiment", yaxis_title="Number of Comments",
+                        title_font_size=14, title_x=0.5, showlegend=False, height=400,
+                        margin=dict(t=50, b=50), plot_bgcolor='white', font=dict(size=14)
+                    )
+                    fig_bar.update_yaxes(showgrid=False)
+                    fig_bar.update_xaxes(showline=True, linewidth=1, linecolor='black')
+                    st.plotly_chart(fig_bar, use_container_width=True)
+                
+                # Pie Chart
+                with col_pie:
+                    fig_pie = go.Figure(data=[
+                        go.Pie(
+                            labels=sentiment_counts['sentiment'],
+                            values=sentiment_counts['count'],
+                            textinfo='percent+label',
+                            marker=dict(colors=colors, line=dict(color='black', width=1)),
+                            pull=[0.02, 0.02, 0.02],
+                            rotation=45
+                        )
+                    ])
+                    fig_pie.update_layout(
+                        title="Pie Chart",
+                        title_font_size=14, title_x=0.5, showlegend=True, height=400,
+                        margin=dict(t=50, b=50), plot_bgcolor='white', font=dict(size=14),
+                        legend=dict(orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5),
+                    )
+                    st.plotly_chart(fig_pie, use_container_width=True)
+                
+                # Download Buttons for Charts
+                col_btn1, col_btn2, col_btn3 = st.columns([2, 1, 1])
+                with col_btn2:
+                    bar_buf = BytesIO()
+                    fig_bar.write_image(bar_buf, format="png", scale=2)
+                    bar_buf.seek(0)
                     st.download_button(
                         label="📥 Download Bar Chart (PNG)",
                         data=bar_buf,
@@ -497,30 +530,10 @@ def main():
                         mime="image/png",
                         key="download_bar_chart"
                     )
-            
-                # Pie Chart
-                st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px;'>Pie Chart of Sentiment Distribution</h4>", unsafe_allow_html=True)
-                fig_pie = go.Figure(data=[
-                    go.Pie(
-                        labels=sentiment_counts['sentiment'],
-                        values=sentiment_counts['count'],
-                        textinfo='percent+label',
-                        marker=dict(colors=colors, line=dict(color='black', width=1)),
-                        pull=[0.02, 0.02, 0.02],
-                        rotation=45
-                    )
-                ])
-                fig_pie.update_layout(
-                    title="Sentiment Distribution",
-                    title_font_size=14, title_x=0.5, showlegend=True, height=500,
-                    margin=dict(t=50, b=50), plot_bgcolor='white', font=dict(size=14)
-                )
-                st.plotly_chart(fig_pie, use_container_width=True)
-                pie_buf = BytesIO()
-                fig_pie.write_image(pie_buf, format="png", scale=2)
-                pie_buf.seek(0)
-                pie_col1, pie_col2, pie_col3 = st.columns([6, 1.5, 4])
-                with pie_col3:
+                with col_btn3:
+                    pie_buf = BytesIO()
+                    fig_pie.write_image(pie_buf, format="png", scale=2)
+                    pie_buf.seek(0)
                     st.download_button(
                         label="📥 Download Pie Chart (PNG)",
                         data=pie_buf,
@@ -528,11 +541,11 @@ def main():
                         mime="image/png"
                     )
             
-                # Word Clouds
-                st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; ;margin-bottom: 10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
-                positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text'].dropna())
-                negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text'].dropna())
-                neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text'].dropna())
+                # Word Clouds for Formalized Text
+                st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px'>Formalized Text Word Clouds</h4>", unsafe_allow_html=True)
+                positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text_for_sentiment'].dropna())
+                negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text_for_sentiment'].dropna())
+                neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text_for_sentiment'].dropna())
                 sentiments_available = {
                     'positive': bool(positive_text.strip()),
                     'negative': bool(negative_text.strip()),
@@ -544,13 +557,13 @@ def main():
                 else:
                     fig_pos, fig_neg, fig_neutral = None, None, None
                     if sentiments_available['positive']:
-                        fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Sentiment Word Cloud')
+                        fig_pos = generate_wordcloud(positive_text, 'Greens', 'Positive Formalized Word Cloud')
                         st.pyplot(fig_pos)
                     if sentiments_available['negative']:
-                        fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Sentiment Word Cloud')
+                        fig_neg = generate_wordcloud(negative_text, 'Reds', 'Negative Formalized Word Cloud')
                         st.pyplot(fig_neg)
                     if sentiments_available['neutral']:
-                        fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Sentiment Word Cloud')
+                        fig_neutral = generate_wordcloud(neutral_text, 'Purples', 'Neutral Formalized Word Cloud')
                         st.pyplot(fig_neutral)
                     
                     st.markdown("<div style='margin-top: 5px;'></div>", unsafe_allow_html=True)
@@ -561,7 +574,7 @@ def main():
                             st.download_button(
                                 label="📥 Download Positive Word Cloud (HD)",
                                 data=buf_pos,
-                                file_name="wordcloud_positive.png",
+                                file_name="wordcloud_positive_formalized.png",
                                 mime="image/png",
                                 use_container_width=True
                             )
@@ -571,7 +584,7 @@ def main():
                             st.download_button(
                                 label="📥 Download Negative Word Cloud (HD)",
                                 data=buf_neg,
-                                file_name="wordcloud_negative.png",
+                                file_name="wordcloud_negative_formalized.png",
                                 mime="image/png",
                                 use_container_width=True
                             )
@@ -581,11 +594,11 @@ def main():
                             st.download_button(
                                 label="📥 Download Neutral Word Cloud (HD)",
                                 data=buf_neutral,
-                                file_name="wordcloud_neutral.png",
+                                file_name="wordcloud_neutral_formalized.png",
                                 mime="image/png",
                                 use_container_width=True
                             )
-           
+
             # Tab 3: Download Results
             with tab3:
                 st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Final Dataset Preview</h3><p>Preview of the dataset with sentiment results:</p>", unsafe_allow_html=True)
@@ -606,7 +619,7 @@ def main():
                         file_name="sentiment_analysis_results.csv",
                         mime="text/csv"
                     )
-       
+
             st.markdown(thank_you_message, unsafe_allow_html=True)
     
         except Exception as e:
