@@ -518,24 +518,24 @@ def main():
                     st.plotly_chart(fig_pie, use_container_width=True)
                 
                 # Download Buttons for Charts
-                col_btn1, col_btn2 = st.columns(2)
+                col_btn1, col_btn2, col_btn3 = st.columns([2,1,2])
                 with col_btn1:
                     bar_buf = BytesIO()
                     fig_bar.write_image(bar_buf, format="png", scale=2)
                     bar_buf.seek(0)
                     st.download_button(
-                        label="📥   Download Bar Chart (PNG)   ",
+                        label="📥 Download Bar Chart (PNG)",
                         data=bar_buf,
                         file_name="sentiment_distribution_bar_chart.png",
                         mime="image/png",
                         key="download_bar_chart"
                     )
-                with col_btn2:
+                with col_btn3:
                     pie_buf = BytesIO()
                     fig_pie.write_image(pie_buf, format="png", scale=2)
                     pie_buf.seek(0)
                     st.download_button(
-                        label="📥    Download Pie Chart (PNG)   ",
+                        label="📥 Download Pie Chart (PNG) ",
                         data=pie_buf,
                         file_name="sentiment_pie_chart.png",
                         mime="image/png"
