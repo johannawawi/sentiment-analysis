@@ -520,7 +520,7 @@ def main():
                 # Download Buttons for Charts
                 col_btn1, col_btn2 = st.columns([1, 1])
                 with col_btn1:
-                    st.markdown('<div class="full-width-button">', unsafe_allow_html=True)
+                    st.markdown('<div style="width: 100%;">', unsafe_allow_html=True)
                     bar_buf = BytesIO()
                     fig_bar.write_image(bar_buf, format="png", scale=2)
                     bar_buf.seek(0)
@@ -533,7 +533,6 @@ def main():
                     )
                     st.markdown('</div>', unsafe_allow_html=True)
                 with col_btn2:
-                    st.markdown('<div class="full-width-button">', unsafe_allow_html=True)
                     pie_buf = BytesIO()
                     fig_pie.write_image(pie_buf, format="png", scale=2)
                     pie_buf.seek(0)
@@ -543,8 +542,7 @@ def main():
                         file_name="sentiment_pie_chart.png",
                         mime="image/png"
                     )
-                    st.markdown('</div>', unsafe_allow_html=True)
-
+            
                 # Word Clouds for Formalized Text
                 st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px'>Formalized Text Word Clouds</h4>", unsafe_allow_html=True)
                 positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text_for_sentiment'].dropna())
