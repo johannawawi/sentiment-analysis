@@ -392,7 +392,7 @@ def main():
         
             with st.spinner("Finalizing processed text..."):
                 df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
-                df['processed_text_for_sentiment'] = df['slang_converted'].apply(lambda x: ' '.join(x))
+                df['processed_text_for_sentiment'] = df['slang_converted_no_stopwords'].apply(lambda x: ' '.join(x))
                 
                 df = df[df['processed_text'].str.strip().astype(bool)].copy()
                 if len(df) < original_row_count:
