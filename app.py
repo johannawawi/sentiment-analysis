@@ -469,7 +469,7 @@ def main():
                 
                 # Bar and Pie Chart Side by Side
                 st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px;'>Sentiment Distribution Charts</h4>", unsafe_allow_html=True)
-                col_bar, col_pie = st.columns(2)
+                col_bar, col_pie = st.columns([1, 1], gap="medium")
                 
                 # Bar Chart
                 with col_bar:
@@ -513,7 +513,7 @@ def main():
                         title="Pie Chart",
                         title_font_size=14, title_x=0.5, showlegend=True, height=400,
                         margin=dict(t=50, b=50), plot_bgcolor='white', font=dict(size=14),
-                        legend=dict(orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5),
+                        legend=dict(orientation="h", yanchor="bottom", y=-0.25, xanchor="center", x=0.5),
                     )
                     st.plotly_chart(fig_pie, use_container_width=True)
                 
@@ -542,7 +542,7 @@ def main():
                     )
             
                 # Word Clouds for Formalized Text
-                st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px'>Formalized Text Word Clouds</h4>", unsafe_allow_html=True)
+                st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
                 positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text_for_sentiment'].dropna())
                 negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text_for_sentiment'].dropna())
                 neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text_for_sentiment'].dropna())
