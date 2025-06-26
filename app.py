@@ -518,7 +518,7 @@ def main():
                     st.plotly_chart(fig_pie, use_container_width=True)
                 
                 # Download Buttons for Charts
-                col_btn1, col_btn2 = st.columns([3, 3])
+                col_btn1, col_btn2 = st.columns(2)
                 with col_btn1:
                     bar_buf = BytesIO()
                     fig_bar.write_image(bar_buf, format="png", scale=2)
