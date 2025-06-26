@@ -520,7 +520,6 @@ def main():
                 # Download Buttons for Charts
                 col_btn1, col_btn2 = st.columns([1, 1])
                 with col_btn1:
-                    st.markdown('<div style="width: 100%;">', unsafe_allow_html=True)
                     bar_buf = BytesIO()
                     fig_bar.write_image(bar_buf, format="png", scale=2)
                     bar_buf.seek(0)
@@ -531,7 +530,6 @@ def main():
                         mime="image/png",
                         key="download_bar_chart"
                     )
-                    st.markdown('</div>', unsafe_allow_html=True)
                 with col_btn2:
                     pie_buf = BytesIO()
                     fig_pie.write_image(pie_buf, format="png", scale=2)
