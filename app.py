@@ -524,7 +524,7 @@ def main():
                     fig_bar.write_image(bar_buf, format="png", scale=2)
                     bar_buf.seek(0)
                     st.download_button(
-                        label="📥 Download Bar Chart (PNG)",
+                        label="📥   Download Bar Chart (PNG)   ",
                         data=bar_buf,
                         file_name="sentiment_distribution_bar_chart.png",
                         mime="image/png",
@@ -535,7 +535,7 @@ def main():
                     fig_pie.write_image(pie_buf, format="png", scale=2)
                     pie_buf.seek(0)
                     st.download_button(
-                        label="📥 Download Pie Chart (PNG)",
+                        label="📥    Download Pie Chart (PNG)   ",
                         data=pie_buf,
                         file_name="sentiment_pie_chart.png",
                         mime="image/png"
