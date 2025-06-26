@@ -40,24 +40,6 @@ logging.basicConfig(filename='unmatched_slang.log', level=logging.INFO, filemode
 
 st.set_page_config(layout="centered")
 
-import base64
-def get_image_download_link(buf, filename, label):
-    b64 = base64.b64encode(buf.getvalue()).decode()
-    href = f'''
-        <a href="data:image/png;base64,{b64}" download="{filename}">
-            <button style="
-                width: 100%;
-                padding: 0.75em;
-                background-color: #f0f0f0;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                font-size: 16px;
-                cursor: pointer;
-            ">{label}</button>
-        </a>
-    '''
-    return href
-
 # Initialize NLTK
 def initialize_nltk():
     """Setup NLTK data and ensure punkt_tab is available."""
@@ -540,13 +522,25 @@ def main():
                 with col_btn1:
                     bar_buf = BytesIO()
                     fig_bar.write_image(bar_buf, format="png", scale=2)
-                    st.markdown(get_image_download_link(bar_buf, "sentiment_distribution_bar_chart.png", "📥 Download Bar Chart (PNG)"), unsafe_allow_html=True)
-
+                    bar_buf.seek(0)
+                    st.download_button(
+                        label="📥 Download Bar Chart (PNG)",
+                        data=bar_buf,
+                        file_name="sentiment_distribution_bar_chart.png",
+                        mime="image/png",
+                        key="download_bar_chart"
+                    )
                 with col_btn2:
                     pie_buf = BytesIO()
                     fig_pie.write_image(pie_buf, format="png", scale=2)
-                    st.markdown(get_image_download_link(pie_buf, "sentiment_pie_chart.png", "📥 Download Pie Chart (PNG)"), unsafe_allow_html=True)
-
+                    pie_buf.seek(0)
+                    st.download_button(
+                        label="📥 Download Pie Chart (PNG)",
+                        data=pie_buf,
+                        file_name="sentiment_pie_chart.png",
+                        mime="image/png"
+                    )
+            
                 # Word Clouds for Formalized Text
                 st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
                 positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text_for_sentiment'].dropna())
