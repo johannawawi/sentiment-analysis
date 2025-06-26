@@ -392,8 +392,9 @@ def main():
         
             with st.spinner("Finalizing processed text..."):
                 df['processed_text'] = df['stemmed'].apply(lambda x: ' '.join(x))
-                df['processed_text_for_sentiment'] = df['slang_converted_no_stopwords'].apply(lambda x: ' '.join(x))
-                
+                df['processed_text_for_sentiment'] = df['slang_converted'].apply(lambda x: ' '.join(x))
+                df['processed_text_for_wordcloud'] = df['slang_converted_no_stopword'].apply(lambda x: ' '.join(x))
+
                 df = df[df['processed_text'].str.strip().astype(bool)].copy()
                 if len(df) < original_row_count:
                     st.warning(f"Original rows: {original_row_count}, Removed: {original_row_count - len(df)}, Remaining data after preprocessing: {len(df)}")
@@ -543,9 +544,9 @@ def main():
             
                 # Word Clouds for Formalized Text
                 st.markdown("<h4 style='text-align: center; font-size: 20px; background-color:#FFDAB9; border: 1px solid #000000; padding:3px; border-radius:5px; margin-bottom: 10px'>Sentiment Word Clouds</h4>", unsafe_allow_html=True)
-                positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text_for_sentiment'].dropna())
-                negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text_for_sentiment'].dropna())
-                neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text_for_sentiment'].dropna())
+                positive_text = ' '.join(df[df['sentiment_result'] == 'positive']['processed_text_for_wordcloud'].dropna())
+                negative_text = ' '.join(df[df['sentiment_result'] == 'negative']['processed_text_for_wordcloud'].dropna())
+                neutral_text = ' '.join(df[df['sentiment_result'] == 'neutral']['processed_text_for_wordcloud'].dropna())
                 sentiments_available = {
                     'positive': bool(positive_text.strip()),
                     'negative': bool(negative_text.strip()),
@@ -602,7 +603,7 @@ def main():
             # Tab 3: Download Results
             with tab3:
                 st.markdown("<h3 style='margin-bottom: -15px; margin-top: -15px'>Final Dataset Preview</h3><p>Preview of the dataset with sentiment results:</p>", unsafe_allow_html=True)
-                preview_columns = original_columns + ['processed_text', 'sentiment_result', 'confidence']
+                preview_columns = original_columns + ['slang_converted','slang_converted_no_stopword', 'sentiment_result', 'confidence']
                 preview_columns = [col for col in preview_columns if col in df.columns]
                 preview_df = df[preview_columns].copy()
                 
